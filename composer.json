@@ -19,9 +19,17 @@
     "require": {
         "fzaninotto/faker": "^1"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
     "autoload": {
         "psr-4": {
             "Faker\\Provider\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Faker\\Tests\\Provider\\": "tests/Faker"
         }
     }
 }
