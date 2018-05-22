@@ -1,10 +1,8 @@
 <?php
 
-namespace pelmered\Faker\FakeCar;
+namespace Faker\Provider;
 
-use Faker\Provider\Base;
-
-class Provider extends Base
+class Fakecar extends \Faker\Provider\Base
 {
     protected static $brandsWithModels = array(
         'Abarth' => array(
@@ -528,6 +526,14 @@ class Provider extends Base
         )
     );
 
+
+    protected static $vehicleTypes = [
+        'hatchback', 'sedan', 'small', 'cab'
+    ];
+    protected static $vehicleFuelTypes = [
+        'gas', 'electric', 'diesel'
+    ];
+
     public static function vehicle() : string
     {
         $vehicleBrand = static::vehicleBrand();
@@ -548,9 +554,9 @@ class Provider extends Base
         return static::randomElement(array_keys(static::$brandsWithModels));
     }
 
-    public static function vehicleModel($make = null)
+    public static function vehicleModel($brand = null)
     {
-        return static::randomElement(static::$brandsWithModels[$make ?: static::vehicleBrand()]);
+        return static::randomElement(static::$brandsWithModels[$brand ?: static::vehicleBrand()]);
     }
 
     public static function vehicleRegistration($regex = '[A-Z]{3}-[0-9]{3}')
@@ -560,10 +566,10 @@ class Provider extends Base
 
     public static function vehicleType()
     {
-        return static::randomElement(['hatchback', 'sedan', 'small', 'cab']);
+        return static::randomElement(static::$vehicleTypes);
     }
     public static function vehicleFuelType()
     {
-        return static::randomElement(['gas', 'electric', 'diesel']);
+        return static::randomElement(static::$vehicleFuelTypes);
     }
 }

@@ -1,27 +1,27 @@
 {
-  "name": "pelmered/fake-car",
-  "type": "library",
-  "description": "Fake-Car is a Faker provider that generates fake car data for you.",
-  "keywords": [
-    "faker",
-    "car",
-    "vehicle",
-    "fake-car",
-    "car-faker"
-  ],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Peter Elmered",
-      "email": "peter@elmered.com"
+    "name": "pelmered/fake-car",
+    "type": "library",
+    "description": "Fake-Car is a Faker provider that generates fake car data for you.",
+    "keywords": [
+        "faker",
+        "car",
+        "vehicle",
+        "fake-car",
+        "car-faker"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Peter Elmered",
+            "email": "peter@elmered.com"
+        }
+    ],
+    "require": {
+        "fzaninotto/faker": "^1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Faker\\Provider\\": "src/"
+        }
     }
-  ],
-  "require": {
-    "fzaninotto/faker": "*"
-  },
-  "autoload": {
-    "psr-4": {
-      "pelmered\\Faker\\FakeCar\\": "src/"
-    }
-  }
 }
