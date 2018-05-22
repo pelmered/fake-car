@@ -41,3 +41,27 @@ echo $faker->vehicleType; //hatchback
 // generate automobile fuel type
 echo $faker->vehicleFuelType; //diesel
 ```
+
+### Laravel seeder example
+
+```php
+<?php
+
+use Faker\Generator as Faker;
+
+$factory->define(App\Vehicle::class, function (Faker $faker) {
+
+    $faker->addProvider(new \Faker\Provider\Fakecar($faker));
+    $v = $faker->vehicleArray();
+
+    return [
+        'vehicle_type'      => 'car',
+        'registration_no'   => $faker->vehicleRegistration,
+        'type'              => $faker->vehicleType,
+        'fuel'              => $faker->vehicleFuelType,
+        'brand'             => $v['brand'],
+        'model'             => $v['model'],
+        'year'              => $faker->biasedNumberBetween(1998,2017, 'sqrt'),
+    ];
+});
+```
