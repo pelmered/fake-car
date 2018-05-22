@@ -528,14 +528,29 @@ class Provider extends Base
         )
     );
 
-    public static function vehicleMake()
+    public static function vehicle() : string
+    {
+        $vehicleBrand = static::vehicleBrand();
+        return $vehicleBrand.' '.static::vehicleModel($vehicleBrand);
+    }
+
+    public static function vehicleArray() : array
+    {
+        $vehicleBrand = static::vehicleBrand();
+        return [
+            'brand' => $vehicleBrand,
+            'model' => static::vehicleModel($vehicleBrand)
+        ];
+    }
+
+    public static function vehicleBrand()
     {
         return static::randomElement(array_keys(static::$brandsWithModels));
     }
 
     public static function vehicleModel($make = null)
     {
-        return static::randomElement(static::$brandsWithModels[$make ?: static::vehicleMake()]);
+        return static::randomElement(static::$brandsWithModels[$make ?: static::vehicleBrand()]);
     }
 
     public static function vehicleRegistration($regex = '[A-Z]{3}-[0-9]{3}')
