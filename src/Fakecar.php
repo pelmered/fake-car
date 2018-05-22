@@ -4,6 +4,7 @@ namespace Faker\Provider;
 
 class Fakecar extends \Faker\Provider\Base
 {
+    // phpcs:disable
     protected static $brandsWithModels = array(
         'Abarth' => array(
             'Fiat 595'
@@ -525,6 +526,7 @@ class Fakecar extends \Faker\Provider\Base
             'Nomad', 'Z300', 'Z100', 'T600'
         )
     );
+    // phpcs:enable
 
 
     protected static $vehicleTypes = [

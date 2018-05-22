@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ruleset name="PSR2 Standards">
+
+    <file>src</file>
+
+    <arg name="colors"/>
+    <arg value="p"/>
+
+    <ini name="memory_limit" value="128M"/>
+
+    <rule ref="PSR2"/>
+
+</ruleset>
