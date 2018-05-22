@@ -1,5 +1,5 @@
 {
-  "name": "iamraccoon/car-faker",
+  "name": "pelmered/fake-car",
   "type": "library",
   "description": "Fake-Car is a Faker provider that generates fake car data for you.",
   "keywords": [
