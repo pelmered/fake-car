@@ -1,6 +1,10 @@
 # Fake-Car
 Faker provider for fake car data
 
+[![Build Status](https://scrutinizer-ci.com/g/pelmered/fake-car/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pelmered/fake-car/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pelmered/fake-car/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pelmered/fake-car/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/pelmered/fake-car/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/pelmered/fake-car/?branch=master)
+
 ## Installation
 
 ```sh
