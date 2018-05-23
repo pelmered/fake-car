@@ -1,3 +1,6 @@
 
 vendor/
 composer.lock
+
+clover.xml
+coverage.clover
