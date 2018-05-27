@@ -530,10 +530,10 @@ class Fakecar extends \Faker\Provider\Base
 
 
     protected static $vehicleTypes = [
-        'hatchback', 'sedan', 'small', 'cab'
+        'hatchback', 'sedan', 'small', 'convertible', 'SUV', 'MPV', 'coupe'
     ];
     protected static $vehicleFuelTypes = [
-        'gas', 'electric', 'diesel'
+        'gas', 'electric', 'diesel', 'hybrid'
     ];
 
     public static function vehicle() : string
