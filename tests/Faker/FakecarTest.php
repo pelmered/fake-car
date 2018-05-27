@@ -5,6 +5,7 @@ namespace Faker\Tests\Provider;
 use Faker\Factory;
 use Faker\Generator;
 use Faker\Provider\Fakecar;
+use Faker\Provider\CarData;
 use PHPUnit\Framework\TestCase;
 
 class FakecarTest extends TestCase
@@ -42,7 +43,7 @@ class FakecarTest extends TestCase
         $vehicleBrand = $this->faker->vehicleBrand();
 
         $vehicleText = $this->faker->vehicle();
-        $brands = $this->getProtectedProperty('brandsWithModels');
+        $brands = CarData::getBrandsWithModels();
 
         foreach($brands as $brand => $models)
         {
@@ -66,7 +67,7 @@ class FakecarTest extends TestCase
         $this->assertArrayHasKey('brand', $vehicleArray);
         $this->assertArrayHasKey('model', $vehicleArray);
 
-        $brandsArray = $this->getProtectedProperty('brandsWithModels');
+        $brandsArray = CarData::getBrandsWithModels();
 
         $this->assertTrue(
             in_array(
@@ -82,8 +83,7 @@ class FakecarTest extends TestCase
         $this->assertTrue(
             in_array(
                 $this->faker->vehicleBrand,
-                array_keys($this->getProtectedProperty('vehicleTypes')
-                )
+                array_keys(CarData::getVehicleTypes())
             )
         );
     }
@@ -94,7 +94,7 @@ class FakecarTest extends TestCase
 
         $vehicleBrand = $this->faker->vehicleBrand();
 
-        $modelArray = $this->getProtectedProperty('brandsWithModels');
+        $modelArray = CarData::getBrandsWithModels();
         $modelArray = $modelArray[$this->faker->vehicleBrand()];
 
         $vehicleBrand = $this->faker->vehicleBrand();
@@ -102,7 +102,7 @@ class FakecarTest extends TestCase
         $this->assertTrue(
             in_array(
                 $this->faker->vehicleModel($vehicleBrand),
-                $this->getProtectedProperty('brandsWithModels')[$vehicleBrand]
+                (CarData::getBrandsWithModels())[$vehicleBrand]
             )
         );
     }
@@ -115,11 +115,11 @@ class FakecarTest extends TestCase
 
     public function testVehicleType()
     {
-        $this->assertTrue(in_array($this->faker->vehicleType, $this->getProtectedProperty('vehicleTypes')));
+        $this->assertTrue(in_array($this->faker->vehicleType, CarData::getVehicleTypes()));
     }
 
     public function testVehicleFuelType()
     {
-        $this->assertTrue(in_array($this->faker->vehicleFuelType, $this->getProtectedProperty('vehicleFuelTypes')));
+        $this->assertTrue(in_array($this->faker->vehicleFuelType, CarData::getVehicleFuelTypes()));
     }
 }
