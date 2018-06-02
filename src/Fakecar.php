@@ -87,8 +87,14 @@ class Fakecar extends \Faker\Provider\Base
     }
 
     public static function getWeighted(array $values) {
-        $total = $currentTotal = 0;
-        $firstRand = mt_rand(1, 100);
+
+        if(empty($values))
+        {
+            return '';
+        }
+
+        $currentTotal = 0;
+        $firstRand = random_int(1, 100);
 
         $total = array_sum($values);
 
