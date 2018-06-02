@@ -67,9 +67,9 @@ class Fakecar extends \Faker\Provider\Base
     {
         return static::getRandomElementsFromArray(CarData::getVehicleProperties(), $count);
     }
-    public static function vehicleGearBox()
+    public static function vehicleGearBoxType()
     {
-        return static::randomElement(CarData::getVehicleGearBox());
+        return static::randomElement(CarData::getVehicleGearBoxType());
     }
     public static function getRandomElementsFromArray(array $values, int $count = 0) {
 

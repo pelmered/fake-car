@@ -169,9 +169,10 @@ class FakecarTest extends TestCase
         $this->assertTrue(is_array($properties));
         $this->assertGreaterThan(0, count($properties));
     }
+
     public function testVehicleGearBox()
     {
-        $this->assertTrue(in_array($this->faker->vehicleGearBox, CarData::getVehicleGearBox()));
+        $this->assertTrue(in_array($this->faker->vehicleGearBoxType, CarData::getVehicleGearBoxType()));
     }
 
     public function testGetWeighted()

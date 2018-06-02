@@ -30,7 +30,7 @@ class CarData
     {
         return static::$vehicleProperties;
     }
-    public static function getVehicleGearBox()
+    public static function getVehicleGearBoxType()
     {
         return static::$vehicleGearBox;
     }
