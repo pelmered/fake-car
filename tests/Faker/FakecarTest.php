@@ -164,10 +164,10 @@ class FakecarTest extends TestCase
         $this->assertTrue(is_array($properties));
         $this->assertCount(5, $properties);
 
-        //If we pass 0 we should get a random count > 0
+        //If we pass 0 we should get a random
         $properties = $this->faker->vehicleProperties(0);
         $this->assertTrue(is_array($properties));
-        $this->assertGreaterThan(0, count($properties));
+        $this->assertGreaterThanOrEqual(0, count($properties));
     }
 
     public function testVehicleGearBox()
