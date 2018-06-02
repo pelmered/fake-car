@@ -193,5 +193,7 @@ class FakecarTest extends TestCase
         $this->assertGreaterThan($result['key2'], $result['key1']);
         $this->assertGreaterThan($result['key3'], $result['key2']);
         $this->assertGreaterThan($result['key3'], $result['key1']);
+
+        $this->assertEquals('', $this->faker->getWeighted([]));
     }
 }
