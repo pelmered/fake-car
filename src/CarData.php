@@ -581,7 +581,7 @@ class CarData
     ];
 
     protected static $vehicleProperties = [
-        'Towbar','Aircondition','GPS', 'Leather seats', 'Roof Rack'
+        'Towbar', 'Aircondition', 'GPS', 'Leather seats', 'Roof Rack'
     ];
 
     protected static $vehicleGearBox = [

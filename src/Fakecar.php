@@ -73,12 +73,12 @@ class Fakecar extends \Faker\Provider\Base
     }
     public static function getRandomElementsFromArray(array $values, int $count = 0) :array {
 
-        if(!$count)
+        if (!$count)
         {
             $count = random_int(0, count($values));
         }
 
-        if($count === 0)
+        if ($count === 0)
         {
             return [];
         }
