@@ -71,7 +71,7 @@ class Fakecar extends \Faker\Provider\Base
     {
         return static::randomElement(CarData::getVehicleGearBoxType());
     }
-    public static function getRandomElementsFromArray(array $values, int $count = 0) {
+    public static function getRandomElementsFromArray(array $values, int $count = 0) :array {
 
         if(!$count)
         {
@@ -86,7 +86,7 @@ class Fakecar extends \Faker\Provider\Base
         return array_intersect_key($values, array_flip((array) array_rand($values, $count)));
     }
 
-    public static function getWeighted(array $values) {
+    public static function getWeighted(array $values) :string {
 
         if(empty($values))
         {
@@ -104,11 +104,9 @@ class Fakecar extends \Faker\Provider\Base
             $currentTotal += $weight;
 
             if ($rand <= $currentTotal) {
-                break;
+                return $key;
             }
         }
-
-        return $key;
     }
 
 }
