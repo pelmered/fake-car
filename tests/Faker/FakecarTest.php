@@ -81,9 +81,9 @@ class FakecarTest extends TestCase
     public function testVehicleBrand()
     {
         $this->assertTrue(
-            in_array(
+            array_key_exists(
                 $this->faker->vehicleBrand,
-                array_keys(CarData::getVehicleTypes())
+                CarData::getBrandsWithModels()
             )
         );
     }
@@ -91,8 +91,6 @@ class FakecarTest extends TestCase
     public function testVehicleModel($make = null)
     {
         $this->faker->seed(random_int(1, 9999));
-
-        $vehicleBrand = $this->faker->vehicleBrand();
 
         $modelArray = CarData::getBrandsWithModels();
         $modelArray = $modelArray[$this->faker->vehicleBrand()];
@@ -121,5 +119,78 @@ class FakecarTest extends TestCase
     public function testVehicleFuelType()
     {
         $this->assertTrue(in_array($this->faker->vehicleFuelType, CarData::getVehicleFuelTypes()));
+    }
+
+    public function testVehicleDoorCount()
+    {
+        for($i = 0; $i<10; $i++)
+        {
+            $this->assertThat(
+                $this->faker->vehicleDoorCount,
+                $this->logicalAnd(
+                    $this->isType('int'),
+                    $this->greaterThanOrEqual(2),
+                    $this->lessThanOrEqual(6)
+                )
+            );
+        }
+    }
+
+    public function testVehicleSeatCount()
+    {
+        for($i = 0; $i<10; $i++)
+        {
+            $this->assertThat(
+                $this->faker->vehicleSeatCount,
+                $this->logicalAnd(
+                    $this->isType('int'),
+                    $this->greaterThanOrEqual(1),
+                    $this->lessThanOrEqual(9)
+                )
+            );
+        }
+    }
+
+    public function testVehicleProperties()
+    {
+        $properties = $this->faker->vehicleProperties;
+        $this->assertTrue(is_array($properties));
+
+        $properties = $this->faker->vehicleProperties(2);
+        $this->assertTrue(is_array($properties));
+        $this->assertCount(2, $properties);
+
+        $properties = $this->faker->vehicleProperties(5);
+        $this->assertTrue(is_array($properties));
+        $this->assertCount(5, $properties);
+
+        //If we pass 0 we should get a random count > 0
+        $properties = $this->faker->vehicleProperties(0);
+        $this->assertTrue(is_array($properties));
+        $this->assertGreaterThan(0, count($properties));
+    }
+    public function testVehicleGearBox()
+    {
+        $this->assertTrue(in_array($this->faker->vehicleGearBox, CarData::getVehicleGearBox()));
+    }
+
+    public function testGetWeighted()
+    {
+        $data = [
+            'key1' => 80,
+            'key2' => 19,
+            'key3' => 1,
+        ];
+
+        $result = array_fill_keys(array_keys($data), 0);
+
+        for($i = 0; $i<1000; $i++)
+        {
+            $result[$this->faker->getWeighted($data)]++;
+        }
+
+        $this->assertGreaterThan($result['key2'], $result['key1']);
+        $this->assertGreaterThan($result['key3'], $result['key2']);
+        $this->assertGreaterThan($result['key3'], $result['key1']);
     }
 }

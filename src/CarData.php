@@ -18,6 +18,23 @@ class CarData
     {
         return static::$vehicleFuelTypes;
     }
+    public static function getVehicleDoorCount()
+    {
+        return static::$vehicleDoorCount;
+    }
+    public static function getVehicleSeatCount()
+    {
+        return static::$vehicleSeatCount;
+    }
+    public static function getVehicleProperties()
+    {
+        return static::$vehicleProperties;
+    }
+    public static function getVehicleGearBox()
+    {
+        return static::$vehicleGearBox;
+    }
+
 
     // phpcs:disable
     protected static $brandsWithModels = array(
@@ -542,12 +559,35 @@ class CarData
         )
     );
 
-
     protected static $vehicleTypes = [
         'hatchback', 'sedan', 'small', 'convertible', 'SUV', 'MPV', 'coupe'
     ];
+
     protected static $vehicleFuelTypes = [
         'gas', 'electric', 'diesel', 'hybrid'
     ];
+
+    protected static $vehicleDoorCount = [
+        '4' => 75,
+        '2' => 15,
+        '6' => 10,
+    ];
+
+    protected static $vehicleSeatCount = [
+        '5' => 75,
+        '2' => 15,
+        '8' => 5,
+        '4' => 10,
+    ];
+
+    protected static $vehicleProperties = [
+        'Towbar','Aircondition','GPS', 'Leather seats', 'Roof Rack'
+    ];
+
+    protected static $vehicleGearBox = [
+        'manual'    => 70,
+        'automatic' => 30,
+    ];
+
     // phpcs:enable
 }

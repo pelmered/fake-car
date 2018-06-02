@@ -49,8 +49,60 @@ class Fakecar extends \Faker\Provider\Base
     {
         return static::randomElement(CarData::getVehicleTypes());
     }
+
     public static function vehicleFuelType()
     {
         return static::randomElement(CarData::getVehicleFuelTypes());
     }
+
+    public static function vehicleDoorCount() :int
+    {
+        return (int) static::getWeighted(CarData::getVehicleDoorCount());
+    }
+    public static function vehicleSeatCount() :int
+    {
+        return (int) static::getWeighted(CarData::getVehicleSeatCount());
+    }
+    public static function vehicleProperties(int $count = 0)
+    {
+        return static::getRandomElementsFromArray(CarData::getVehicleProperties(), $count);
+    }
+    public static function vehicleGearBox()
+    {
+        return static::randomElement(CarData::getVehicleGearBox());
+    }
+    public static function getRandomElementsFromArray(array $values, int $count = 0) {
+
+        if(!$count)
+        {
+            $count = random_int(0, count($values));
+        }
+
+        if($count === 0)
+        {
+            return [];
+        }
+
+        return array_intersect_key($values, array_flip((array) array_rand($values, $count)));
+    }
+
+    public static function getWeighted(array $values) {
+        $total = $currentTotal = 0;
+        $firstRand = mt_rand(1, 100);
+
+        $total = array_sum($values);
+
+        $rand = ($firstRand / 100) * $total;
+
+        foreach ($values as $key => $weight) {
+            $currentTotal += $weight;
+
+            if ($rand <= $currentTotal) {
+                break;
+            }
+        }
+
+        return $key;
+    }
+
 }
