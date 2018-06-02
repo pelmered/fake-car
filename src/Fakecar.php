@@ -88,11 +88,6 @@ class Fakecar extends \Faker\Provider\Base
 
     public static function getWeighted(array $values) :string {
 
-        if(empty($values))
-        {
-            return '';
-        }
-
         $currentTotal = 0;
         $firstRand = random_int(1, 100);
 
@@ -107,6 +102,8 @@ class Fakecar extends \Faker\Provider\Base
                 return $key;
             }
         }
+
+        return '';
     }
 
 }
