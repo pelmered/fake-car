@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Faker\Provider;
-
 
 class CarData
 {
@@ -34,7 +32,6 @@ class CarData
     {
         return static::$vehicleGearBox;
     }
-
 
     // phpcs:disable
     protected static $brandsWithModels = array(
@@ -147,7 +144,7 @@ class CarData
             'GT'
         ),
         'Daihatsu' => array(
-            'Applause', 'Charade', 'Charmant', 'Cuore', 'Domino', 'Fourtrak', 'Gran Move', 'Hijet', 'Mira', 'Move', 'Sirion', 'Sportrak', 'Terios', 'YRV', 'Altis', 'Atrai/extol', 'Copen', 'Delta', 'Feroza', 'Leeza', 'MAX', 'IRV', 'Materia', 'Rocky', 'Tianjin', 'Taft', 'Trevis'
+            'Applause', 'Charade', 'Charmant', 'Cuore', 'Domino', 'Fourtrak', 'Gran Move', 'Hijet', 'Mira', 'Move', 'Sirion', 'Sportrak', 'Terios', 'YRV', 'Altis', 'Atrai/extol', 'Copen', 'Delta', 'Feroza', 'Leeza', 'MAX', 'IRV', 'Materia', 'Rocky', 'Tianjin', 'Taft', 'Trevis', 'Ayla', 'Sigra'
         ),
         'Daimler' => array(
             'Limousine', 'Series III', 'Sovereign', 'XJ Series', 'XJ12', 'XJ6', 'Coupe', 'Daimler', 'Landaulette', 'Double Six'
@@ -225,7 +222,7 @@ class CarData
             '3'
         ),
         'Honda' => array(
-            'Accord', 'Aerodeck', 'Ballade', 'Civic', 'Concerto', 'CR-V', 'CRX', 'HR-V', 'Insight', 'Integra', 'Jazz', 'Legend', 'Logo', 'NSX', 'Prelude', 'Quintet', 'S2000', 'Shuttle', 'Stream', 'Avancier', 'Capa', 'City', 'Domani', 'Element', 'F-mx', 'FIT', 'Fit Aria', 'FR-V', 'Inspire', 'Lagreat', 'Life', 'Mobilio', 'Odyssey', 'Orthia', 'Partner', 'Passport', 'Pilot', 'Saber', 'Sm-X', 'Stepwgn', 'That S', 'Torneo', 'Vamos', 'Vigor', 'Ridgeline', 'Accord Tourer', 'Crosstour', 'CR-Z', 'VLX', 'Acty', 'Rafaga', 'Beat', 'Eve', 'Elysion'
+            'Accord', 'Aerodeck', 'Brio', 'Ballade', 'Civic', 'Concerto', 'CR-V', 'CRX', 'HR-V', 'Insight', 'Integra', 'Jazz', 'Legend', 'Logo', 'NSX', 'Prelude', 'Quintet', 'S2000', 'Shuttle', 'Stream', 'Avancier', 'Capa', 'City', 'Domani', 'Element', 'F-mx', 'FIT', 'Fit Aria', 'FR-V', 'Inspire', 'Lagreat', 'Life', 'Mobilio', 'Odyssey', 'Orthia', 'Partner', 'Passport', 'Pilot', 'Saber', 'Sm-X', 'Stepwgn', 'That S', 'Torneo', 'Vamos', 'Vigor', 'Ridgeline', 'Accord Tourer', 'Crosstour', 'CR-Z', 'VLX', 'Acty', 'Rafaga', 'Beat', 'Eve', 'Elysion', 'Freed'
         ),
         'Huabei' => array(
             'HC', 'HG', 'Poni'
@@ -252,7 +249,7 @@ class CarData
             'Runna', 'Samand', 'Soren'
         ),
         'Isuzu' => array(
-            'Piazza', 'Trooper', 'Ascender', 'Aska', 'Axiom', 'Campo', 'Gemini', 'Impulse', 'Midi пасс.', 'Rodeo', 'VehiCross', 'Bighorn', 'Fargo', 'D-Max', 'Amigo', 'Midi груз.', 'Florian', 'TFR', 'MD', 'FRR', 'Faster', 'Hombre', 'Pick Up', 'Stylus'
+            'Piazza', 'Trooper', 'Ascender', 'Aska', 'Axiom', 'Campo', 'Gemini', 'Impulse', 'Midi пасс.', 'Rodeo', 'VehiCross', 'Bighorn', 'Fargo', 'D-Max', 'Amigo', 'Midi груз.', 'Florian', 'TFR', 'MD', 'FRR', 'Faster', 'Hombre', 'Pick Up', 'Stylus', 'Panther'
         ),
         'ItalCar' => array(
             'Attiva'
@@ -351,7 +348,7 @@ class CarData
             'Cooper', 'Mini', 'One', 'Cabrio', 'Clubman', 'Cooper S', 'Cooper D', 'Rover', 'Countryman', 'Paceman', 'Coupe', 'Roadster', 'Hatch'
         ),
         'Mitsubishi' => array(
-            '3000 GT', 'Carisma', 'Celeste', 'Challenger', 'Colt', 'Cordia', 'FTO', 'Galant', 'Lancer', 'Sapporo', 'Shogun', 'Shogun Pinin', 'Shogun Sport', 'Sigma', 'Space Runner', 'Space Star', 'Space Wagon', 'Starion', 'Tredia', 'Aspire', 'Chariot', 'Debonair', 'Diamante', 'Dingo', 'Dion', 'Eclipse', 'EK Wagon', 'Emeraude', 'Endeavor', 'Grandis', 'GTO', 'Jeep', 'L 200', 'L 300 пасс.', 'L 400 пасс.', 'Legnum', 'Libero', 'Minica', 'Mirage', 'Outlander', 'Pajero', 'Pistachio', 'Proudia', 'RVR', 'Santamo', 'Space Gear', 'Toppo', 'Town Box', 'Montero', 'Eterna', 'Prestij', 'Nativa', 'Lancer X', 'Lancer Evolution', 'Outlander XL', 'Pajero Sport', 'Pajero Wagon', 'Lancer X Sportback', 'Lanser Sportback', 'Eclipse USA', 'Delica', 'Virage', 'Raider', 'ASX', 'Lancer X Ralliart', 'Ralli Art', 'L 400 груз.', 'L 300 груз.', 'Proton', 'Magna', 'i-MiEV', 'Pajero Pinin', 'Galloper', 'Attrage', 'Minicab', 'Outlander PHEV', 'Airtrek', 'Axia ES'
+            '3000 GT', 'Carisma', 'Celeste', 'Challenger', 'Colt', 'Cordia', 'FTO', 'Galant', 'Lancer', 'Sapporo', 'Shogun', 'Shogun Pinin', 'Shogun Sport', 'Sigma', 'Space Runner', 'Space Star', 'Space Wagon', 'Starion', 'Tredia', 'Aspire', 'Chariot', 'Debonair', 'Diamante', 'Dingo', 'Dion', 'Eclipse', 'EK Wagon', 'Emeraude', 'Endeavor', 'Grandis', 'GTO', 'Jeep', 'L 200', 'L 300 пасс.', 'L 400 пасс.', 'Legnum', 'Libero', 'Minica', 'Mirage', 'Outlander', 'Pajero', 'Pistachio', 'Proudia', 'RVR', 'Santamo', 'Space Gear', 'Toppo', 'Town Box', 'Montero', 'Eterna', 'Prestij', 'Nativa', 'Lancer X', 'Lancer Evolution', 'Outlander XL', 'Pajero Sport', 'Pajero Wagon', 'Lancer X Sportback', 'Lanser Sportback', 'Eclipse USA', 'Delica', 'Virage', 'Raider', 'ASX', 'Lancer X Ralliart', 'Ralli Art', 'L 400 груз.', 'L 300 груз.', 'Proton', 'Magna', 'i-MiEV', 'Pajero Pinin', 'Galloper', 'Attrage', 'Minicab', 'Outlander PHEV', 'Airtrek', 'Axia ES', 'Xpander'
         ),
         'Morgan' => array(
             'Four Four', 'Aero 8', 'Plus 4', 'Plus 8', 'Aero Supersports'
@@ -363,7 +360,7 @@ class CarData
             'PS 160'
         ),
         'Nissan' => array(
-            '100NX', '120Y Sunny', '140J Violet', '140Y Sunny', '160B Bluebird', '160J Violet', '180B Bluebird', '200', '240K Skyline', '280C', '280ZX', '300', '350Z', 'Almera', 'Almera Tino', 'Bluebird', 'Cherry', 'Laurel', 'Maxima', 'Maxima QX', 'Micra', 'Patrol', 'Patrol GR', 'Prairie', 'Primera', 'QX', 'Serena пасс.', 'Silvia', 'Skyline', 'Stanza', 'Sunny', 'Terrano', 'Terrano II', 'X-Trail', '200 SX', 'Altima', 'Murano', 'Vanette пасс.', 'Pathfinder', 'X-Terra', 'Note', 'Primastar пасс.', 'Teana', 'Interstar', 'Qashqai', 'Rogue', 'Cefiro', 'Cima', 'Trade', 'Navara', 'Armada', 'Frontier', 'GT-R', 'Urvan', 'L35', 'Sentra', 'Kubistar', 'Qashqai+2', 'TIIDA', 'NP300', 'Avenir', 'Cedric', 'Titan', 'Pulsar', 'Versa', 'Gloria', 'Almera Classic', 'Elgrand', 'Quest', 'Langley', 'Presea', 'Paladin', 'Leopard', 'R`nessa', 'Liberta Villa', '370Z', 'Juke', 'Datsun', 'Vehiculos', '300ZX', 'Pickup', '70', 'Tino', 'King Cab', 'Vanette груз.', 'Serena груз.', 'Primastar груз.', 'Sima', 'Bassara', 'Stagea', 'Pixo', 'Auster', 'Gazelle', '100NS', 'Largo', 'Leaf', 'NV', 'Homy', 'Presage', 'Wingroad', 'Cube', 'Arna', 'e-NV200', 'Datsun on-DO', 'Datsun MI-DO', 'Fuga', 'Juke Nismo', 'Caravan', 'Liberty', 'Safari'
+            '100NX', '120Y Sunny', '140J Violet', '140Y Sunny', '160B Bluebird', '160J Violet', '180B Bluebird', '200', '240K Skyline', '280C', '280ZX', '300', '350Z', 'Almera', 'Almera Tino', 'Bluebird', 'Cherry', 'Laurel', 'Maxima', 'Maxima QX', 'Micra', 'Patrol', 'Patrol GR', 'Prairie', 'Primera', 'QX', 'Serena пасс.', 'Silvia', 'Skyline', 'Stanza', 'Sunny', 'Terrano', 'Terrano II', 'X-Trail', '200 SX', 'Altima', 'Murano', 'Vanette пасс.', 'Pathfinder', 'X-Terra', 'Note', 'Primastar пасс.', 'Teana', 'Interstar', 'Qashqai', 'Rogue', 'Cefiro', 'Cima', 'Trade', 'Navara', 'Armada', 'Frontier', 'GT-R', 'Urvan', 'L35', 'Sentra', 'Kubistar', 'Qashqai+2', 'TIIDA', 'NP300', 'Avenir', 'Cedric', 'Titan', 'Pulsar', 'Versa', 'Gloria', 'Almera Classic', 'Elgrand', 'Quest', 'Langley', 'Presea', 'Paladin', 'Leopard', 'R`nessa', 'Liberta Villa', '370Z', 'Juke', 'Datsun', 'Vehiculos', '300ZX', 'Pickup', '70', 'Tino', 'King Cab', 'Vanette груз.', 'Serena груз.', 'Primastar груз.', 'Sima', 'Bassara', 'Stagea', 'Pixo', 'Auster', 'Gazelle', '100NS', 'Largo', 'Leaf', 'NV', 'Homy', 'Presage', 'Wingroad', 'Cube', 'Arna', 'e-NV200', 'Datsun on-DO', 'Datsun MI-DO', 'Fuga', 'Juke Nismo', 'Caravan', 'Liberty', 'Safari', 'Grand Livina', 'Xtrail'
         ),
         'Norster' => array(
             '600R'
@@ -510,7 +507,7 @@ class CarData
             'Sahin', 'Dogan'
         ),
         'Toyota' => array(
-            '4Runner', 'Avensis', 'Avensis Verso', 'Camry', 'Carina', 'Carina E', 'Celica', 'Corolla', 'Corolla Verso', 'Corona', 'Cressida', 'Crown', 'MR2', 'Paseo', 'Picnic', 'Previa', 'Prius', 'Rav 4', 'Space Cruiser', 'Starlet', 'Supra', 'Tercel', 'Yaris', 'Yaris Verso', 'Echo', 'Hiace пасс.', 'Matrix', 'Solara', 'Avalon', 'Scion', 'XA', 'Mark', 'Sienna', 'FJ Cruiser', 'Aygo', 'Auris', 'Tundra', 'Highlander', 'Fortuner', 'Sequoia', 'Windom', 'Estima', 'Town Ace', 'Tacoma', 'Vista', 'Hilux', 'Chaser', 'Gaia', 'Sprinter', 'Aurion', 'Progres', 'Aristo', 'Land Cruiser 71', 'Land Cruiser 78', 'Venza', 'Lite Ace', 'Soarer', 'Harrier', 'Caldina', 'Hino', 'Mark II', 'Avanza', 'IQ', 'Land Cruiser 76', 'Verossa', 'Cresta', 'Verso', 'Hiace груз.', 'Inova', 'Urban Cruiser', 'Corsa', 'Carib', 'Regular Cab', 'Will Vs', 'Funcargo', 'Land Cruiser (все)', 'Land Cruiser 100', 'Land Cruiser 200', 'Land Cruiser Prado', 'Land Cruiser 80', 'Land Cruiser 90', 'Land Cruiser 70', 'Altezza', 'Land Cruiser 73', 'Land Cruiser 105', 'Land Cruiser 60', 'Land Cruiser 40', '1000 (Publica)', 'Brevis', 'Cavalier', 'Zelas', 'Corolla Levin', 'Sprinter Trueno', 'Ipsum', 'Raum', 'F', 'Master', 'GT 86', 'Isis', 'Sera', 'Cynos', 'Nadia', 'Alphard', 'Century', 'Curren', 'Opa', 'Land Cruiser 79', 'Mirai', 'Voxy', 'Allex', 'Verso-S', 'Celsior', 'Prius C', 'Allion', 'C-HR', 'Proace', '7FBMF16', 'Duet', '8FBMT16', 'Cami'
+            '4Runner', 'Avensis', 'Avensis Verso', 'Camry', 'Carina', 'Carina E', 'Celica', 'Corolla', 'Corolla Verso', 'Corona', 'Cressida', 'Crown', 'MR2', 'Paseo', 'Picnic', 'Previa', 'Prius', 'Rav 4', 'Space Cruiser', 'Starlet', 'Supra', 'Tercel', 'Yaris', 'Yaris Verso', 'Echo', 'Hiace пасс.', 'Matrix', 'Solara', 'Avalon', 'Scion', 'XA', 'Mark', 'Sienna', 'FJ Cruiser', 'Aygo', 'Auris', 'Tundra', 'Highlander', 'Fortuner', 'Sequoia', 'Windom', 'Estima', 'Town Ace', 'Tacoma', 'Vista', 'Hilux', 'Chaser', 'Gaia', 'Sprinter', 'Aurion', 'Progres', 'Aristo', 'Land Cruiser 71', 'Land Cruiser 78', 'Venza', 'Lite Ace', 'Soarer', 'Harrier', 'Caldina', 'Hino', 'Mark II', 'Avanza', 'IQ', 'Land Cruiser 76', 'Verossa', 'Cresta', 'Verso', 'Hiace груз.', 'Inova', 'Urban Cruiser', 'Corsa', 'Carib', 'Regular Cab', 'Will Vs', 'Funcargo', 'Land Cruiser (все)', 'Land Cruiser 100', 'Land Cruiser 200', 'Land Cruiser Prado', 'Land Cruiser 80', 'Land Cruiser 90', 'Land Cruiser 70', 'Altezza', 'Land Cruiser 73', 'Land Cruiser 105', 'Land Cruiser 60', 'Land Cruiser 40', '1000 (Publica)', 'Brevis', 'Cavalier', 'Zelas', 'Corolla Levin', 'Sprinter Trueno', 'Ipsum', 'Raum', 'F', 'Master', 'GT 86', 'Isis', 'Sera', 'Cynos', 'Nadia', 'Alphard', 'Century', 'Curren', 'Opa', 'Land Cruiser 79', 'Mirai', 'Voxy', 'Allex', 'Verso-S', 'Celsior', 'Prius C', 'Allion', 'C-HR', 'Proace', '7FBMF16', 'Duet', '8FBMT16', 'Cami', 'Agya', 'Cayla'
         ),
         'Triumph' => array(
             '1500', 'Acclaim', 'Dolomite', 'Spitfire', 'Stag', 'Toledo', 'TR7', 'Daytona', 'Thruxton'
@@ -540,7 +537,7 @@ class CarData
             'SHK'
         ),
         'Wuling' => array(
-            'Sunshine', 'Xingwang', 'LZW'
+            'Sunshine', 'Xingwang', 'LZW', 'Confero', 'Cortez'
         ),
         'Xiaolong' => array(
             'XLW'
