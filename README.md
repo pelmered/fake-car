@@ -27,7 +27,7 @@ $faker->addProvider(new \Faker\Provider\Fakecar($faker));
 echo $faker->vehicle; //Volvo 740
 
 // generate matching automobile brand and model of car as an array
-echo $faker->vehicle; //[ 'brand' => 'Hummer', 'model' => 'H1' ]
+echo $faker->vehicleArray; //[ 'brand' => 'Hummer', 'model' => 'H1' ]
 
 // generate only automobile brand
 echo $faker->vehicleBrand; //Ford
