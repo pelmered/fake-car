@@ -175,7 +175,52 @@ class FakecarTest extends TestCase
         $this->assertTrue(in_array($this->faker->vehicleGearBoxType, CarData::getVehicleGearBoxType()));
     }
 
-    public function testGetWeighted()
+    public function testGetRandomElementsFromArray()
+    {
+        $data = [
+            'value1',
+            'value2',
+            'value3',
+            'value4',
+            'value5',
+            'value6',
+            'value7',
+            'value8',
+            'value9',
+            'value10',
+        ];
+
+
+        $result1 = $this->faker->getRandomElementsFromArray($data, 1);
+        $this->assertCount(1, $result1);
+
+        $result2 = $this->faker->getRandomElementsFromArray($data, 3);
+        $this->assertCount(3, $result2);
+
+        $result3 = $this->faker->getRandomElementsFromArray($data, 6);
+        $this->assertCount(6, $result3);
+
+        $result4 = $this->faker->getRandomElementsFromArray($data, 10);
+        $this->assertCount(10, $result4);
+
+        for($i = 0; $i<10; $i++) {
+            $result5 = $this->faker->getRandomElementsFromArray($data);
+
+            $this->assertGreaterThanOrEqual(0, count($result5));
+            $this->assertLessThanOrEqual(10, count($result5));
+
+            foreach ($result5 as $r) {
+                $this->assertContains($r, $data);
+            }
+        }
+
+        $this->expectException(\InvalidArgumentException::class);
+
+        $this->faker->getRandomElementsFromArray($data, 20);
+    }
+
+
+        public function testGetWeighted()
     {
         $data = [
             'key1' => 80,

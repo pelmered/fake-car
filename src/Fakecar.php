@@ -153,7 +153,7 @@ class Fakecar extends \Faker\Provider\Base
         $valuesLength = count($values);
         if ($count > $valuesLength)
         {
-            throw new \Exception('Count larger than array length.');
+            throw new \InvalidArgumentException('Count larger than array length.');
         }
 
         if (!$count)
@@ -173,6 +173,8 @@ class Fakecar extends \Faker\Provider\Base
             )
         );
     }
+
+
 
     /**
      * Get one element out of an input array with specified weights to get the distribution of the generated elements as you want them.
