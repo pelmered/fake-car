@@ -15,7 +15,7 @@ class FakecarTest extends TestCase
      */
     private $faker;
 
-    public function setUp(): void
+    public function setUp()
     {
         $faker = Factory::create();
         $faker->addProvider(new Fakecar($faker));
