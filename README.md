@@ -46,9 +46,24 @@ echo $faker->vehicleType; //hatchback
 
 // generate automobile fuel type
 echo $faker->vehicleFuelType; //diesel
+
+// generate automobile door count
+echo $faker->vehicleDoorCount; //4
+
+// generate automobile seat count
+echo $faker->vehicleSeatCount; //5
+
+// generate automobile properties
+echo $faker->vehicleProperties; //['Towbar','Aircondition','GPS', 'Leather seats']
+
+// generate automobile properties
+echo $faker->vehicleProperties; //['Towbar','Aircondition','GPS', 'Leather seats']
+
+// generate automobile gear type (manual or automatic)
+echo $faker->vehicleGearBoxType; //manual
 ```
 
-### Laravel seeder example
+### Laravel factory example
 
 ```php
 <?php
