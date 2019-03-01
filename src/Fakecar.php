@@ -73,9 +73,15 @@ class Fakecar extends \Faker\Provider\Base
     }
     public static function getRandomElementsFromArray(array $values, int $count = 0) :array {
 
+        $valuesLength = count($values);
+        if($count > $valuesLength)
+        {
+            throw new Exception('Count larger than array length.');
+        }
+
         if(!$count)
         {
-            $count = random_int(0, count($values));
+            $count = random_int(0, $valuesLength);
         }
 
         if($count === 0)
