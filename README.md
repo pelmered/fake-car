@@ -20,14 +20,14 @@ or add
 ## Basic Usage
 ```php
 $faker = (new \Faker\Factory())::create();
-$faker->addProvider(new pelmered\Faker\FakeCar\Provider($faker));
+$faker->addProvider(new \Faker\Provider\Fakecar($faker));
 
 
 // generate matching automobile brand and model of car as a string
 echo $faker->vehicle; //Volvo 740
 
 // generate matching automobile brand and model of car as an array
-echo $faker->vehicle; //[ 'brand' => 'Hummer', 'model' => 'H1' ]
+echo $faker->vehicleArray; //[ 'brand' => 'Hummer', 'model' => 'H1' ]
 
 // generate only automobile brand
 echo $faker->vehicleBrand; //Ford
