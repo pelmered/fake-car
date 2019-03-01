@@ -146,6 +146,7 @@ class Fakecar extends \Faker\Provider\Base
      * @param int $count The number of random elements you want to get in your response. Leave out or set to 0 for random.
      *
      * @return array
+     * @throws \InvalidArgumentException
      * @throws \Exception
      */
     public static function getRandomElementsFromArray(array $values, int $count = 0) :array {
