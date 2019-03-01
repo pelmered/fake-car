@@ -9,10 +9,10 @@ notifications:
     on_failure: change
 
 before_script:
-- vendor/bin/phpunit install --dev
+- composer install --dev
 
 script:
-  - phpunit --coverage-clover=coverage.clover
+  - vendor/bin/phpunit --coverage-clover=coverage.clover
 
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
