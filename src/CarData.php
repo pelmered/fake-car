@@ -317,6 +317,9 @@ class CarData
         'Marshell' => array(
             'DN', 'DG-C2'
         ),
+        'Mahindra' => array(
+            'Alturas G4', 'Bolero', 'KUV100', 'KUV100 NXT', 'Marazzo', 'Scorpio', 'Scorpio Getaway', 'TUV300', 'TUV300 PLUS', 'Thar', 'Verito', 'Verito Vibe CS', 'XUV500', 'e20 NXT', 'e2o PLUS', 'eKUV100', 'XUV300'
+        ),
         'Maruti' => array(
             '1000', '800', 'Alto', 'Baleno', 'Esteem', 'Gypsy', 'Omni', 'Versa', 'Wagon R', 'Zen', 'Suzuki'
         ),
