@@ -89,7 +89,12 @@ class Fakecar extends \Faker\Provider\Base
             return [];
         }
 
-        return array_intersect_key($values, array_flip((array) array_rand($values, $count)));
+        return array_intersect_key(
+            $values,
+            array_flip(
+                (array) array_rand($values, $count)
+            )
+        );
     }
 
     public static function getWeighted(array $values) :string {
