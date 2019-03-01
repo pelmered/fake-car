@@ -6,35 +6,34 @@ namespace Faker\Provider;
 
 class CarData
 {
-    public static function getBrandsWithModels()
+    public static function getBrandsWithModels() : array
     {
         return static::$brandsWithModels;
     }
-    public static function getVehicleTypes()
+    public static function getVehicleTypes() : array
     {
         return static::$vehicleTypes;
     }
-    public static function getVehicleFuelTypes()
+    public static function getVehicleFuelTypes() : array
     {
         return static::$vehicleFuelTypes;
     }
-    public static function getVehicleDoorCount()
+    public static function getVehicleDoorCount() : array
     {
         return static::$vehicleDoorCount;
     }
-    public static function getVehicleSeatCount()
+    public static function getVehicleSeatCount() : array
     {
         return static::$vehicleSeatCount;
     }
-    public static function getVehicleProperties()
+    public static function getVehicleProperties() : array
     {
         return static::$vehicleProperties;
     }
-    public static function getVehicleGearBoxType()
+    public static function getVehicleGearBoxType() : array
     {
         return static::$vehicleGearBox;
     }
-
 
     // phpcs:disable
     protected static $brandsWithModels = array(
