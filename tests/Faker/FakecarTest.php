@@ -242,6 +242,24 @@ class FakecarTest extends TestCase
         $this->assertEquals('', $this->faker->getWeighted([]));
     }
 
+    public function testValidVin()
+    {
+        //Too short
+        $this->assertFalse($this->faker->validateVin('z2j9hhgr8Ahl1e3g'));
+        //Invalid check digit
+        $this->assertFalse($this->faker->validateVin('z2j9hhgr2Ahl1e3gs'));
+        //Invalid
+        $this->assertFalse($this->faker->validateVin('z2j9hhgr8Ahl1e3gd'));
+
+        // Valid VINs
+        $this->assertTrue($this->faker->validateVin('z2j9hhgr8Ahl1e3gs'));
+        $this->assertTrue($this->faker->validateVin('n7u30vns7Ajsrb1nc'));
+        $this->assertTrue($this->faker->validateVin('3julknxb0A06hj41x'));
+        $this->assertTrue($this->faker->validateVin('yj12c8z40Aca2x6p3'));
+        $this->assertTrue($this->faker->validateVin('y95wf7gm1A9g7pz5z'));
+        $this->assertTrue($this->faker->validateVin('355430557Azf4u0vr'));
+    }
+
     public function testVinReturnsValidVin()
     {
         $vin = $this->faker->vin();
