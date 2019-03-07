@@ -5,6 +5,9 @@ use Faker\Generator;
 
 class Fakecar extends \Faker\Provider\Base
 {
+    const EBCDIC = "0123456789.ABCDEFGH..JKLMN.P.R..STUVWXYZ";
+    const MODELYEAR = "ABCDEFGHJKLMNPRSTVWXY123456789";
+
     /**
      * Fakecar constructor.
      *
@@ -62,6 +65,22 @@ class Fakecar extends \Faker\Provider\Base
         $brandsWithModels = CarData::getBrandsWithModels();
 
         return static::randomElement($brandsWithModels[$brand ?: static::vehicleBrand()]);
+    }
+
+    /**
+     * Generate VIN
+     * @link https://en.wikipedia.org/wiki/Vehicle_identification_number
+     *
+     * @param int $year
+     *
+     * @return mixed
+     */
+    public static function vin($year = 1980)
+    {
+        $modelYear = static::modelYear($year);
+        $regex = "([a-hj-npr-z0-9]{8})_{$modelYear}([a-hj-npr-z0-9]{7})";
+        $vin = static::regexify($regex);
+        return str_replace('_', self::checkDigit($vin), $vin);
     }
 
     /**
@@ -203,6 +222,43 @@ class Fakecar extends \Faker\Provider\Base
         }
 
         return '';
+    }
+
+
+
+    public static function modelYear($year = 1980)
+    {
+        return substr(self::MODELYEAR, ($year-1980) % 30, 1);
+    }
+
+    /**
+     * @param $c
+     *
+     * @return int
+     */
+    public static function transliterate($c)
+    {
+        return stripos(self::EBCDIC, $c) % 10;
+    }
+
+    public static function checkDigit($vin)
+    {
+        $map = "0123456789X";
+        $weights = "8765432X098765432";
+        $sum = 0;
+        for ($i=0; $i < 17; $i++) {
+            $sum += self::transliterate(substr($vin, $i, 1))
+                    * stripos($map, $weights[$i]);
+        }
+        return $map[$sum % 11];
+    }
+
+    public static function validateVin($vin)
+    {
+        if (strlen($vin) != 17) {
+            return false;
+        }
+        return self::checkDigit($vin) == substr($vin, 8, 1);
     }
 
 }

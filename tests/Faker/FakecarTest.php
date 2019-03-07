@@ -220,7 +220,7 @@ class FakecarTest extends TestCase
     }
 
 
-        public function testGetWeighted()
+    public function testGetWeighted()
     {
         $data = [
             'key1' => 80,
@@ -240,5 +240,25 @@ class FakecarTest extends TestCase
         $this->assertGreaterThan($result['key3'], $result['key1']);
 
         $this->assertEquals('', $this->faker->getWeighted([]));
+    }
+
+    public function testVinReturnsValidVin()
+    {
+        $vin = $this->faker->vin();
+        $this->assertTrue($this->faker->validateVin($vin));
+    }
+    public function testModelYear()
+    {
+        $this->assertEquals($this->faker->modelYear(1980), 'A');
+        $this->assertEquals($this->faker->modelYear(2000), 'Y');
+        $this->assertEquals($this->faker->modelYear(2017), 'H');
+        $this->assertEquals($this->faker->modelYear(2018), 'J');
+        $this->assertEquals($this->faker->modelYear(2019), 'K');
+    }
+    public function testTransliterate()
+    {
+        $this->assertEquals($this->faker->transliterate('O'), 0);
+        $this->assertEquals($this->faker->transliterate('A'), 1);
+        $this->assertEquals($this->faker->transliterate('K'), 2);
     }
 }

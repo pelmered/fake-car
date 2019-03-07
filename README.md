@@ -35,6 +35,9 @@ echo $faker->vehicleBrand; //Ford
 // generate automobile manufacturer and model of car
 echo $faker->vehicleModel; //488 Spider
 
+// generate Vehicle Identification Number(VIN) - https://en.wikipedia.org/wiki/Vehicle_identification_number
+echo $faker->vin; //d0vcddxpXAcz1utgz
+
 // generate automobile registration number
 echo $faker->vehicleRegistration; //ABC-123
 
@@ -77,6 +80,7 @@ $factory->define(App\Vehicle::class, function (Faker $faker) {
 
     return [
         'vehicle_type'      => 'car',
+        'vin'               => $faker->vin,
         'registration_no'   => $faker->vehicleRegistration,
         'type'              => $faker->vehicleType,
         'fuel'              => $faker->vehicleFuelType,
