@@ -172,7 +172,7 @@ class FakecarTest extends TestCase
 
     public function testVehicleGearBox()
     {
-        $this->assertTrue(in_array($this->faker->vehicleGearBoxType, CarData::getVehicleGearBoxType()));
+        $this->assertTrue(in_array($this->faker->vehicleGearBoxType, array_keys(CarData::getVehicleGearBoxType())));
     }
 
     public function testGetRandomElementsFromArray()

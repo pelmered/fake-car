@@ -155,7 +155,7 @@ class Fakecar extends \Faker\Provider\Base
      */
     public static function vehicleGearBoxType()
     {
-        return static::randomElement(CarData::getVehicleGearBoxType());
+        return static::getWeighted(CarData::getVehicleGearBoxType());
     }
 
     /**
