@@ -50,21 +50,21 @@ class Fakecar extends \Faker\Provider\Base
      */
     public static function vehicleBrand() : string
     {
-        return static::randomElement(array_keys(CarData::getBrandsWithModels()));
+        return (string) static::randomElement(array_keys(CarData::getBrandsWithModels()));
     }
 
     /**
      * Get random vehicle model
      *
-     * @param null $brand Get random model from specific brand (optional)
+     * @param string $brand Get random model from specific brand (optional)
      *
      * @return mixed
      */
-    public static function vehicleModel($brand = null) : string
+    public static function vehicleModel(string $brand = null) : string
     {
         $brandsWithModels = CarData::getBrandsWithModels();
 
-        return static::randomElement($brandsWithModels[$brand ?: static::vehicleBrand()]);
+        return (string) static::randomElement($brandsWithModels[$brand ?: static::vehicleBrand()]);
     }
 
     /**
@@ -75,7 +75,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return mixed
      */
-    public static function vin($year = 1980)
+    public static function vin(int $year = 1980) : string
     {
         $modelYear = static::modelYear($year);
         $regex = "([a-hj-npr-z0-9]{8})_{$modelYear}([a-hj-npr-z0-9]{7})";
@@ -90,7 +90,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return string
      */
-    public static function vehicleRegistration($regex = '[A-Z]{3}-[0-9]{3}') : string
+    public static function vehicleRegistration(string $regex = '[A-Z]{3}-[0-9]{3}') : string
     {
         //TODO: Set format based on locale
         return static::regexify($regex);
@@ -103,7 +103,7 @@ class Fakecar extends \Faker\Provider\Base
      */
     public static function vehicleType() : string
     {
-        return static::randomElement(CarData::getVehicleTypes());
+        return (string) static::randomElement(CarData::getVehicleTypes());
     }
 
     /**
@@ -113,7 +113,7 @@ class Fakecar extends \Faker\Provider\Base
      */
     public static function vehicleFuelType() : string
     {
-        return static::randomElement(CarData::getVehicleFuelTypes());
+        return (string) static::randomElement(CarData::getVehicleFuelTypes());
     }
 
     /**
