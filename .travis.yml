@@ -23,12 +23,13 @@ after_success:
   - codecov
 
 php:
-  - '7.1'
-  - '7.2'
-  - '7.3'
-  - '7.4snapshot'
+  - 7.1
+  - 7.2
+  - 7.3
+  - 7.4snapshot
+  - hhvm
 
 matrix:
   allow_failures:
-  - php: '7.4snapshot'
-    env: KEY=VALUE
+  - php: 7.4snapshot
+  - php: hhvm
