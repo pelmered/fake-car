@@ -120,6 +120,7 @@ class Fakecar extends \Faker\Provider\Base
      * Get vehicle door count
      *
      * @return int
+     * @throws \Exception
      */
     public static function vehicleDoorCount() : int
     {
@@ -130,6 +131,7 @@ class Fakecar extends \Faker\Provider\Base
      * Get vehicle door count
      *
      * @return int
+     * @throws \Exception
      */
     public static function vehicleSeatCount() : int
     {
@@ -142,6 +144,7 @@ class Fakecar extends \Faker\Provider\Base
      * @param int $count
      *
      * @return array
+     * @throws \Exception
      */
     public static function vehicleProperties(int $count = 0) : array
     {
@@ -152,6 +155,7 @@ class Fakecar extends \Faker\Provider\Base
      * Get random vehicle gearbox type
      *
      * @return mixed
+     * @throws \Exception
      */
     public static function vehicleGearBoxType() : string
     {
@@ -193,8 +197,6 @@ class Fakecar extends \Faker\Provider\Base
             )
         );
     }
-
-
 
     /**
      * Get one element out of an input array with specified weights to get the distribution of the generated elements as you want them.
