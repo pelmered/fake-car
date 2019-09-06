@@ -121,7 +121,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return int
      */
-    public static function vehicleDoorCount() :int
+    public static function vehicleDoorCount() : int
     {
         return (int) static::getWeighted(CarData::getVehicleDoorCount());
     }
@@ -131,7 +131,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return int
      */
-    public static function vehicleSeatCount() :int
+    public static function vehicleSeatCount() : int
     {
         return (int) static::getWeighted(CarData::getVehicleSeatCount());
     }
@@ -143,7 +143,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return array
      */
-    public static function vehicleProperties(int $count = 0)
+    public static function vehicleProperties(int $count = 0) : array
     {
         return static::getRandomElementsFromArray(CarData::getVehicleProperties(), $count);
     }
@@ -153,7 +153,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return mixed
      */
-    public static function vehicleGearBoxType()
+    public static function vehicleGearBoxType() : string
     {
         return static::getWeighted(CarData::getVehicleGearBoxType());
     }
@@ -168,7 +168,7 @@ class Fakecar extends \Faker\Provider\Base
      * @throws \InvalidArgumentException
      * @throws \Exception
      */
-    public static function getRandomElementsFromArray(array $values, int $count = 0) :array {
+    public static function getRandomElementsFromArray(array $values, int $count = 0) : array {
 
         $valuesLength = count($values);
         if ($count > $valuesLength)
@@ -204,7 +204,7 @@ class Fakecar extends \Faker\Provider\Base
      * @return string
      * @throws \Exception
      */
-    public static function getWeighted(array $values) :string {
+    public static function getWeighted(array $values) : string {
 
         $currentTotal = 0;
         $firstRand = random_int(1, 100);
@@ -224,9 +224,12 @@ class Fakecar extends \Faker\Provider\Base
         return '';
     }
 
-
-
-    public static function modelYear($year = 1980)
+    /**
+     * @param int $year
+     *
+     * @return int
+     */
+    public static function modelYear(int $year = 1980) : string
     {
         return substr(self::MODELYEAR, ($year-1980) % 30, 1);
     }
@@ -236,12 +239,17 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return int
      */
-    public static function transliterate($c)
+    public static function transliterate(string $c) : string
     {
         return stripos(self::EBCDIC, $c) % 10;
     }
 
-    public static function checkDigit($vin)
+    /**
+     * @param string $vin
+     *
+     * @return mixed
+     */
+    public static function checkDigit(string $vin) : string
     {
         $map = "0123456789X";
         $weights = "8765432X098765432";
@@ -253,7 +261,12 @@ class Fakecar extends \Faker\Provider\Base
         return $map[$sum % 11];
     }
 
-    public static function validateVin($vin)
+    /**
+     * @param $vin
+     *
+     * @return bool
+     */
+    public static function validateVin(string $vin) : bool
     {
         if (strlen($vin) != 17) {
             return false;
