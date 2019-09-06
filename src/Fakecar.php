@@ -231,7 +231,7 @@ class Fakecar extends \Faker\Provider\Base
     /**
      * @param int $year
      *
-     * @return int
+     * @return string
      */
     public static function modelYear(int $year = 1980) : string
     {
