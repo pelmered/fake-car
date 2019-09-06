@@ -27,3 +27,8 @@ php:
   - '7.2'
   - '7.3'
   - '7.4snapshot'
+
+matrix:
+  allow_failures:
+  - php: '7.4snapshot'
+    env: KEY=VALUE
