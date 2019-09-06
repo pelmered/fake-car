@@ -1,6 +1,7 @@
 <?php
 
 namespace Faker\Provider;
+
 use Faker\Generator;
 
 class Fakecar extends \Faker\Provider\Base
@@ -166,27 +167,26 @@ class Fakecar extends \Faker\Provider\Base
      * Get random elements from input array
      *
      * @param array $values The input array
-     * @param int $count The number of random elements you want to get in your response. Leave out or set to 0 for random.
+     * @param int $count The number of random elements you want to get in your response.
+                         Leave out or set to 0 for random.
      *
      * @return array
      * @throws \InvalidArgumentException
      * @throws \Exception
      */
-    public static function getRandomElementsFromArray(array $values, int $count = 0) : array {
+    public static function getRandomElementsFromArray(array $values, int $count = 0) : array
+    {
 
         $valuesLength = count($values);
-        if ($count > $valuesLength)
-        {
+        if ($count > $valuesLength) {
             throw new \InvalidArgumentException('Count larger than array length.');
         }
 
-        if (!$count)
-        {
+        if (!$count) {
             $count = random_int(0, $valuesLength);
         }
 
-        if ($count === 0)
-        {
+        if ($count === 0) {
             return [];
         }
 
@@ -199,14 +199,16 @@ class Fakecar extends \Faker\Provider\Base
     }
 
     /**
-     * Get one element out of an input array with specified weights to get the distribution of the generated elements as you want them.
+     * Get one element out of an input array with specified weights to get the distribution
+     * of the generated elements as you want them.
      *
      * @param array $values Input array with values as key and weight as value. ['value 1' => 30, 'value 7' => 70]
      *
      * @return string
      * @throws \Exception
      */
-    public static function getWeighted(array $values) : string {
+    public static function getWeighted(array $values) : string
+    {
 
         $currentTotal = 0;
         $firstRand = random_int(1, 100);
@@ -275,5 +277,4 @@ class Fakecar extends \Faker\Provider\Base
         }
         return self::checkDigit($vin) == substr($vin, 8, 1);
     }
-
 }
