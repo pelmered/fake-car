@@ -6,6 +6,7 @@ Faker provider for fake car data
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pelmered/fake-car/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pelmered/fake-car/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/pelmered/fake-car/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/pelmered/fake-car/?branch=master)
 [![License](https://poser.pugx.org/pelmered/fake-car/license)](https://packagist.org/packages/pelmered/fake-car)
+[![Build Status](https://travis-ci.org/pelmered/fake-car.svg?branch=master)](https://travis-ci.org/pelmered/fake-car)
 
 ## Installation
 
