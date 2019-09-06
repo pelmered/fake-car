@@ -203,13 +203,16 @@ class FakecarTest extends TestCase
         $result4 = $this->faker->getRandomElementsFromArray($data, 10);
         $this->assertCount(10, $result4);
 
+        $result5 = $this->faker->getRandomElementsFromArray([], 0);
+        $this->assertEquals([], $result5);
+
         for($i = 0; $i<10; $i++) {
-            $result5 = $this->faker->getRandomElementsFromArray($data);
+            $result6 = $this->faker->getRandomElementsFromArray($data);
 
-            $this->assertGreaterThanOrEqual(0, count($result5));
-            $this->assertLessThanOrEqual(10, count($result5));
+            $this->assertGreaterThanOrEqual(0, count($result6));
+            $this->assertLessThanOrEqual(10, count($result6));
 
-            foreach ($result5 as $r) {
+            foreach ($result6 as $r) {
                 $this->assertContains($r, $data);
             }
         }
