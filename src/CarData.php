@@ -560,7 +560,7 @@ class CarData
     );
 
     protected static $vehicleTypes = [
-        'hatchback', 'sedan', 'small', 'convertible', 'SUV', 'MPV', 'coupe'
+        'hatchback', 'sedan', 'small', 'convertible', 'SUV', 'MPV', 'coupe', 'station wagon'
     ];
 
     protected static $vehicleFuelTypes = [
