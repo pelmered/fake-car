@@ -60,9 +60,6 @@ echo $faker->vehicleSeatCount; //5
 // generate automobile properties
 echo $faker->vehicleProperties; //['Towbar','Aircondition','GPS', 'Leather seats']
 
-// generate automobile properties
-echo $faker->vehicleProperties; //['Towbar','Aircondition','GPS', 'Leather seats']
-
 // generate automobile gear type (manual or automatic)
 echo $faker->vehicleGearBoxType; //manual
 ```
