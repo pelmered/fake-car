@@ -2,22 +2,10 @@
 
 namespace Faker\Provider;
 
-use Faker\Generator;
-
 class Fakecar extends \Faker\Provider\Base
 {
     const EBCDIC = "0123456789.ABCDEFGH..JKLMN.P.R..STUVWXYZ";
     const MODELYEAR = "ABCDEFGHJKLMNPRSTVWXY123456789";
-
-    /**
-     * Fakecar constructor.
-     *
-     * @param \Faker\Generator $generator
-     */
-    public function __construct(Generator $generator)
-    {
-        parent::__construct($generator);
-    }
 
     /**
      * Get vehicle string with brand and model
