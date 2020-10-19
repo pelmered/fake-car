@@ -32,5 +32,13 @@
         "psr-4": {
             "Faker\\Tests\\Provider\\": "tests/Faker"
         }
+    },
+    "scripts": {
+        "test": [
+            "./vendor/bin/phpunit -c tests/phpunit.xml"
+        ],
+        "test-coverage": [
+            "./vendor/bin/phpunit --coverage-text -c tests/phpunit.xml"
+        ]
     }
 }
