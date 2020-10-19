@@ -5,10 +5,18 @@
          colors="true"
 >
     <testsuites>
-        <testsuite name="Unit">
-            <directory suffix="Test.php">./</directory>
+        <testsuite name="tests">
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist>
+            <directory>./src</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-clover" target="clover.xml"/>
+    </logging>
     <coverage processUncoveredFiles="true">
         <include>
             <directory suffix=".php">../../src</directory>
