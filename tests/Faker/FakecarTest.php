@@ -107,8 +107,8 @@ class FakecarTest extends TestCase
 
     public function testVehicleRegistration()
     {
-        $this->assertRegExp('/[A-Z]{3}-[0-9]{3}/', $this->faker->vehicleRegistration());
-        $this->assertRegExp('/[A-Z]{2}-[0-9]{5}/', $this->faker->vehicleRegistration('[A-Z]{2}-[0-9]{5}'));
+        $this->assertMatchesRegularExpression('/[A-Z]{3}-[0-9]{3}/', $this->faker->vehicleRegistration());
+        $this->assertMatchesRegularExpression('/[A-Z]{2}-[0-9]{5}/', $this->faker->vehicleRegistration('[A-Z]{2}-[0-9]{5}'));
     }
 
     public function testVehicleType()

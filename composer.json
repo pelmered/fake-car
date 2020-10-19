@@ -17,11 +17,11 @@
         }
     ],
     "require": {
-        "php": "^7.1",
-        "fzaninotto/faker": "^1"
+        "php": "^7.2",
+        "fzaninotto/faker": "^1.9"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7"
+        "phpunit/phpunit": "^8.0||^9.0"
     },
     "autoload": {
         "psr-4": {
@@ -32,5 +32,13 @@
         "psr-4": {
             "Faker\\Tests\\Provider\\": "tests/Faker"
         }
+    },
+    "scripts": {
+        "test": [
+            "./vendor/bin/phpunit -c tests/phpunit.xml"
+        ],
+        "test-coverage": [
+            "./vendor/bin/phpunit --coverage-text -c tests/phpunit.xml"
+        ]
     }
 }
