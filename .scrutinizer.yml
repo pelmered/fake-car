@@ -11,6 +11,8 @@ checks:
 
 tools:
   external_code_coverage: true
+    timeout: 600
+    runs: 2
 
   php_cs_fixer:
     enabled: true
