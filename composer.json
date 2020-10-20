@@ -35,10 +35,10 @@
     },
     "scripts": {
         "test": [
-            "./vendor/bin/phpunit -c tests/phpunit.xml"
+            "./vendor/bin/phpunit -c phpunit.xml"
         ],
         "test-coverage": [
-            "./vendor/bin/phpunit --coverage-text -c tests/phpunit.xml"
+            "./vendor/bin/phpunit --coverage-text -c phpunit.xml"
         ]
     }
 }
