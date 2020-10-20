@@ -16,12 +16,12 @@ tools:
 
   php_cs_fixer:
     enabled: true
+    extensions:
+      - php
     filter:
       excluded_paths:
         - bin/*
         - tests/*
-      extensions:
-        - php
 
   php_sim:
     enabled: true
