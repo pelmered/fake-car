@@ -20,8 +20,8 @@ tools:
       excluded_paths:
         - bin/*
         - tests/*
-    extensions:
-      - php
+      extensions:
+        - php
 
   php_sim:
     enabled: true
