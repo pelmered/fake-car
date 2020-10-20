@@ -2,5 +2,5 @@
 vendor/
 composer.lock
 
-clover.xml
 coverage.clover
+.phpunit.result.cache
