@@ -231,7 +231,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return int
      */
-    public static function transliterate(string $c) : string
+    private static function transliterate(string $c) : string
     {
         return stripos(self::EBCDIC, $c) % 10;
     }
@@ -241,7 +241,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return mixed
      */
-    public static function checkDigit(string $vin) : string
+    private static function checkDigit(string $vin) : string
     {
         $map = "0123456789X";
         $weights = "8765432X098765432";
