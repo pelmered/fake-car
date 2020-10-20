@@ -7,7 +7,7 @@ version: 2
 updates:
   - package-ecosystem: "composer"
     directory: "/"
-    target-branch: "master"
+    target-branch: "develop"  
     schedule:
       interval: "daily"    
     commit-message:
