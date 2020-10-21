@@ -2,6 +2,8 @@
 
 namespace Faker\Provider;
 
+use InvalidArgumentException;
+
 class Fakecar extends \Faker\Provider\Base
 {
     const EBCDIC = "0123456789.ABCDEFGH..JKLMN.P.R..STUVWXYZ";
@@ -159,15 +161,14 @@ class Fakecar extends \Faker\Provider\Base
                          Leave out or set to 0 for random.
      *
      * @return array
-     * @throws \InvalidArgumentException
-     * @throws \Exception
+     * @throws InvalidArgumentException
      */
     public static function getRandomElementsFromArray(array $values, int $count = 0) : array
     {
 
         $valuesLength = count($values);
         if ($count > $valuesLength) {
-            throw new \InvalidArgumentException('Count larger than array length.');
+            throw new InvalidArgumentException('Count larger than array length.');
         }
 
         if (!$count) {
