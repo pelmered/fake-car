@@ -231,9 +231,9 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return int
      */
-    public static function transliterate(string $c) : string
+    public static function transliterate(string $character) : string
     {
-        return stripos(self::EBCDIC, $c) % 10;
+        return stripos(self::EBCDIC, $character) % 10;
     }
 
     /**
