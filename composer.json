@@ -48,10 +48,10 @@
             "open ./reports/phpmd.html"
         ],
         "codemetrics": [
-            "php ./vendor/bin/phpmetrics app"
+            "php ./vendor/bin/phpmetrics src"
         ],
         "codemetrics-html": [
-            "php ./vendor/bin/phpmetrics --report-html=reports/codemetrics app",
+            "php ./vendor/bin/phpmetrics --report-html=reports/codemetrics src",
             "open ./reports/codemetrics/index.html"
         ]
     }
