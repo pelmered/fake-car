@@ -39,6 +39,20 @@
         ],
         "test-coverage": [
             "./vendor/bin/phpunit --coverage-text -c phpunit.xml"
+        ],
+        "phpmd": [
+            "php ./vendor/bin/phpmd src ansi ./phpmd-ruleset.xml --ignore-violations-on-exit"
+        ],
+        "phpmd-html": [
+            "php ./vendor/bin/phpmd src html ./phpmd-ruleset.xml --ignore-violations-on-exit > reports/phpmd.html",
+            "open ./reports/phpmd.html"
+        ],
+        "codemetrics": [
+            "php ./vendor/bin/phpmetrics app"
+        ],
+        "codemetrics-html": [
+            "php ./vendor/bin/phpmetrics --report-html=reports/codemetrics app",
+            "open ./reports/codemetrics/index.html"
         ]
     }
 }
