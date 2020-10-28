@@ -1,7 +1,7 @@
 
 language: php
-
-sudo: false
+os: linux
+dist: bionic
 
 notifications:
   email:
@@ -28,7 +28,7 @@ php:
   - nightly
   - hhvm
 
-matrix:
+jobs:
   allow_failures:
     - php: nightly
     - php: hhvm
