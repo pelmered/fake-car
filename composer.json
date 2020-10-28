@@ -53,6 +53,9 @@
         "codemetrics-html": [
             "php ./vendor/bin/phpmetrics --report-html=reports/codemetrics src",
             "open ./reports/codemetrics/index.html"
+        ],
+        "all": [
+            "composer run test && composer run test-coverage && composer run phpmd && composer run codemetrics"
         ]
     }
 }
