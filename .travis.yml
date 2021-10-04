@@ -25,6 +25,8 @@ after_success:
 php:
   - 7.3
   - 7.4
+  - 8.0snapshot
+  - 8.1snapshot
   - nightly
 
 jobs:
