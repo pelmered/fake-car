@@ -1,6 +1,12 @@
 
+.idea
+.vscode
+
 vendor/
 composer.lock
 
+# Temp files
 coverage.clover
 .phpunit.result.cache
+ocular.phar
+reports
