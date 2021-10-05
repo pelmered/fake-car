@@ -15,17 +15,16 @@ class FakecarTest extends TestCase
      */
     private $faker;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         $faker = Factory::create();
         $faker->addProvider(new Fakecar($faker));
         $this->faker = $faker;
     }
 
-    public function getProtectedProperty( $property, $class = null )
+    public function getProtectedProperty($property, $class = null)
     {
-        if( is_null($class))
-        {
+        if (is_null($class)) {
             $class = new Fakecar($this->faker);
         }
 
@@ -45,13 +44,10 @@ class FakecarTest extends TestCase
         $vehicleText = $this->faker->vehicle();
         $brands = CarData::getBrandsWithModels();
 
-        foreach($brands as $brand => $models)
-        {
-            if(substr($vehicleText, 0, strlen($brand)) === $brand) {
-                foreach ($models as $model)
-                {
-                    if(substr($vehicleText,  -strlen($model)) === $model) {
-
+        foreach ($brands as $brand => $models) {
+            if (substr($vehicleText, 0, strlen($brand)) === $brand) {
+                foreach ($models as $model) {
+                    if (substr($vehicleText, -strlen($model)) === $model) {
                         $this->assertStringEndsWith($model, $vehicleText);
                         break;
                     }
@@ -75,7 +71,6 @@ class FakecarTest extends TestCase
                 $brandsArray[$vehicleArray['brand']]
             )
         );
-
     }
 
     public function testVehicleBrand()
@@ -123,8 +118,7 @@ class FakecarTest extends TestCase
 
     public function testVehicleDoorCount()
     {
-        for($i = 0; $i<10; $i++)
-        {
+        for ($i = 0; $i<10; $i++) {
             $this->assertThat(
                 $this->faker->vehicleDoorCount,
                 $this->logicalAnd(
@@ -138,8 +132,7 @@ class FakecarTest extends TestCase
 
     public function testVehicleSeatCount()
     {
-        for($i = 0; $i<10; $i++)
-        {
+        for ($i = 0; $i<10; $i++) {
             $this->assertThat(
                 $this->faker->vehicleSeatCount,
                 $this->logicalAnd(
@@ -206,7 +199,7 @@ class FakecarTest extends TestCase
         $result5 = $this->faker->getRandomElementsFromArray([], 0);
         $this->assertEquals([], $result5);
 
-        for($i = 0; $i<10; $i++) {
+        for ($i = 0; $i<10; $i++) {
             $result6 = $this->faker->getRandomElementsFromArray($data);
 
             $this->assertGreaterThanOrEqual(0, count($result6));
@@ -233,8 +226,7 @@ class FakecarTest extends TestCase
 
         $result = array_fill_keys(array_keys($data), 0);
 
-        for($i = 0; $i<1000; $i++)
-        {
+        for ($i = 0; $i<1000; $i++) {
             $result[$this->faker->getWeighted($data)]++;
         }
 
