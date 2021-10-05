@@ -7,11 +7,11 @@ version: 2
 updates:
   - package-ecosystem: "composer"
     directory: "/"
-    target-branch: "develop"  
     schedule:
-      interval: "daily"    
+      interval: "daily"
+    target-branch: "master"
     commit-message:
       prefix: "Composer"
       include: "scope"
     labels:
-      - "composer dependencies"
+      - "composer"
