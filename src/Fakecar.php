@@ -104,6 +104,17 @@ class Fakecar extends \Faker\Provider\Base
     {
         return (string) static::randomElement(CarData::getVehicleFuelTypes());
     }
+    
+     /**
+     * Get vehicle power engine
+     *
+     * @return string
+     */
+    public static function vehicleEnginePower(): string
+    {
+        return (string) static::randomElement(CarData::getVehicleEnginePower());
+    }
+
 
     /**
      * Get vehicle door count
