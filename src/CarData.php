@@ -16,6 +16,10 @@ class CarData
     {
         return static::$vehicleFuelTypes;
     }
+    public static function getVehicleEnginePower(): array
+    {
+        return static::$vehicleEnginePower;
+    }
     public static function getVehicleDoorCount(): array
     {
         return static::$vehicleDoorCount;
@@ -818,6 +822,10 @@ class CarData
 
     protected static $vehicleFuelTypes = [
         'gas', 'electric', 'diesel', 'hybrid'
+    ];
+    
+    protected static $vehicleEnginePower = [
+        '1800 16v 120HP', '2000 160HP', '1600 16v 90HP', '2500 16v 200HP', '1400 80HP', '3000 250HP', '1800 100HP', '2000 16v V6 220HP'
     ];
 
     protected static $vehicleDoorCount = [
