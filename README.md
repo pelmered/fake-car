@@ -13,7 +13,7 @@ Faker provider for fake car data
 ## Installation
 
 ```sh
-composer require pelmered/fake-car
+composer require pelmered/fake-car --dev
 ```
 or add 
 ```sh
