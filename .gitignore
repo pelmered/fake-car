@@ -8,5 +8,6 @@ composer.lock
 # Temp files
 coverage.clover
 .phpunit.result.cache
+.php-cs-fixer.cache
 ocular.phar
 reports
