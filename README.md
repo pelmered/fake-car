@@ -12,13 +12,11 @@ Faker provider for fake car data
 
 ## Installation
 
+To install as a dev dependency run:
 ```sh
 composer require pelmered/fake-car --dev
 ```
-or add 
-```sh
-"pelmered/fake-car": "^1.0"
-```
+Remove the `--dev` flag if you need it in production.
 
 ## Basic Usage
 ```php
