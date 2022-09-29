@@ -70,23 +70,41 @@ echo $faker->vehicleGearBoxType; //manual
 
 ```php
 <?php
+namespace Database\Factories;
 
-use Faker\Generator as Faker;
+use App\Models\Vehicle;
+use Faker\Provider\Fakecar;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(App\Vehicle::class, function (Faker $faker) {
+class VehicleFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Vehicle::class;
 
-    $faker->addProvider(new \Faker\Provider\Fakecar($faker));
-    $v = $faker->vehicleArray();
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $this->faker->addProvider(new Fakecar($this->faker));
+        $vehicle = $this->faker->vehicleArray();
 
-    return [
-        'vehicle_type'      => 'car',
-        'vin'               => $faker->vin,
-        'registration_no'   => $faker->vehicleRegistration,
-        'type'              => $faker->vehicleType,
-        'fuel'              => $faker->vehicleFuelType,
-        'brand'             => $v['brand'],
-        'model'             => $v['model'],
-        'year'              => $faker->biasedNumberBetween(1998,2017, 'sqrt'),
-    ];
-});
+        return [
+            'vehicle_type'    => 'car',
+            'vin'             => $this->faker->vin,
+            'registration_no' => $this->faker->vehicleRegistration,
+            'chassis_type'    => str_replace(' ', '_', $this->faker->vehicleType),
+            'fuel'            => $this->faker->vehicleFuelType,
+            'brand'           => $vehicle['brand'],
+            'model'           => $vehicle['model'],
+            'year'            => $this->faker->biasedNumberBetween(1990, date('Y'), 'sqrt'),
+        ];
+    }
+}
 ```
