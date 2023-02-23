@@ -6,15 +6,15 @@ use InvalidArgumentException;
 
 class Fakecar extends \Faker\Provider\Base
 {
-    const EBCDIC = "0123456789.ABCDEFGH..JKLMN.P.R..STUVWXYZ";
-    const MODELYEAR = "ABCDEFGHJKLMNPRSTVWXY123456789";
+    public const EBCDIC = "0123456789.ABCDEFGH..JKLMN.P.R..STUVWXYZ";
+    public const MODELYEAR = "ABCDEFGHJKLMNPRSTVWXY123456789";
 
     /**
      * Get vehicle string with brand and model
      *
      * @return string
      */
-    public static function vehicle() : string
+    public static function vehicle(): string
     {
         $vehicleBrand = static::vehicleBrand();
         return $vehicleBrand.' '.static::vehicleModel($vehicleBrand);
@@ -25,7 +25,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return array
      */
-    public static function vehicleArray() : array
+    public static function vehicleArray(): array
     {
         $vehicleBrand = static::vehicleBrand();
         return [
@@ -39,7 +39,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return string
      */
-    public static function vehicleBrand() : string
+    public static function vehicleBrand(): string
     {
         return (string) static::randomElement(array_keys(CarData::getBrandsWithModels()));
     }
@@ -51,7 +51,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return mixed
      */
-    public static function vehicleModel(string $brand = null) : string
+    public static function vehicleModel(string $brand = null): string
     {
         $brandsWithModels = CarData::getBrandsWithModels();
 
@@ -66,7 +66,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return mixed
      */
-    public static function vin(int $year = 1980) : string
+    public static function vin(int $year = 1980): string
     {
         $modelYear = static::modelYear($year);
         $regex = "([a-hj-npr-z0-9]{8})_{$modelYear}([a-hj-npr-z0-9]{7})";
@@ -81,7 +81,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return string
      */
-    public static function vehicleRegistration(string $regex = '[A-Z]{3}-[0-9]{3}') : string
+    public static function vehicleRegistration(string $regex = '[A-Z]{3}-[0-9]{3}'): string
     {
         //TODO: Set format based on locale
         return static::regexify($regex);
@@ -92,7 +92,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return string
      */
-    public static function vehicleType() : string
+    public static function vehicleType(): string
     {
         return (string) static::randomElement(CarData::getVehicleTypes());
     }
@@ -102,7 +102,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return string
      */
-    public static function vehicleFuelType() : string
+    public static function vehicleFuelType(): string
     {
         return (string) static::randomElement(CarData::getVehicleFuelTypes());
     }
@@ -113,7 +113,7 @@ class Fakecar extends \Faker\Provider\Base
      * @return int
      * @throws \Exception
      */
-    public static function vehicleDoorCount() : int
+    public static function vehicleDoorCount(): int
     {
         return (int) static::getWeighted(CarData::getVehicleDoorCount());
     }
@@ -124,7 +124,7 @@ class Fakecar extends \Faker\Provider\Base
      * @return int
      * @throws \Exception
      */
-    public static function vehicleSeatCount() : int
+    public static function vehicleSeatCount(): int
     {
         return (int) static::getWeighted(CarData::getVehicleSeatCount());
     }
@@ -137,7 +137,7 @@ class Fakecar extends \Faker\Provider\Base
      * @return array
      * @throws \Exception
      */
-    public static function vehicleProperties(int $count = 0) : array
+    public static function vehicleProperties(int $count = 0): array
     {
         return static::getRandomElementsFromArray(CarData::getVehicleProperties(), $count);
     }
@@ -148,7 +148,7 @@ class Fakecar extends \Faker\Provider\Base
      * @return mixed
      * @throws \Exception
      */
-    public static function vehicleGearBoxType() : string
+    public static function vehicleGearBoxType(): string
     {
         return static::getWeighted(CarData::getVehicleGearBoxType());
     }
@@ -163,9 +163,8 @@ class Fakecar extends \Faker\Provider\Base
      * @return array
      * @throws InvalidArgumentException
      */
-    public static function getRandomElementsFromArray(array $values, int $count = 0) : array
+    public static function getRandomElementsFromArray(array $values, int $count = 0): array
     {
-
         $valuesLength = count($values);
         if ($count > $valuesLength) {
             throw new InvalidArgumentException('Count larger than array length.');
@@ -196,9 +195,8 @@ class Fakecar extends \Faker\Provider\Base
      * @return string
      * @throws \Exception
      */
-    public static function getWeighted(array $values) : string
+    public static function getWeighted(array $values): string
     {
-
         $currentTotal = 0;
         $firstRand = random_int(1, 100);
 
@@ -222,7 +220,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return string
      */
-    public static function modelYear(int $year = 1980) : string
+    public static function modelYear(int $year = 1980): string
     {
         return substr(self::MODELYEAR, ($year-1980) % 30, 1);
     }
@@ -232,7 +230,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return int
      */
-    private static function transliterate(string $character) : string
+    private static function transliterate(string $character): string
     {
         return stripos(self::EBCDIC, $character) % 10;
     }
@@ -242,7 +240,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return mixed
      */
-    private static function checkDigit(string $vin) : string
+    private static function checkDigit(string $vin): string
     {
         $map = "0123456789X";
         $weights = "8765432X098765432";
@@ -259,7 +257,7 @@ class Fakecar extends \Faker\Provider\Base
      *
      * @return bool
      */
-    public static function validateVin(string $vin) : bool
+    public static function validateVin(string $vin): bool
     {
         if (strlen($vin) != 17) {
             return false;
