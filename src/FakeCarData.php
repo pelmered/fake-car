@@ -2,38 +2,10 @@
 
 namespace Faker\Provider;
 
-class CarData
+class FakeCarData
 {
-    public static function getBrandsWithModels(): array
-    {
-        return static::$brandsWithModels;
-    }
-    public static function getVehicleTypes(): array
-    {
-        return static::$vehicleTypes;
-    }
-    public static function getVehicleFuelTypes(): array
-    {
-        return static::$vehicleFuelTypes;
-    }
-    public static function getVehicleDoorCount(): array
-    {
-        return static::$vehicleDoorCount;
-    }
-    public static function getVehicleSeatCount(): array
-    {
-        return static::$vehicleSeatCount;
-    }
-    public static function getVehicleProperties(): array
-    {
-        return static::$vehicleProperties;
-    }
-    public static function getVehicleGearBoxType(): array
-    {
-        return static::$vehicleGearBox;
-    }
 
-    protected static $brandsWithModels = [
+    public static $brandsWithModels = [
         'Abarth' => [
             'Fiat 595'
         ],
@@ -812,32 +784,39 @@ class CarData
         ]
     ];
 
-    protected static $vehicleTypes = [
+    public static $vehicleTypes = [
         'hatchback', 'sedan', 'small', 'convertible', 'SUV', 'MPV', 'coupe', 'station wagon'
     ];
 
-    protected static $vehicleFuelTypes = [
-        'gas', 'electric', 'diesel', 'hybrid'
+    // Based on 2021 EU sales data
+    // https://www.acea.auto/fuel-pc/fuel-types-of-new-cars-battery-electric-9-1-hybrid-19-6-and-petrol-40-0-market-share-full-year-2021/
+    public static $vehicleFuelTypes = [
+        'gasoline' => 40,
+        'electric' => 10,
+        'diesel' => 20,
+        'hybrid' => 19.5,
+        'plugin-hybrid' => 10,
+        'natural-gas' => 0.5,
     ];
 
-    protected static $vehicleDoorCount = [
+    public static $vehicleDoorCount = [
         '4' => 75,
         '2' => 15,
         '6' => 10,
     ];
 
-    protected static $vehicleSeatCount = [
+    public static $vehicleSeatCount = [
         '5' => 75,
         '2' => 15,
         '8' => 5,
         '4' => 10,
     ];
 
-    protected static $vehicleProperties = [
+    public static $vehicleProperties = [
         'Towbar', 'Aircondition', 'GPS', 'Leather seats', 'Roof Rack'
     ];
 
-    protected static $vehicleGearBox = [
+    public static $vehicleGearBoxType = [
         'manual'    => 70,
         'automatic' => 30,
     ];
