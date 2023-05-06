@@ -114,7 +114,6 @@ class FakeCar extends \Faker\Provider\Base
     public function vehicleType(): string
     {
         return (string) $this->dataProvider->getVehicleType();
-        //return (string) static::randomElement(FakeCarData::getVehicleTypes());
     }
 
     /**
@@ -138,7 +137,6 @@ class FakeCar extends \Faker\Provider\Base
     public function vehicleDoorCount(): int
     {
         return (int) $this->dataProvider->getVehicleDoorCount();
-        //return (int) static::getWeighted(FakeCarData::getVehicleDoorCount());
     }
 
     /**
@@ -150,7 +148,6 @@ class FakeCar extends \Faker\Provider\Base
     public function vehicleSeatCount(): int
     {
         return (int) $this->dataProvider->getVehicleSeatCount();
-        //return (int) static::getWeighted(FakeCarData::getVehicleSeatCount());
     }
 
     /**
@@ -164,7 +161,6 @@ class FakeCar extends \Faker\Provider\Base
     public function vehicleProperties(int $count = 0): array
     {
         return $this->dataProvider->getVehicleProperties($count);
-        return static::getRandomElementsFromArray(FakeCarData::getVehicleProperties(), $count);
     }
 
     /**
