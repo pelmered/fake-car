@@ -4,7 +4,6 @@ namespace Faker\Provider;
 
 class FakeCarData
 {
-
     public static $brandsWithModels = [
         'Abarth' => [
             'Fiat 595'

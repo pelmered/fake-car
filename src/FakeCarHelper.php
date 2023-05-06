@@ -1,4 +1,5 @@
 <?php
+
 namespace Faker\Provider;
 
 use Exception;
@@ -6,7 +7,6 @@ use InvalidArgumentException;
 
 class FakeCarHelper
 {
-
     /**
      * @throws Exception
      */
@@ -16,8 +16,7 @@ class FakeCarHelper
             ? static::getWeighted($arrayData, $count)
             : static::getRandomElementsFromArray($arrayData, $count);
 
-        if (is_array($data) && $count === 1)
-        {
+        if (is_array($data) && $count === 1) {
             return array_values($data)[0];
         }
 

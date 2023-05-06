@@ -1,4 +1,5 @@
 <?php
+
 namespace Faker\Provider;
 
 interface FakeCarDataProviderInterface

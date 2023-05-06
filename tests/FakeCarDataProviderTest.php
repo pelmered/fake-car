@@ -7,13 +7,10 @@ use PHPUnit\Framework\TestCase;
 
 class FakeCarDataProviderTest extends TestCase
 {
-
-
     public function testCustomProviderDataSource()
     {
         $BMWCarData = new BMWFakeCarData;
         $fakeCarDataProvider = new \Faker\Provider\FakeCarDataProvider($BMWCarData);
-
 
         $faker = (new \Faker\Factory())::create();
         $fakeCar = new \Faker\Provider\FakeCar($faker);
@@ -28,7 +25,6 @@ class FakeCarDataProviderTest extends TestCase
             $this->assertContains($faker->vehicleType, $BMWCarData::$vehicleTypes);
         }
     }
-
 
     public function testCustomProviderClass()
     {
@@ -56,8 +52,4 @@ class FakeCarDataProviderTest extends TestCase
             'Leather seats',
         ], $faker->vehicleProperties);
     }
-
-
-
-
 }
