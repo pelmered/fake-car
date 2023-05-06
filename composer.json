@@ -21,7 +21,7 @@
         "fakerphp/faker": "^1.10"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.1",
+        "phpunit/phpunit": "^10",
         "larapack/dd": "^1.1",
         "brianium/paratest": "^7.1"
     },
