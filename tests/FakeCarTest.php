@@ -1,13 +1,16 @@
 <?php
 
-namespace Faker\Tests\Provider;
+namespace FakeCar\tests;
 
+use Exception;
 use Faker\Factory;
 use Faker\Generator;
 use Faker\Provider\FakeCar;
 use Faker\Provider\FakeCarData;
 use Faker\Provider\FakeCarDataProvider;
+use Faker\Provider\FakeCarHelper;
 use PHPUnit\Framework\TestCase;
+use ReflectionException;
 
 class FakeCarTest extends TestCase
 {
@@ -24,7 +27,7 @@ class FakeCarTest extends TestCase
     }
 
     /**
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function getProtectedProperty($property, $object = null)
     {
@@ -41,7 +44,7 @@ class FakeCarTest extends TestCase
     }
 
     /**
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function callProtectedMethod($args, $method, $object = null)
     {
@@ -64,7 +67,7 @@ class FakeCarTest extends TestCase
         $vehicleBrand = $this->faker->vehicleBrand();
 
         $vehicleText = $this->faker->vehicle();
-        $brands = FakeCarDataProvider::getBrandsWithModels();
+        $brands = (new FakeCarDataProvider)->getBrandsWithModels();
 
         foreach ($brands as $brand => $models) {
             if (substr($vehicleText, 0, strlen($brand)) === $brand) {
@@ -85,7 +88,7 @@ class FakeCarTest extends TestCase
         $this->assertArrayHasKey('brand', $vehicleArray);
         $this->assertArrayHasKey('model', $vehicleArray);
 
-        $brandsArray = FakeCarDataProvider::getBrandsWithModels();
+        $brandsArray = (new FakeCarDataProvider)->getBrandsWithModels();
 
         $this->assertTrue(
             in_array(
@@ -100,7 +103,7 @@ class FakeCarTest extends TestCase
         $this->assertTrue(
             array_key_exists(
                 $this->faker->vehicleBrand,
-                FakeCarDataProvider::getBrandsWithModels()
+                (new FakeCarDataProvider)->getBrandsWithModels()
             )
         );
     }
@@ -109,16 +112,13 @@ class FakeCarTest extends TestCase
     {
         $this->faker->seed(random_int(1, 9999));
 
-        $modelArray = FakeCarDataProvider::getBrandsWithModels();
+        $modelArray = (new FakeCarDataProvider)->getBrandsWithModels();
         $modelArray = $modelArray[$this->faker->vehicleBrand()];
 
         $vehicleBrand = $this->faker->vehicleBrand();
 
-        $this->assertTrue(
-            in_array(
-                $this->faker->vehicleModel($vehicleBrand),
-                (FakeCarDataProvider::getBrandsWithModels())[$vehicleBrand]
-            )
+        $this->assertContains(
+            $this->faker->vehicleModel($vehicleBrand), ((new FakeCarDataProvider)->getBrandsWithModels())[$vehicleBrand]
         );
     }
 
@@ -192,7 +192,7 @@ class FakeCarTest extends TestCase
     }
 
     /**
-     * @throws \ReflectionException
+     * @throws Exception
      */
     public function testGetRandomElementsFromArray()
     {
@@ -209,15 +209,17 @@ class FakeCarTest extends TestCase
             'value10',
         ];
 
-        $this->assertCount(1, $this->callProtectedMethod([$data, 1], 'getRandomElementsFromArray'));
-        $this->assertCount(3, $this->callProtectedMethod([$data, 3], 'getRandomElementsFromArray'));
-        $this->assertCount(6, $this->callProtectedMethod([$data, 6], 'getRandomElementsFromArray'));
-        $this->assertCount(10, $this->callProtectedMethod([$data, 10], 'getRandomElementsFromArray'));
-        $this->assertEquals([], $this->callProtectedMethod([$data, 0], 'getRandomElementsFromArray'));
+        $this->assertCount(1, FakeCarHelper::getRandomElementsFromArray($data, 1));
+        $this->assertCount(3, FakeCarHelper::getRandomElementsFromArray($data, 3));
+        $this->assertCount(6, FakeCarHelper::getRandomElementsFromArray($data, 6));
+        $this->assertCount(10, FakeCarHelper::getRandomElementsFromArray($data, 10));
+        $this->assertEquals([], FakeCarHelper::getRandomElementsFromArray($data, 0));
 
-        for ($i = 0; $i<10; $i++) {
+        for ($i = 0; $i<50; $i++) {
+
+            $result6 = FakeCarHelper::getRandomElementsFromArray($data, null);
             //$result6 = $this->assertCount(1, $this->callProtectedMethod([$data], 'getRandomElementsFromArray'));
-            $result6 = $this->callProtectedMethod([$data, null], 'getRandomElementsFromArray');
+            //$result6 = $this->callProtectedMethod([$data, null], 'getRandomElementsFromArray');
 
             $this->assertGreaterThanOrEqual(0, count($result6));
             $this->assertLessThanOrEqual(10, count($result6));
@@ -229,38 +231,43 @@ class FakeCarTest extends TestCase
 
         $this->expectException(\InvalidArgumentException::class);
 
-        $this->callProtectedMethod([$data, 20], 'getRandomElementsFromArray');
+        FakeCarHelper::getRandomElementsFromArray($data, 20);
     }
 
 
     /**
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function testGetWeighted()
     {
+        // NOTE: As this is based on random distribution this test might fail in extremely rare cases.
         $data = [
-            'key1' => 80,
-            'key2' => 19,
+            'key1' => 100,
+            'key2' => 10,
             'key3' => 1,
         ];
 
-        $result = array_fill_keys(array_keys($data), 0);
+        for($x = 0; $x<10; $x++) {
+            $result = array_fill_keys(array_keys($data), 0);
 
-        for ($i = 0; $i<1000; $i++) {
-            $result[$this->callProtectedMethod([$data], 'getWeighted')]++;
+            for ($i = 0; $i<1000; $i++) {
+                $result[FakeCarHelper::getWeighted($data)]++;
+            }
+
+            $this->assertGreaterThan($result['key2'], $result['key1']);
+            $this->assertGreaterThan($result['key3'], $result['key2']);
+            $this->assertGreaterThan($result['key3'], $result['key1']);
         }
 
-        $this->assertGreaterThan($result['key2'], $result['key1']);
-        $this->assertGreaterThan($result['key3'], $result['key2']);
-        $this->assertGreaterThan($result['key3'], $result['key1']);
-
-        $this->assertEquals('', $this->callProtectedMethod([[]], 'getWeighted'));
+        $this->assertEquals('', FakeCarHelper::getWeighted([]));
     }
 
     public function testValidVin()
     {
         //Too short
         $this->assertFalse($this->faker->validateVin('z2j9hhgr8Ahl1e3g'));
+        //Too long
+        $this->assertFalse($this->faker->validateVin('az2j9hhgr8Ahl1e3gs'));
         //Invalid check digit
         $this->assertFalse($this->faker->validateVin('z2j9hhgr2Ahl1e3gs'));
         //Invalid

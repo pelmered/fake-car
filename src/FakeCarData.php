@@ -813,7 +813,7 @@ class FakeCarData
     ];
 
     public static $vehicleProperties = [
-        'Towbar', 'Aircondition', 'GPS', 'Leather seats', 'Roof Rack'
+        'Towbar', 'Air condition', 'GPS', 'Leather seats', 'Roof Rack'
     ];
 
     public static $vehicleGearBoxType = [
