@@ -13,3 +13,4 @@ ocular.phar
 reports
 outdated.txt
 .phpunit.cache/
+coverage/
