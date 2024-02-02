@@ -1,11 +1,10 @@
 build:
+  environment:
+    php:
+      version: 8.1
+    variables:
+      XDEBUG_MODE: coverage
   nodes:
-    my-tests:
-      environment:
-        php:
-          version: 8.1
-        variables:
-          XDEBUG_MODE: coverage
     coverage:
       tests:
         override:
