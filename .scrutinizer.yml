@@ -1,4 +1,8 @@
 
+build:
+  environment:
+    php: 8.2
+
 filter:
   excluded_paths:
     - bin/*
