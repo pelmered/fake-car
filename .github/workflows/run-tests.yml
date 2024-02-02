@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@latest
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@latest
@@ -40,7 +40,7 @@ jobs:
       - name: Upload Scrutinizer coverage
         uses: sudo-bot/action-scrutinizer@latest
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@latest
+        uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
