@@ -4,6 +4,14 @@ build:
       environment:
         php:
           version: 8.3
+    coverage:
+      tests:
+        override:
+          - command: vendor/bin/phpunit --coverage-clover=coverage.xml
+            coverage:
+              file: coverage.xml
+              format: clover
+
 
 filter:
   excluded_paths:
