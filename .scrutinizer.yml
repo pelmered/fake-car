@@ -3,7 +3,7 @@ build:
   environment:
     php: 8.2
     variables:
-      XDEBUG_MODE=coverage
+      XDEBUG_MODE: coverage
 
 filter:
   excluded_paths:
