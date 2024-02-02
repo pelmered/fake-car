@@ -4,6 +4,8 @@ build:
       environment:
         php:
           version: 8.2
+      variables:
+        XDEBUG_MODE: coverage
     coverage:
       tests:
         override:
