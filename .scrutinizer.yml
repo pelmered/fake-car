@@ -1,9 +1,6 @@
 build:
-  nodes:
-    my-tests:
-      environment:
-        php:
-          version: 8.3
+  environment:
+    php: 8.3
 
 filter:
   excluded_paths:
