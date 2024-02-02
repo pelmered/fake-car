@@ -8,21 +8,21 @@ use InvalidArgumentException;
 
 class FakeCar extends \Faker\Provider\Base
 {
-    public const EBCDIC = "0123456789.ABCDEFGH..JKLMN.P.R..STUVWXYZ";
-    public const MODELYEAR = "ABCDEFGHJKLMNPRSTVWXY123456789";
+    protected const EBCDIC = "0123456789.ABCDEFGH..JKLMN.P.R..STUVWXYZ";
+    protected const MODEL_YEAR = "ABCDEFGHJKLMNPRSTVWXY123456789";
 
     protected FakeCarDataProviderInterface $dataProvider;
 
     /**
-     * @param \Faker\Generator $generator
+     * @param Generator $generator
      */
     public function __construct(Generator $generator)
     {
         parent::__construct($generator);
-        $this->dataProvider = new FakeCarDataProvider();
+        $this->setDataProvider(new FakeCarDataProvider());
     }
 
-    public function setDataProvider(FakeCarDataProviderInterface $dataProvider)
+    public function setDataProvider(FakeCarDataProviderInterface $dataProvider): void
     {
         $this->dataProvider = $dataProvider;
     }
@@ -182,7 +182,7 @@ class FakeCar extends \Faker\Provider\Base
      */
     public static function modelYear(int $year = 1980): string
     {
-        return substr(self::MODELYEAR, ($year-1980) % 30, 1);
+        return substr(self::MODEL_YEAR, ($year - 1980) % 30, 1);
     }
 
     /**
