@@ -5,6 +5,17 @@ build:
     variables:
       XDEBUG_MODE: coverage
   nodes:
+    analysis:
+      project_setup:
+        override:
+          - 'true'
+      tests:
+        override:
+          - php-scrutinizer-run
+          -
+            command: phpcs-run
+            use_website_config: true
+    tests: true
     coverage:
       tests:
         override:
