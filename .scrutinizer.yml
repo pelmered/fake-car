@@ -3,7 +3,7 @@ build:
     my-tests:
       environment:
         php:
-          version: 8.3
+          version: 8.2
     coverage:
       tests:
         override:
