@@ -32,7 +32,6 @@ class FakeCarTest extends TestCase
     public function getProtectedProperty($property, $object = null)
     {
         if (is_null($object)) {
-            //$object = new FakeCar($this->faker);
             $object = new FakeCarDataProvider;
         }
 
@@ -49,7 +48,6 @@ class FakeCarTest extends TestCase
     public function callProtectedMethod($args, $method, $object = null)
     {
         if (is_null($object)) {
-            //$object = new FakeCar($this->faker);
             $object = new FakeCarDataProvider;
         }
 
@@ -63,8 +61,6 @@ class FakeCarTest extends TestCase
     public function testVehicle()
     {
         $this->faker->seed(random_int(1, 9999));
-
-        $vehicleBrand = $this->faker->vehicleBrand();
 
         $vehicleText = $this->faker->vehicle();
         $brands = (new FakeCarDataProvider)->getBrandsWithModels();
@@ -112,9 +108,6 @@ class FakeCarTest extends TestCase
     {
         $this->faker->seed(random_int(1, 9999));
 
-        $modelArray = (new FakeCarDataProvider)->getBrandsWithModels();
-        $modelArray = $modelArray[$this->faker->vehicleBrand()];
-
         $vehicleBrand = $this->faker->vehicleBrand();
 
         $this->assertContains(
@@ -135,7 +128,6 @@ class FakeCarTest extends TestCase
 
     public function testVehicleFuelType()
     {
-        //dd($this->faker->vehicleFuelType, FakeCarData::$vehicleFuelTypes);
         $this->assertTrue(in_array($this->faker->vehicleFuelType, array_keys(FakeCarData::$vehicleFuelTypes), true));
     }
 
@@ -216,10 +208,7 @@ class FakeCarTest extends TestCase
         $this->assertEquals([], FakeCarHelper::getRandomElementsFromArray($data, 0));
 
         for ($i = 0; $i<50; $i++) {
-
             $result6 = FakeCarHelper::getRandomElementsFromArray($data, null);
-            //$result6 = $this->assertCount(1, $this->callProtectedMethod([$data], 'getRandomElementsFromArray'));
-            //$result6 = $this->callProtectedMethod([$data, null], 'getRandomElementsFromArray');
 
             $this->assertGreaterThanOrEqual(0, count($result6));
             $this->assertLessThanOrEqual(10, count($result6));

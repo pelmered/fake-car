@@ -61,5 +61,4 @@ class FerrariEnzoTestProvider implements FakeCarDataProviderInterface
             'automatic' => 30,
         ]);
     }
-
 }
