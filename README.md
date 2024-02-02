@@ -18,10 +18,22 @@ composer require pelmered/fake-car --dev
 ```
 Remove the `--dev` flag if you need it in production.
 
+## Upgrade to 2.x from 1.x
+
+### Breaking changes:
+1. Now requires PHP 8.1+ (previously 7.3+)
+2. The provider name has changed from `Fakear` to `FakeCar`. This will cause problems if you are on a case-sensitive filesystem, but it is strongly recommended to change this even if you are not.
+3. The methods `transliterate` and `checkDigit` on the `FakeCar` provider class are now no longer publicly available (Visibility changed to private).
+4. The public methods `getRandomElementsFromArray` and `getWeighted` on the `FakeCar` provider class has been moved to a helper class. Access them like this: `\Faker\Provider\FakeCarHelper::getWeighted`
+5. The constants `EBCDIC` and `MODELYEAR` are no longer public.
+
+3, 4 and 5 are changes to limited to undocumented features of the public API and should therefore not impact the typical use cases of this package.
+
 ## Basic Usage
+
 ```php
 $faker = (new \Faker\Factory())::create();
-$faker->addProvider(new \Faker\Provider\Fakecar($faker));
+$faker->addProvider(new \Faker\Provider\FakeCar($faker));
 
 
 // generate matching automobile brand and model of car as a string
@@ -71,7 +83,7 @@ echo $faker->vehicleGearBoxType; //manual
 namespace Database\Factories;
 
 use App\Models\Vehicle;
-use Faker\Provider\Fakecar;
+use Faker\Provider\FakeCar;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class VehicleFactory extends Factory
@@ -90,7 +102,7 @@ class VehicleFactory extends Factory
      */
     public function definition()
     {
-        $this->faker->addProvider(new Fakecar($this->faker));
+        $this->faker->addProvider(new FakeCar($this->faker));
         $vehicle = $this->faker->vehicleArray();
 
         return [
@@ -106,3 +118,137 @@ class VehicleFactory extends Factory
     }
 }
 ```
+
+## Bring your own data
+
+To bring you own data or override the default you can just provide your own data provider.
+
+### Option 1: Provide your own data object:
+
+First, create the data object:
+```php
+<?php
+class BMWFakeCarData extends \Faker\Provider\FakeCarData
+{
+    public static $brandsWithModels = [
+        'BMW' => [
+            '8 Series', 'M1', 'X5', 'Z1', 'Z3', 'Z4', 'Z8', 'Alpina', 'E', 'X3', 'M', 'X6', '1 Series', '5 Series',
+            'X5 M', 'M5', '750', '6 Series', '3 Series', 'M3', 'X6 M', 'M6', 'X1', '7 Series', '325', '324', '316',
+            '320', '318', '328', '523', '740', '520', '728', '525', 'Isetta', '530', '528', '545', '535', 'Dixi',
+            '730', '745', '518', '524', '540', '116', '118', '120', '123', '125', '130', '135', '323', '330', '335',
+            '550', '628', '630', '633', '635', '645', '650', '640', '760', '735', '732', '725', 'X series', 'X8',
+            '340', 'RR', '1 Series М', '321', '315', '6 Series Gran Coupe', 'X2', '4 Series', '428', '435', '420',
+            '2 Series', '3 Series GT', 'X4', '4 Series Gran Coupe', '326', 'I8', '5 Series GT', 'I3', 'M2', 'M4',
+            'Neue Klasse', '1602', 'Active Hybrid 7', '2002', '2000', 'F10', 'X7', '128', '6 Series GT'
+        ],
+    ];
+
+    public static $vehicleTypes = [
+        'hatchback', 'sedan', 'convertible', 'SUV', 'coupe',
+    ];
+
+    public static $vehicleFuelTypes = [
+        'gasoline' => 40,
+        'electric' => 10,
+        'diesel' => 20,
+    ];
+}
+```
+
+And then add it to faker like this:
+```php
+$fakeCarDataProvider = new \Faker\Provider\FakeCarDataProvider(new BMWFakeCarData);
+
+$faker = (new \Faker\Factory())::create();
+$fakeCar = new \Faker\Provider\FakeCar($faker);
+$fakeCar->setDataProvider($fakeCarDataProvider);
+$faker->addProvider($fakeCar);
+
+echo $faker->vehicleBrand; // BMW
+```
+
+### Option 2: Provide your own data provider:
+```php
+<?php
+namespace FakeCar\Tests\TestProviders;
+
+use Faker\Provider\FakeCarDataProviderInterface;
+use Faker\Provider\FakeCarHelper;
+
+class FerrariEnzoTestProvider implements FakeCarDataProviderInterface
+{
+
+    public function getVehicleBrand(): string
+    {
+        return 'Ferrari';
+    }
+
+    public function getVehicleModel(): string
+    {
+        return 'Enzo';
+    }
+
+    public function getBrandsWithModels(): array
+    {
+        return [
+            'brand' => $this->getVehicleBrand(),
+            'model' => $this->getVehicleModel(),
+        ];
+    }
+
+    public function getVehicleType(): string
+    {
+        return 'coupe';
+    }
+
+    public function getVehicleFuelType(): string|array
+    {
+        return 'gasoline';
+    }
+
+    public function getVehicleDoorCount(): int
+    {
+        return 2;
+    }
+
+    public function getVehicleSeatCount(): int
+    {
+        return 2;
+    }
+
+    public function getVehicleProperties(int $count = 0): array
+    {
+        return [
+            'Air condition',
+            'GPS',
+            'Leather seats',
+        ];
+    }
+
+    public function getVehicleGearBoxType(): string
+    {
+        return FakeCarHelper::getWeighted([
+            'manual'    => 70,
+            'automatic' => 30,
+        ]);
+    }
+
+}
+```
+
+And then add the provider to faker:
+```php
+
+$fakeCarDataProvider = new FerrariEnzoTestProvider();
+
+$faker = (new \Faker\Factory())::create();
+$fakeCar = new \Faker\Provider\FakeCar($faker);
+$fakeCar->setDataProvider($fakeCarDataProvider);
+$faker->addProvider($fakeCar);
+
+echo $faker->vehicleBrand; // Ferrari
+echo $faker->vehicleModel; // Enzo
+```
+
+Check the [FakeCarDataProviderTest]() for more examples. 
+

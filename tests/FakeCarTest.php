@@ -1,14 +1,18 @@
 <?php
 
-namespace Faker\Tests\Provider;
+namespace FakeCar\tests;
 
+use Exception;
 use Faker\Factory;
 use Faker\Generator;
-use Faker\Provider\Fakecar;
-use Faker\Provider\CarData;
+use Faker\Provider\FakeCar;
+use Faker\Provider\FakeCarData;
+use Faker\Provider\FakeCarDataProvider;
+use Faker\Provider\FakeCarHelper;
 use PHPUnit\Framework\TestCase;
+use ReflectionException;
 
-class FakecarTest extends TestCase
+class FakeCarTest extends TestCase
 {
     /**
      * @var Generator
@@ -18,31 +22,48 @@ class FakecarTest extends TestCase
     public function setUp(): void
     {
         $faker = Factory::create();
-        $faker->addProvider(new Fakecar($faker));
+        $faker->addProvider(new FakeCar($faker));
         $this->faker = $faker;
     }
 
-    public function getProtectedProperty($property, $class = null)
+    /**
+     * @throws ReflectionException
+     */
+    public function getProtectedProperty($property, $object = null)
     {
-        if (is_null($class)) {
-            $class = new Fakecar($this->faker);
+        if (is_null($object)) {
+            $object = new FakeCarDataProvider;
         }
 
-        $reflection = new \ReflectionClass($class);
+        $reflection = new \ReflectionClass($object);
         $reflection_property = $reflection->getProperty($property);
         $reflection_property->setAccessible(true);
 
-        return $reflection_property->getValue($class, $property);
+        return $reflection_property->getValue($object, $property);
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function callProtectedMethod($args, $method, $object = null)
+    {
+        if (is_null($object)) {
+            $object = new FakeCarDataProvider;
+        }
+
+        $reflection = new \ReflectionClass($object);
+        $reflectionMethod = $reflection->getMethod($method);
+        $reflectionMethod->setAccessible(true);
+
+        return $reflectionMethod->invoke($object, ...$args);
     }
 
     public function testVehicle()
     {
         $this->faker->seed(random_int(1, 9999));
 
-        $vehicleBrand = $this->faker->vehicleBrand();
-
         $vehicleText = $this->faker->vehicle();
-        $brands = CarData::getBrandsWithModels();
+        $brands = (new FakeCarDataProvider)->getBrandsWithModels();
 
         foreach ($brands as $brand => $models) {
             if (substr($vehicleText, 0, strlen($brand)) === $brand) {
@@ -63,7 +84,7 @@ class FakecarTest extends TestCase
         $this->assertArrayHasKey('brand', $vehicleArray);
         $this->assertArrayHasKey('model', $vehicleArray);
 
-        $brandsArray = CarData::getBrandsWithModels();
+        $brandsArray = (new FakeCarDataProvider)->getBrandsWithModels();
 
         $this->assertTrue(
             in_array(
@@ -78,7 +99,7 @@ class FakecarTest extends TestCase
         $this->assertTrue(
             array_key_exists(
                 $this->faker->vehicleBrand,
-                CarData::getBrandsWithModels()
+                (new FakeCarDataProvider)->getBrandsWithModels()
             )
         );
     }
@@ -87,16 +108,10 @@ class FakecarTest extends TestCase
     {
         $this->faker->seed(random_int(1, 9999));
 
-        $modelArray = CarData::getBrandsWithModels();
-        $modelArray = $modelArray[$this->faker->vehicleBrand()];
-
         $vehicleBrand = $this->faker->vehicleBrand();
 
-        $this->assertTrue(
-            in_array(
-                $this->faker->vehicleModel($vehicleBrand),
-                (CarData::getBrandsWithModels())[$vehicleBrand]
-            )
+        $this->assertContains(
+            $this->faker->vehicleModel($vehicleBrand), ((new FakeCarDataProvider)->getBrandsWithModels())[$vehicleBrand]
         );
     }
 
@@ -108,12 +123,12 @@ class FakecarTest extends TestCase
 
     public function testVehicleType()
     {
-        $this->assertTrue(in_array($this->faker->vehicleType, CarData::getVehicleTypes()));
+        $this->assertContains($this->faker->vehicleType, FakeCarData::$vehicleTypes);
     }
 
     public function testVehicleFuelType()
     {
-        $this->assertTrue(in_array($this->faker->vehicleFuelType, CarData::getVehicleFuelTypes()));
+        $this->assertTrue(in_array($this->faker->vehicleFuelType, array_keys(FakeCarData::$vehicleFuelTypes), true));
     }
 
     public function testVehicleDoorCount()
@@ -165,9 +180,12 @@ class FakecarTest extends TestCase
 
     public function testVehicleGearBox()
     {
-        $this->assertTrue(in_array($this->faker->vehicleGearBoxType, array_keys(CarData::getVehicleGearBoxType())));
+        $this->assertTrue(in_array($this->faker->vehicleGearBoxType, array_keys(FakeCarData::$vehicleGearBoxType)));
     }
 
+    /**
+     * @throws Exception
+     */
     public function testGetRandomElementsFromArray()
     {
         $data = [
@@ -183,24 +201,14 @@ class FakecarTest extends TestCase
             'value10',
         ];
 
+        $this->assertCount(1, FakeCarHelper::getRandomElementsFromArray($data, 1));
+        $this->assertCount(3, FakeCarHelper::getRandomElementsFromArray($data, 3));
+        $this->assertCount(6, FakeCarHelper::getRandomElementsFromArray($data, 6));
+        $this->assertCount(10, FakeCarHelper::getRandomElementsFromArray($data, 10));
+        $this->assertEquals([], FakeCarHelper::getRandomElementsFromArray($data, 0));
 
-        $result1 = $this->faker->getRandomElementsFromArray($data, 1);
-        $this->assertCount(1, $result1);
-
-        $result2 = $this->faker->getRandomElementsFromArray($data, 3);
-        $this->assertCount(3, $result2);
-
-        $result3 = $this->faker->getRandomElementsFromArray($data, 6);
-        $this->assertCount(6, $result3);
-
-        $result4 = $this->faker->getRandomElementsFromArray($data, 10);
-        $this->assertCount(10, $result4);
-
-        $result5 = $this->faker->getRandomElementsFromArray([], 0);
-        $this->assertEquals([], $result5);
-
-        for ($i = 0; $i<10; $i++) {
-            $result6 = $this->faker->getRandomElementsFromArray($data);
+        for ($i = 0; $i<50; $i++) {
+            $result6 = FakeCarHelper::getRandomElementsFromArray($data, null);
 
             $this->assertGreaterThanOrEqual(0, count($result6));
             $this->assertLessThanOrEqual(10, count($result6));
@@ -212,35 +220,43 @@ class FakecarTest extends TestCase
 
         $this->expectException(\InvalidArgumentException::class);
 
-        $this->faker->getRandomElementsFromArray($data, 20);
+        FakeCarHelper::getRandomElementsFromArray($data, 20);
     }
 
 
+    /**
+     * @throws ReflectionException
+     */
     public function testGetWeighted()
     {
+        // NOTE: As this is based on random distribution this test might fail in extremely rare cases.
         $data = [
-            'key1' => 80,
-            'key2' => 19,
+            'key1' => 100,
+            'key2' => 10,
             'key3' => 1,
         ];
 
-        $result = array_fill_keys(array_keys($data), 0);
+        for($x = 0; $x<10; $x++) {
+            $result = array_fill_keys(array_keys($data), 0);
 
-        for ($i = 0; $i<1000; $i++) {
-            $result[$this->faker->getWeighted($data)]++;
+            for ($i = 0; $i<1000; $i++) {
+                $result[FakeCarHelper::getWeighted($data)]++;
+            }
+
+            $this->assertGreaterThan($result['key2'], $result['key1']);
+            $this->assertGreaterThan($result['key3'], $result['key2']);
+            $this->assertGreaterThan($result['key3'], $result['key1']);
         }
 
-        $this->assertGreaterThan($result['key2'], $result['key1']);
-        $this->assertGreaterThan($result['key3'], $result['key2']);
-        $this->assertGreaterThan($result['key3'], $result['key1']);
-
-        $this->assertEquals('', $this->faker->getWeighted([]));
+        $this->assertEquals('', FakeCarHelper::getWeighted([]));
     }
 
     public function testValidVin()
     {
         //Too short
         $this->assertFalse($this->faker->validateVin('z2j9hhgr8Ahl1e3g'));
+        //Too long
+        $this->assertFalse($this->faker->validateVin('az2j9hhgr8Ahl1e3gs'));
         //Invalid check digit
         $this->assertFalse($this->faker->validateVin('z2j9hhgr2Ahl1e3gs'));
         //Invalid
@@ -270,8 +286,8 @@ class FakecarTest extends TestCase
     }
     public function testTransliterate()
     {
-        $this->assertEquals($this->faker->transliterate('O'), 0);
-        $this->assertEquals($this->faker->transliterate('A'), 1);
-        $this->assertEquals($this->faker->transliterate('K'), 2);
+        $this->assertEquals($this->callProtectedMethod(['O'], 'transliterate', new FakeCar($this->faker)), 0);
+        $this->assertEquals($this->callProtectedMethod(['A'], 'transliterate', new FakeCar($this->faker)), 1);
+        $this->assertEquals($this->callProtectedMethod(['K'], 'transliterate', new FakeCar($this->faker)), 2);
     }
 }

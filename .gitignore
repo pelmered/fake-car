@@ -11,3 +11,6 @@ coverage.clover
 .php-cs-fixer.cache
 ocular.phar
 reports
+outdated.txt
+.phpunit.cache/
+coverage/
