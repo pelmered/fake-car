@@ -1,9 +1,9 @@
 build:
-  nodes:
-    my-tests:
-      environment:
-        php:
-          version: 8.3
+  environment:
+    php:
+      version: 8.2
+    variables:
+      XDEBUG_MODE: coverage
 
 filter:
   excluded_paths:
