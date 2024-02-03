@@ -21,13 +21,21 @@ class FakeCarDataProviderTest extends TestCase
             $data = $faker->vehicleArray();
             $this->assertEquals('BMW', $data['brand']);
             $this->assertEquals('BMW', $faker->vehicleBrand);
-            $this->assertContains($faker->vehicleModel, ($BMWCarData::$brandsWithModels)['BMW']);
-            $this->assertContains($faker->vehicleType, $BMWCarData::$vehicleTypes);
+            $this->assertContains($faker->vehicleModel, (BMWFakeCarData::$brandsWithModels)['BMW']);
+            $this->assertContains($faker->vehicleType, BMWFakeCarData::$vehicleTypes);
 
-            $this->assertMatchesRegularExpression('/^(\d+) ([a-zA-Z]+)$/', $faker->vehicleEngineTorque);
-            preg_match_all('/^(\d+) ([a-zA-Z]+)$/', $faker->vehicleEngineTorque, $matches);
-            $this->assertGreaterThanOrEqual($BMWCarData::$vehicleEngineTorque['range'][0], $matches[1][0]);
-            $this->assertLessThanOrEqual($BMWCarData::$vehicleEngineTorque['range'][1], $matches[1][1]);
+            $regex = '/^(?<value>\d+) (?<unit>[a-zA-Z]+)$/';
+            $this->assertMatchesRegularExpression($regex, $faker->vehicleEnginePower);
+            preg_match($regex, $faker->vehicleEnginePower, $matches);
+            $this->assertGreaterThanOrEqual(BMWFakeCarData::$vehicleEnginePower['range'][0], $matches['value']);
+            $this->assertLessThanOrEqual(BMWFakeCarData::$vehicleEnginePower['range'][1], $matches['value']);
+            $this->assertEquals('hp', $matches['unit']);
+
+            $this->assertMatchesRegularExpression($regex, $faker->vehicleEngineTorque);
+            preg_match($regex, $faker->vehicleEngineTorque, $matches);
+            $this->assertGreaterThanOrEqual(BMWFakeCarData::$vehicleEngineTorque['range'][0], $matches['value']);
+            $this->assertLessThanOrEqual(BMWFakeCarData::$vehicleEngineTorque['range'][1], $matches['value']);
+            $this->assertEquals('nm', $matches['unit']);
         }
     }
 
