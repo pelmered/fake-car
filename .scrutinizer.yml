@@ -1,11 +1,18 @@
 build:
+  environment:
+    php:
+      version: 8.2
+    variables:
+      XDEBUG_MODE: coverage
   nodes:
-    my-tests:
-      environment:
-        php:
-          version: 8.2
-        variables:
-          XDEBUG_MODE: coverage
+    analysis:
+      project_setup:
+        override:
+          - 'true'
+      tests:
+        override:
+          - php-scrutinizer-run
+    tests: true
     coverage:
       tests:
         override:
@@ -27,10 +34,6 @@ checks:
       ruleset_path: 'phpcs.xml'
 
 tools:
-  external_code_coverage:
-    timeout: 1800
-    runs: 2
-
   php_cs_fixer:
     enabled: true
     extensions:
