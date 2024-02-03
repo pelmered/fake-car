@@ -33,11 +33,6 @@ checks:
     custom_coding_standard:
       ruleset_path: 'phpcs.xml'
 
-tools:
-  external_code_coverage:
-    timeout: 1800
-    runs: 2
-
   php_cs_fixer:
     enabled: true
     extensions:
