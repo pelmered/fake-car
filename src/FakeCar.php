@@ -4,7 +4,6 @@ namespace Faker\Provider;
 
 use Exception;
 use Faker\Generator;
-use InvalidArgumentException;
 
 class FakeCar extends \Faker\Provider\Base
 {
@@ -172,6 +171,29 @@ class FakeCar extends \Faker\Provider\Base
     public function vehicleGearBoxType(): string
     {
         return $this->dataProvider->getVehicleGearBoxType();
+    }
+
+
+    /**
+     * Get engine torque
+     *
+     * @return mixed
+     * @throws Exception
+     */
+    public function vehicleEngineTorque(): string
+    {
+        return $this->dataProvider->getVehicleEngineTorque();
+    }
+
+    /**
+     * Get engine power (horsepower or kilowatts)
+     *
+     * @return mixed
+     * @throws Exception
+     */
+    public function vehicleEnginePower(): string
+    {
+        return $this->dataProvider->getVehicleEnginePower();
     }
 
 

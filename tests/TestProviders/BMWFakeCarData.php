@@ -25,4 +25,9 @@ class BMWFakeCarData extends \Faker\Provider\FakeCarData
         'electric' => 10,
         'diesel' => 20,
     ];
+
+    public static $vehicleEngineTorque = [
+        'range' => [300,700],
+        'unit'  => 'Nm',
+    ];
 }

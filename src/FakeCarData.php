@@ -819,4 +819,16 @@ class FakeCarData
         'manual'    => 70,
         'automatic' => 30,
     ];
+
+    public static $vehicleEnginePower = [
+        'range' => [100, 1500],
+        'unit'  => 'hp',
+    ];
+
+    public static $vehicleEngineTorque = [
+        'range' => [100, 700],
+        'unit'  => 'nm',
+    ];
+
+
 }

@@ -17,12 +17,17 @@ class FakeCarDataProviderTest extends TestCase
         $fakeCar->setDataProvider($fakeCarDataProvider);
         $faker->addProvider($fakeCar);
 
-        for ($i = 0; $i <= 10; $i++) {
+        for ($i = 0; $i <= 100; $i++) {
             $data = $faker->vehicleArray();
             $this->assertEquals('BMW', $data['brand']);
             $this->assertEquals('BMW', $faker->vehicleBrand);
             $this->assertContains($faker->vehicleModel, ($BMWCarData::$brandsWithModels)['BMW']);
             $this->assertContains($faker->vehicleType, $BMWCarData::$vehicleTypes);
+
+            $this->assertMatchesRegularExpression('/^(\d+) ([a-zA-Z]+)$/', $faker->vehicleEngineTorque);
+            preg_match_all('/^(\d+) ([a-zA-Z]+)$/', $faker->vehicleEngineTorque, $matches);
+            $this->assertGreaterThanOrEqual($BMWCarData::$vehicleEngineTorque['range'][0], $matches[1][0]);
+            $this->assertLessThanOrEqual($BMWCarData::$vehicleEngineTorque['range'][1], $matches[1][1]);
         }
     }
 
