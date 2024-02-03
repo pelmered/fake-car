@@ -33,6 +33,7 @@ checks:
     custom_coding_standard:
       ruleset_path: 'phpcs.xml'
 
+tools:
   php_cs_fixer:
     enabled: true
     extensions:
