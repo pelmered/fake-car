@@ -22,7 +22,7 @@ Remove the `--dev` flag if you need it in production.
 
 ### Breaking changes:
 1. Now requires PHP 8.1+ (previously 7.3+)
-2. The provider name has changed from `Fakear` to `FakeCar`. This will cause problems if you are on a case-sensitive filesystem, but it is strongly recommended to change this even if you are not.
+2. The provider name has changed from `Fakcar` to `FakeCar`. This will cause problems if you are on a case-sensitive filesystem, but it is strongly recommended to change this even if you are not.
 3. The methods `transliterate` and `checkDigit` on the `FakeCar` provider class are now no longer publicly available (Visibility changed to private).
 4. The public methods `getRandomElementsFromArray` and `getWeighted` on the `FakeCar` provider class has been moved to a helper class. Access them like this: `\Faker\Provider\FakeCarHelper::getWeighted`
 5. The constants `EBCDIC` and `MODELYEAR` are no longer public.
