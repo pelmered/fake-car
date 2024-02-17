@@ -84,4 +84,24 @@ class FakeCarDataProvider implements FakeCarDataProviderInterface
     {
         return FakeCarHelper::getArrayData($this->vehicleData::$vehicleGearBoxType);
     }
+
+    /**
+     * @throws Exception
+     */
+    public function getVehicleEnginePower(): string
+    {
+        ['range' => $range, 'unit' => $unit] = $this->vehicleData::$vehicleEnginePower;
+        return FakeCarHelper::getRangeWithUnit($range, $unit);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getVehicleEngineTorque(): string
+    {
+        ['range' => $range, 'unit' => $unit] = $this->vehicleData::$vehicleEngineTorque;
+        return FakeCarHelper::getRangeWithUnit($range, $unit);
+    }
+
+
 }

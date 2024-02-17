@@ -61,4 +61,14 @@ class FerrariEnzoTestProvider implements FakeCarDataProviderInterface
             'automatic' => 30,
         ]);
     }
+
+    public function getVehicleEnginePower(): string
+    {
+        // TODO: Implement getVehicleEnginePower() method.
+    }
+
+    public function getVehicleEngineTorque(): string
+    {
+        // TODO: Implement getVehicleEngineTorque() method.
+    }
 }

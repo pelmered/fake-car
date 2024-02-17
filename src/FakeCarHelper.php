@@ -4,6 +4,7 @@ namespace Faker\Provider;
 
 use Exception;
 use InvalidArgumentException;
+use Random\RandomException;
 
 class FakeCarHelper
 {
@@ -115,5 +116,17 @@ class FakeCarHelper
         }
 
         return '';
+    }
+
+    /**
+     * @param array<int> $range
+     * @param string $unit
+     *
+     * @return string
+     * @throws RandomException
+     */
+    public static function getRangeWithUnit(array $range, string $unit): string
+    {
+        return random_int($range[0], $range[1]) . ' ' . $unit;
     }
 }
