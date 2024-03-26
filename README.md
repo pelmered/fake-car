@@ -40,43 +40,49 @@ $faker->addProvider(new \Faker\Provider\FakeCar($faker));
 
 
 // generate matching automobile brand and model of car as a string
-echo $faker->vehicle; //Volvo 740
+echo $faker->vehicle; // Volvo 740
 
 // generate matching automobile brand and model of car as an array
-echo $faker->vehicleArray; //[ 'brand' => 'Hummer', 'model' => 'H1' ]
+echo $faker->vehicleArray; // [ 'brand' => 'Hummer', 'model' => 'H1' ]
 
 // generate only automobile brand
-echo $faker->vehicleBrand; //Ford
+echo $faker->vehicleBrand; // Ford
 
 // generate automobile manufacturer and model of car
-echo $faker->vehicleModel; //488 Spider
+echo $faker->vehicleModel; // 488 Spider
 
 // generate Vehicle Identification Number(VIN) - https://en.wikipedia.org/wiki/Vehicle_identification_number
-echo $faker->vin; //d0vcddxpXAcz1utgz
+echo $faker->vin; // d0vcddxpXAcz1utgz
 
 // generate automobile registration number
-echo $faker->vehicleRegistration; //ABC-123
+echo $faker->vehicleRegistration; // ABC-123
 
 // generate automobile registration number with custom format
-echo $faker->vehicleRegistration('[A-Z]{2}-[0-9]{5}'); //AB-12345
+echo $faker->vehicleRegistration('[A-Z]{2}-[0-9]{5}'); // AB-12345
 
 // generate automobile model type
-echo $faker->vehicleType; //hatchback
+echo $faker->vehicleType; // hatchback
 
 // generate automobile fuel type
-echo $faker->vehicleFuelType; //diesel
+echo $faker->vehicleFuelType; // diesel
 
 // generate automobile door count
-echo $faker->vehicleDoorCount; //4
+echo $faker->vehicleDoorCount; // 4
 
 // generate automobile seat count
-echo $faker->vehicleSeatCount; //5
+echo $faker->vehicleSeatCount; // 5
 
 // generate automobile properties
-echo $faker->vehicleProperties; //['Towbar','Aircondition','GPS', 'Leather seats']
+echo $faker->vehicleProperties; // ['Towbar','Aircondition','GPS', 'Leather seats']
 
 // generate automobile gear type (manual or automatic)
-echo $faker->vehicleGearBoxType; //manual
+echo $faker->vehicleGearBoxType; // manual
+
+// generate automobile engine power
+echo $faker->vehicleEnginePower; // 250 hp
+
+// generate automobile engine torque
+echo $faker->vehicleEngineTorque; // 300 nm
 ```
 
 ### Laravel factory example
