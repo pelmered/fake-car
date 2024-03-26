@@ -2,11 +2,12 @@
 Faker provider for fake car data
 
 [![Build Status](https://travis-ci.org/pelmered/fake-car.svg?branch=master)](https://travis-ci.org/pelmered/fake-car)
+[![Total Downloads](https://poser.pugx.org/pelmered/fake-car/d/total)](//packagist.org/packages/pelmered/fake-car)
 [![Monthly Downloads](https://poser.pugx.org/pelmered/fake-car/d/monthly)](//packagist.org/packages/pelmered/fake-car)
 [![Latest Stable Version](https://poser.pugx.org/pelmered/fake-car/v/stable)](https://packagist.org/packages/pelmered/fake-car)
 [![Latest Unstable Version](https://poser.pugx.org/pelmered/fake-car/v/unstable)](//packagist.org/packages/pelmered/fake-car)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pelmered/fake-car/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pelmered/fake-car/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/pelmered/fake-car/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/pelmered/fake-car/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pelmered/fake-car/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/pelmered/fake-car/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/pelmered/fake-car/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/pelmered/fake-car/?branch=master)
 [![License](https://poser.pugx.org/pelmered/fake-car/license)](https://packagist.org/packages/pelmered/fake-car)
 
 
