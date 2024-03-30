@@ -81,8 +81,29 @@ echo $faker->vehicleGearBoxType; // manual
 // generate automobile engine power
 echo $faker->vehicleEnginePower; // 250 hp
 
+// generate automobile engine power without unit
+echo $faker->vehicleEnginePowerValue; // 175
+
 // generate automobile engine torque
 echo $faker->vehicleEngineTorque; // 300 nm
+
+// generate automobile engine power without unit
+echo $faker->vehicleEngineTorqueValue; // 450
+
+// generate automobile engine displacement
+echo $faker->vehicleEngineDisplacement; // 2.0 l
+
+// generate automobile engine displacement without unit
+echo $faker->vehicleEngineDisplacementValue; // 2.0
+
+// generate automobile engine fuel consumption
+echo $faker->vehicleFuelConsumption; // 5.0 l/100km
+
+// generate automobile engine fuel consumption without unit
+echo $faker->vehicleFuelConsumptionValue; // 5.0
+
+// generate automobile engine fuel consumption without unit
+echo $faker->vehicleEngineCylinders; // 4
 ```
 
 ### Laravel factory example

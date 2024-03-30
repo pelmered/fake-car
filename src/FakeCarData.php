@@ -821,14 +821,37 @@ class FakeCarData
     ];
 
     public static $vehicleEnginePower = [
-        'range' => [100, 1500],
-        'unit'  => 'hp',
+        'range'    => [100, 1500],
+        'unit'     => 'hp',
+        'rounding' => 0
     ];
 
     public static $vehicleEngineTorque = [
-        'range' => [100, 700],
-        'unit'  => 'nm',
+        'range'    => [100, 700],
+        'unit'     => 'nm',
+        'decimals' => 0
     ];
 
+    public static $vehicleEngineDisplacement = [
+        'range'    => [500, 8000],
+        'unit'     => 'cc',
+        'decimals' => 1
+    ];
+
+    public static $vehicleEngineCylinders = [
+        '3' => 5,
+        '4' => 60,
+        '5' => 5,
+        '6' => 5,
+        '8' => 15,
+        '10' => 5,
+        '12' => 5,
+    ];
+
+    public static $vehicleEngineFuelConsumption = [
+        'range'    => [4, 30],
+        'unit'     => 'l/100km',
+        'decimals' => 1
+    ];
 
 }
