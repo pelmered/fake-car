@@ -173,6 +173,17 @@ class FakeCar extends \Faker\Provider\Base
         return $this->dataProvider->getVehicleGearBoxType();
     }
 
+    /**
+     * Get random vehicle gearbox type without unit
+     *
+     * @return mixed
+     * @throws Exception
+     */
+    public function vehicleGearBoxTypeValue(): string
+    {
+        return $this->dataProvider->getVehicleGearBoxType();
+    }
+
 
     /**
      * Get engine torque
@@ -186,6 +197,17 @@ class FakeCar extends \Faker\Provider\Base
     }
 
     /**
+     * Get engine torque without unit
+     *
+     * @return mixed
+     * @throws Exception
+     */
+    public function vehicleEngineTorqueValue(): string
+    {
+        return $this->dataProvider->getVehicleEngineTorque();
+    }
+
+    /**
      * Get engine power (horsepower or kilowatts)
      *
      * @return mixed
@@ -194,6 +216,28 @@ class FakeCar extends \Faker\Provider\Base
     public function vehicleEnginePower(): string
     {
         return $this->dataProvider->getVehicleEnginePower();
+    }
+
+    /**
+     * Get engine power without unit
+     *
+     * @return mixed
+     * @throws Exception
+     */
+    public function vehicleEnginePowerValue(): string
+    {
+        $this->isSupported(__FUNCTION__);
+
+        return $this->dataProvider->getVehicleEnginePowerValue();
+    }
+
+    public function isSupported($method): bool
+    {
+        if (method_exists($this->dataProvider, $method)) {
+            return true;
+        }
+
+        throw new \RuntimeException('Method not supported be data provider. Please implement '.$method.'() in your data provider.');
     }
 
 

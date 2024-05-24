@@ -13,6 +13,4 @@ interface FakeCarDataProviderInterface
     public function getVehicleSeatCount(): int;
     public function getVehicleProperties(int $count = 0): array;
     public function getVehicleGearBoxType(): string;
-    public function getVehicleEnginePower(): string;
-    public function getVehicleEngineTorque(): string;
 }

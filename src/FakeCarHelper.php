@@ -120,13 +120,45 @@ class FakeCarHelper
 
     /**
      * @param array<int> $range
-     * @param string $unit
+     * @param int $decimals
      *
      * @return string
      * @throws RandomException
      */
-    public static function getRangeWithUnit(array $range, string $unit): string
+    public static function getRange(array $range, int $decimals = 0): string
     {
-        return random_int($range[0], $range[1]) . ' ' . $unit;
+        if (count($range) !== 2) {
+            throw new RandomException('Invalid range');
+        }
+
+        if ($range[0] > $range[1]) {
+            throw new RandomException('Invalid range');
+        }
+
+        if ($decimals < 0) {
+            throw new InvalidArgumentException('Invalid decimals');
+        }
+
+        if ($decimals > 0) {
+            $factor = 10 ** $decimals;
+
+            return number_format(random_int($range[0] * $factor, $range[1] * $factor) / $factor, $decimals);
+        }
+
+        return random_int($range[0], $range[1]);
     }
+
+    /**
+     * @param array<int> $range
+     * @param string $unit
+     * @param int $decimals
+     *
+     * @return string
+     * @throws RandomException
+     */
+    public static function getRangeWithUnit(array $range, string $unit, int $decimals = 0): string
+    {
+        return static::getRange($range, $decimals) . ' ' . $unit;
+    }
+
 }
