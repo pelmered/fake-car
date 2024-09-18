@@ -1,68 +1,61 @@
 <?php
-namespace FakeCar\Tests;
 
 use FakeCar\Tests\TestProviders\BMWFakeCarData;
 use FakeCar\Tests\TestProviders\FerrariEnzoTestProvider;
-use PHPUnit\Framework\TestCase;
 
-class FakeCarDataProviderTest extends TestCase
-{
-    public function testCustomProviderDataSource()
-    {
-        $BMWCarData = new BMWFakeCarData;
-        $fakeCarDataProvider = new \Faker\Provider\FakeCarDataProvider($BMWCarData);
+test('custom provider data source', function () {
+    $BMWCarData = new BMWFakeCarData;
+    $fakeCarDataProvider = new \Faker\Provider\FakeCarDataProvider($BMWCarData);
 
-        $faker = (new \Faker\Factory())::create();
-        $fakeCar = new \Faker\Provider\FakeCar($faker);
-        $fakeCar->setDataProvider($fakeCarDataProvider);
-        $faker->addProvider($fakeCar);
+    $faker = (new \Faker\Factory())::create();
+    $fakeCar = new \Faker\Provider\FakeCar($faker);
+    $fakeCar->setDataProvider($fakeCarDataProvider);
+    $faker->addProvider($fakeCar);
 
-        for ($i = 0; $i <= 100; $i++) {
-            $data = $faker->vehicleArray();
-            $this->assertEquals('BMW', $data['brand']);
-            $this->assertEquals('BMW', $faker->vehicleBrand);
-            $this->assertContains($faker->vehicleModel, (BMWFakeCarData::$brandsWithModels)['BMW']);
-            $this->assertContains($faker->vehicleType, BMWFakeCarData::$vehicleTypes);
+    for ($i = 0; $i <= 100; $i++) {
+        $data = $faker->vehicleArray();
+        expect($data['brand'])->toEqual('BMW');
+        expect($faker->vehicleBrand)->toEqual('BMW');
+        expect((BMWFakeCarData::$brandsWithModels)['BMW'])->toContain($faker->vehicleModel);
+        expect(BMWFakeCarData::$vehicleTypes)->toContain($faker->vehicleType);
 
-            $regex = '/^(?<value>\d+) (?<unit>[a-zA-Z]+)$/';
-            $this->assertMatchesRegularExpression($regex, $faker->vehicleEnginePower);
-            preg_match($regex, $faker->vehicleEnginePower, $matches);
-            $this->assertGreaterThanOrEqual(BMWFakeCarData::$vehicleEnginePower['range'][0], $matches['value']);
-            $this->assertLessThanOrEqual(BMWFakeCarData::$vehicleEnginePower['range'][1], $matches['value']);
-            $this->assertEquals('hp', $matches['unit']);
+        $regex = '/^(?<value>\d+) (?<unit>[a-zA-Z]+)$/';
+        expect($faker->vehicleEnginePower)->toMatch($regex);
+        preg_match($regex, $faker->vehicleEnginePower, $matches);
+        expect($matches['value'])->toBeGreaterThanOrEqual(BMWFakeCarData::$vehicleEnginePower['range'][0]);
+        expect($matches['value'])->toBeLessThanOrEqual(BMWFakeCarData::$vehicleEnginePower['range'][1]);
+        expect($matches['unit'])->toEqual('hp');
 
-            $this->assertMatchesRegularExpression($regex, $faker->vehicleEngineTorque);
-            preg_match($regex, $faker->vehicleEngineTorque, $matches);
-            $this->assertGreaterThanOrEqual(BMWFakeCarData::$vehicleEngineTorque['range'][0], $matches['value']);
-            $this->assertLessThanOrEqual(BMWFakeCarData::$vehicleEngineTorque['range'][1], $matches['value']);
-            $this->assertEquals('nm', $matches['unit']);
-        }
+        expect($faker->vehicleEngineTorque)->toMatch($regex);
+        preg_match($regex, $faker->vehicleEngineTorque, $matches);
+        expect($matches['value'])->toBeGreaterThanOrEqual(BMWFakeCarData::$vehicleEngineTorque['range'][0]);
+        expect($matches['value'])->toBeLessThanOrEqual(BMWFakeCarData::$vehicleEngineTorque['range'][1]);
+        expect($matches['unit'])->toEqual('nm');
     }
+});
 
-    public function testCustomProviderClass()
-    {
-        $fakeCarDataProvider = new FerrariEnzoTestProvider();
+test('custom provider class', function () {
+    $fakeCarDataProvider = new FerrariEnzoTestProvider();
 
-        $faker = (new \Faker\Factory())::create();
-        $fakeCar = new \Faker\Provider\FakeCar($faker);
-        $fakeCar->setDataProvider($fakeCarDataProvider);
-        $faker->addProvider($fakeCar);
+    $faker = (new \Faker\Factory())::create();
+    $fakeCar = new \Faker\Provider\FakeCar($faker);
+    $fakeCar->setDataProvider($fakeCarDataProvider);
+    $faker->addProvider($fakeCar);
 
-        $vehicleArray = $faker->vehicleArray();
-        $this->assertEquals('Ferrari', $vehicleArray['brand']);
-        $this->assertEquals('Enzo', $vehicleArray['model']);
+    $vehicleArray = $faker->vehicleArray();
+    expect($vehicleArray['brand'])->toEqual('Ferrari');
+    expect($vehicleArray['model'])->toEqual('Enzo');
 
-        $this->assertEquals('Ferrari Enzo', $faker->vehicle);
-        $this->assertEquals('Ferrari', $faker->vehicleBrand);
-        $this->assertEquals('Enzo', $faker->vehicleModel);
-        $this->assertEquals('coupe', $faker->vehicleType);
-        $this->assertEquals('gasoline', $faker->vehicleFuelType);
-        $this->assertEquals(2, $faker->vehicleDoorCount);
-        $this->assertEquals(2, $faker->vehicleSeatCount);
-        $this->assertEquals([
-            'Air condition',
-            'GPS',
-            'Leather seats',
-        ], $faker->vehicleProperties);
-    }
-}
+    expect($faker->vehicle)->toEqual('Ferrari Enzo');
+    expect($faker->vehicleBrand)->toEqual('Ferrari');
+    expect($faker->vehicleModel)->toEqual('Enzo');
+    expect($faker->vehicleType)->toEqual('coupe');
+    expect($faker->vehicleFuelType)->toEqual('gasoline');
+    expect($faker->vehicleDoorCount)->toEqual(2);
+    expect($faker->vehicleSeatCount)->toEqual(2);
+    expect($faker->vehicleProperties)->toEqual([
+        'Air condition',
+        'GPS',
+        'Leather seats',
+    ]);
+});
