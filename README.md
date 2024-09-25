@@ -2,7 +2,6 @@
 Faker provider for fake car data
 
 [![Latest Stable Version](https://poser.pugx.org/pelmered/fake-car/v/stable)](https://packagist.org/packages/pelmered/fake-car)
-[![Latest Unstable Version](https://poser.pugx.org/pelmered/fake-car/v/unstable)](//packagist.org/packages/pelmered/fake-car)
 [![Total Downloads](https://poser.pugx.org/pelmered/fake-car/d/total)](//packagist.org/packages/pelmered/fake-car)
 [![Monthly Downloads](https://poser.pugx.org/pelmered/fake-car/d/monthly)](//packagist.org/packages/pelmered/fake-car)
 [![License](https://poser.pugx.org/pelmered/fake-car/license)](https://packagist.org/packages/pelmered/fake-car)
