@@ -22,9 +22,10 @@
     },
     "require-dev": {
         "larapack/dd": "^1.1",
-        "phpstan/phpstan": "^1.12",
         "pestphp/pest": "^3.0",
-        "pestphp/pest-plugin-drift": "3.x-dev"
+        "pestphp/pest-plugin-drift": "3.x-dev",
+        "phpstan/phpstan": "^1.12",
+        "laravel/pint": "^1.18"
     },
     "autoload": {
         "psr-4": {
@@ -37,11 +38,17 @@
         }
     },
     "scripts": {
+        "lint": [
+            "composer phpstan",
+            "composer pint"
+        ],
+        "phpstan": "vendor/bin/phpstan analyse src --level=8",
+        "pint": "vendor/bin/pint",
         "test": [
-            "./vendor/bin/phpunit -c phpunit.xml"
+            "./vendor/bin/pest"
         ],
         "test-coverage": [
-            "./vendor/bin/phpunit -c phpunit.xml --coverage-text"
+            "./vendor/bin/pest --coverage-text"
         ],
         "phpmd": [
             "php ./vendor/bin/phpmd src ansi ./phpmd-ruleset.xml --ignore-violations-on-exit"
