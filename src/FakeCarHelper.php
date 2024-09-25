@@ -28,9 +28,6 @@ class FakeCarHelper
      * Determines if an array is weighted(associative).
      *
      * An array is "associative" if it doesn't have sequential numerical keys beginning with zero.
-     *
-     * @param  array  $array
-     * @return bool
      */
     public static function isWeighted(array $array): bool
     {
@@ -42,7 +39,7 @@ class FakeCarHelper
     /**
      * Returns a random element from a passed array
      *
-     * @param array $values
+     * @param  array  $values
      *
      * @throws Exception
      */
@@ -56,11 +53,11 @@ class FakeCarHelper
     /**
      * Get random elements from input array
      *
-     * @param array $values The input array
-     * @param int $count The number of random elements you want to get in your response.
-     * Leave out or set to 0 for random.
-     *
+     * @param  array  $values  The input array
+     * @param  int  $count  The number of random elements you want to get in your response.
+     *                      Leave out or set to 0 for random.
      * @return mixed
+     *
      * @throws InvalidArgumentException|Exception
      */
     public static function getRandomElementsFromArray(array $values, ?int $count = 1): array
@@ -76,7 +73,7 @@ class FakeCarHelper
             return [];
         }
 
-        if (!$count) {
+        if (! $count) {
             $count = random_int(1, $valuesLength);
         }
 
@@ -92,16 +89,14 @@ class FakeCarHelper
      * Get one element out of an input array with specified weights to get the distribution
      * of the generated elements as you want them.
      *
-     * @param array $values Input array with values as key and weight as value. ['value 1' => 30, 'value 7' => 70]
-     * @param int $count
+     * @param  array  $values  Input array with values as key and weight as value. ['value 1' => 30, 'value 7' => 70]
      *
-     * @return string
      * @throws Exception
      */
     public static function getWeighted(array $values, int $count = 1): string
     {
         $currentTotal = 0;
-        $firstRand = random_int(1, 100);
+        $firstRand    = random_int(1, 100);
 
         $total = array_sum($values);
 
@@ -119,10 +114,8 @@ class FakeCarHelper
     }
 
     /**
-     * @param array<int> $range
-     * @param int $decimals
+     * @param  array<int>  $range
      *
-     * @return string
      * @throws RandomException
      */
     public static function getRange(array $range, int $decimals = 0): string
@@ -149,16 +142,12 @@ class FakeCarHelper
     }
 
     /**
-     * @param array<int> $range
-     * @param string $unit
-     * @param int $decimals
+     * @param  array<int>  $range
      *
-     * @return string
      * @throws RandomException
      */
     public static function getRangeWithUnit(array $range, string $unit, int $decimals = 0): string
     {
-        return static::getRange($range, $decimals) . ' ' . $unit;
+        return static::getRange($range, $decimals).' '.$unit;
     }
-
 }

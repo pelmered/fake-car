@@ -3,7 +3,6 @@
 namespace Faker\Provider;
 
 use Exception;
-use InvalidArgumentException;
 
 class FakeCarDataProvider implements FakeCarDataProviderInterface
 {
@@ -25,7 +24,7 @@ class FakeCarDataProvider implements FakeCarDataProviderInterface
     /**
      * @throws Exception
      */
-    public function getVehicleModel(string $brand = null): string
+    public function getVehicleModel(?string $brand = null): string
     {
         $brandsWithModels = $this->vehicleData::$brandsWithModels;
 
@@ -91,6 +90,7 @@ class FakeCarDataProvider implements FakeCarDataProviderInterface
     public function getVehicleEnginePower(): string
     {
         ['range' => $range, 'unit' => $unit] = $this->vehicleData::$vehicleEnginePower;
+
         return FakeCarHelper::getRangeWithUnit($range, $unit);
     }
 
@@ -100,6 +100,7 @@ class FakeCarDataProvider implements FakeCarDataProviderInterface
     public function getVehicleEnginePowerValue(): string
     {
         ['range' => $range] = $this->vehicleData::$vehicleEnginePower;
+
         return FakeCarHelper::getRange($range);
     }
 
@@ -109,16 +110,17 @@ class FakeCarDataProvider implements FakeCarDataProviderInterface
     public function getVehicleEngineTorque(): string
     {
         ['range' => $range, 'unit' => $unit] = $this->vehicleData::$vehicleEngineTorque;
+
         return FakeCarHelper::getRangeWithUnit($range, $unit);
     }
+
     /**
      * @throws Exception
      */
     public function getVehicleEngineTorqueValue(): string
     {
         ['range' => $range] = $this->vehicleData::$vehicleEngineTorque;
+
         return FakeCarHelper::getRange($range);
     }
-
-
 }

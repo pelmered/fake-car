@@ -1,4 +1,5 @@
 <?php
+
 namespace FakeCar\Tests\TestProviders;
 
 class BMWFakeCarData extends \Faker\Provider\FakeCarData
@@ -12,7 +13,7 @@ class BMWFakeCarData extends \Faker\Provider\FakeCarData
             '550', '628', '630', '633', '635', '645', '650', '640', '760', '735', '732', '725', 'X series', 'X8',
             '340', 'RR', '1 Series М', '321', '315', '6 Series Gran Coupe', 'X2', '4 Series', '428', '435', '420',
             '2 Series', '3 Series GT', 'X4', '4 Series Gran Coupe', '326', 'I8', '5 Series GT', 'I3', 'M2', 'M4',
-            'Neue Klasse', '1602', 'Active Hybrid 7', '2002', '2000', 'F10', 'X7', '128', '6 Series GT'
+            'Neue Klasse', '1602', 'Active Hybrid 7', '2002', '2000', 'F10', 'X7', '128', '6 Series GT',
         ],
     ];
 
@@ -23,16 +24,16 @@ class BMWFakeCarData extends \Faker\Provider\FakeCarData
     public static $vehicleFuelTypes = [
         'gasoline' => 40,
         'electric' => 10,
-        'diesel' => 20,
+        'diesel'   => 20,
     ];
 
     public static $vehicleEnginePower = [
-        'range' => [150,1200],
+        'range' => [150, 1200],
         'unit'  => 'hp',
     ];
 
     public static $vehicleEngineTorque = [
-        'range' => [300,700],
+        'range' => [300, 700],
         'unit'  => 'nm',
     ];
 }

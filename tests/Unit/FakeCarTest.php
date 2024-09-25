@@ -1,7 +1,6 @@
 <?php
 
 use Faker\Factory;
-use Faker\Generator;
 use Faker\Provider\FakeCar;
 use Faker\Provider\FakeCarData;
 use Faker\Provider\FakeCarDataProvider;
@@ -22,7 +21,7 @@ function getProtectedProperty($property, $object = null)
         $object = new FakeCarDataProvider;
     }
 
-    $reflection = new \ReflectionClass($object);
+    $reflection          = new \ReflectionClass($object);
     $reflection_property = $reflection->getProperty($property);
     $reflection_property->setAccessible(true);
 
@@ -36,7 +35,7 @@ function callProtectedMethod($args, $method, $object = null)
     }
 
     try {
-        $reflection = new \ReflectionClass($object);
+        $reflection       = new \ReflectionClass($object);
         $reflectionMethod = $reflection->getMethod($method);
         //$reflectionMethod->setAccessible(true);
 
@@ -50,7 +49,7 @@ test('vehicle', function () {
     $this->faker->seed(random_int(1, 9999));
 
     $vehicleText = $this->faker->vehicle();
-    $brands = (new FakeCarDataProvider)->getBrandsWithModels();
+    $brands      = (new FakeCarDataProvider)->getBrandsWithModels();
 
     foreach ($brands as $brand => $models) {
         if (substr($vehicleText, 0, strlen($brand)) === $brand) {
@@ -101,7 +100,7 @@ test('vehicle fuel type', function () {
 });
 
 test('vehicle door count', function () {
-    for ($i = 0; $i<10; $i++) {
+    for ($i = 0; $i < 10; $i++) {
 
         expect($this->faker->vehicleSeatCount())->toBeGreaterThanOrEqual(1)
             ->and($this->faker->vehicleSeatCount())->toBeLessThanOrEqual(9)
@@ -118,7 +117,7 @@ test('vehicle door count', function () {
 });
 
 test('vehicle seat count', function () {
-    for ($i = 0; $i<10; $i++) {
+    for ($i = 0; $i < 10; $i++) {
 
         expect($this->faker->vehicleSeatCount())->toBeGreaterThanOrEqual(1)
             ->and($this->faker->vehicleSeatCount())->toBeLessThanOrEqual(9)
@@ -156,7 +155,7 @@ test('vehicle gear box', function () {
     expect(array_keys(FakeCarData::$vehicleGearBoxType))->toContain($this->faker->vehicleGearBoxType());
 });
 
-test( 'get random elements from array', function () {
+test('get random elements from array', function () {
     $data = [
         'value1',
         'value2',
@@ -176,7 +175,7 @@ test( 'get random elements from array', function () {
         ->and(FakeCarHelper::getRandomElementsFromArray($data, 10))->toHaveCount(10)
         ->and(FakeCarHelper::getRandomElementsFromArray($data, 0))->toEqual([]);
 
-    for ($i = 0; $i<50; $i++) {
+    for ($i = 0; $i < 50; $i++) {
         $result6 = FakeCarHelper::getRandomElementsFromArray($data, null);
 
         expect(count($result6))->toBeGreaterThanOrEqual(0)
@@ -200,16 +199,16 @@ test('get weighted', function () {
         'key3' => 1,
     ];
 
-    for($x = 0; $x<10; $x++) {
+    for ($x = 0; $x < 10; $x++) {
         $result = array_fill_keys(array_keys($data), 0);
 
-        for ($i = 0; $i<1000; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             $result[FakeCarHelper::getWeighted($data)]++;
         }
 
         expect($result['key1'])->toBeGreaterThan($result['key2'])
-           ->and($result['key2'])->toBeGreaterThan($result['key3'])
-           ->and($result['key1'])->toBeGreaterThan($result['key3']);
+            ->and($result['key2'])->toBeGreaterThan($result['key3'])
+            ->and($result['key1'])->toBeGreaterThan($result['key3']);
     }
 
     expect(FakeCarHelper::getWeighted([]))->toEqual('');
@@ -277,14 +276,14 @@ test('engine torque', function () {
 });
 
 test('get range', function () {
-    for($x = 0; $x<100; $x++) {
+    for ($x = 0; $x < 100; $x++) {
         $range = FakeCarHelper::getRange([1, 100], 0);
         expect($range)->toMatch('/^\d+$/')
             ->and((int) $range)->toBeGreaterThanOrEqual(1)
             ->and((int) $range)->toBeLessThanOrEqual(100);
     }
 
-    for($x = 0; $x<100; $x++) {
+    for ($x = 0; $x < 100; $x++) {
         $range = FakeCarHelper::getRange([100, 150], 2);
 
         expect($range)->toMatch('/^\d+\.\d+$/')
@@ -301,7 +300,7 @@ test('get range invalid', function () {
 });
 
 test('get range with unit', function () {
-    for($x = 0; $x<100; $x++) {
+    for ($x = 0; $x < 100; $x++) {
         $range = FakeCarHelper::getRangeWithUnit([2065, 2450], 'l', 0);
 
         expect($range)->toMatch('/^\d+ l$/')
@@ -309,7 +308,7 @@ test('get range with unit', function () {
             ->and((int) $range)->toBeLessThanOrEqual(2450);
     }
 
-    for($x = 0; $x<100; $x++) {
+    for ($x = 0; $x < 100; $x++) {
         $range = FakeCarHelper::getRangeWithUnit([200, 250], 'hp', 2);
 
         expect($range)->toMatch('/^\d+\.\d+ hp$/')
