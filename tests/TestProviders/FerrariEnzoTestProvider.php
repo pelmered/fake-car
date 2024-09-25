@@ -1,4 +1,5 @@
 <?php
+
 namespace FakeCar\Tests\TestProviders;
 
 use Faker\Provider\FakeCarDataProviderInterface;
@@ -6,7 +7,6 @@ use Faker\Provider\FakeCarHelper;
 
 class FerrariEnzoTestProvider implements FakeCarDataProviderInterface
 {
-
     public function getVehicleBrand(): string
     {
         return 'Ferrari';
