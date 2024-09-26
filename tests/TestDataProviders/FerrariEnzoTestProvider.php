@@ -1,6 +1,6 @@
 <?php
 
-namespace FakeCar\Tests\TestProviders;
+namespace FakeCar\Tests\TestDataProviders;
 
 use Faker\Provider\FakeCarDataProviderInterface;
 use Faker\Provider\FakeCarHelper;

@@ -1,6 +1,6 @@
 <?php
 
-namespace FakeCar\Tests\TestProviders;
+namespace FakeCar\Tests\TestDataProviders;
 
 class BMWFakeCarData extends \Faker\Provider\FakeCarData
 {

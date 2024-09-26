@@ -1,7 +1,7 @@
 <?php
 
-use FakeCar\Tests\TestProviders\BMWFakeCarData;
-use FakeCar\Tests\TestProviders\FerrariEnzoTestProvider;
+use FakeCar\Tests\TestDataProviders\BMWFakeCarData;
+use FakeCar\Tests\TestDataProviders\FerrariEnzoTestProvider;
 
 test('custom provider data source', function () {
     $BMWCarData          = new BMWFakeCarData;
