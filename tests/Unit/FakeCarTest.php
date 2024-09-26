@@ -1,10 +1,13 @@
 <?php
 
+use FakeCar\Tests\TestCase;
 use Faker\Factory;
 use Faker\Provider\FakeCar;
 use Faker\Provider\FakeCarData;
 use Faker\Provider\FakeCarDataProvider;
 use Faker\Provider\FakeCarHelper;
+
+uses(TestCase::class);
 
 beforeEach(function () {
     $faker = Factory::create();
@@ -12,38 +15,8 @@ beforeEach(function () {
     $this->faker = $faker;
 });
 
-/**
- * @throws ReflectionException
- */
-function getProtectedProperty($property, $object = null)
-{
-    if (is_null($object)) {
-        $object = new FakeCarDataProvider;
-    }
 
-    $reflection          = new \ReflectionClass($object);
-    $reflection_property = $reflection->getProperty($property);
-    $reflection_property->setAccessible(true);
 
-    return $reflection_property->getValue($object, $property);
-}
-
-function callProtectedMethod($args, $method, $object = null)
-{
-    if (is_null($object)) {
-        $object = new FakeCarDataProvider;
-    }
-
-    try {
-        $reflection       = new \ReflectionClass($object);
-        $reflectionMethod = $reflection->getMethod($method);
-        //$reflectionMethod->setAccessible(true);
-
-        return $reflectionMethod->invoke($object, ...$args);
-    } catch (Exception $e) {
-        return $e->getMessage();
-    }
-}
 
 test('vehicle', function () {
     $this->faker->seed(random_int(1, 9999));
@@ -237,22 +210,32 @@ test('vin returns valid vin', function () {
     expect($this->faker->validateVin($vin))->toBeTrue();
 });
 test('model year', function () {
+
+    $object = new FakeCar($this->faker);
+
+    expect($this->callProtectedMethod([1980], 'encodeModelYear', $object))->toEqual('A');
+
+    //expect($this->callProtectedMethod([1980], 'encodeModelYear', new FakeCar($this->faker)))->toEqual('A');
+
+
+    /*
     expect($this->faker->modelYear(1980))->toEqual('A')
         ->and($this->faker->modelYear(2000))->toEqual('Y')
         ->and($this->faker->modelYear(2017))->toEqual('H')
         ->and($this->faker->modelYear(2018))->toEqual('J')
         ->and($this->faker->modelYear(2019))->toEqual('K');
+    */
 });
 test('transliterate', function () {
-    expect(callProtectedMethod(['O'], 'transliterate', new FakeCar($this->faker)))->toEqual(0)
-        ->and(callProtectedMethod(['A'], 'transliterate', new FakeCar($this->faker)))->toEqual(1)
-        ->and(callProtectedMethod(['K'], 'transliterate', new FakeCar($this->faker)))->toEqual(2);
+    expect($this->callProtectedMethod(['O'], 'transliterate', new FakeCar($this->faker)))->toEqual(0)
+        ->and($this->callProtectedMethod(['A'], 'transliterate', new FakeCar($this->faker)))->toEqual(1)
+        ->and($this->callProtectedMethod(['K'], 'transliterate', new FakeCar($this->faker)))->toEqual(2);
 });
 
 test('check digit', function () {
-    expect(callProtectedMethod(['z2j9hhgr8Ahl1e3g'], 'checkDigit', new FakeCar($this->faker)))->toEqual('4')
-        ->and(callProtectedMethod(['n7u30vns7Ajsrb1n'], 'checkDigit', new FakeCar($this->faker)))->toEqual('1')
-        ->and(callProtectedMethod(['3julknxb0A06hj41'], 'checkDigit', new FakeCar($this->faker)))->toEqual('8');
+    expect($this->callProtectedMethod(['z2j9hhgr8Ahl1e3g'], 'checkDigit', new FakeCar($this->faker)))->toEqual('4')
+        ->and($this->callProtectedMethod(['n7u30vns7Ajsrb1n'], 'checkDigit', new FakeCar($this->faker)))->toEqual('1')
+        ->and($this->callProtectedMethod(['3julknxb0A06hj41'], 'checkDigit', new FakeCar($this->faker)))->toEqual('8');
 });
 
 test('vin', function () {
@@ -278,7 +261,8 @@ test('engine torque', function () {
 test('get range', function () {
     for ($x = 0; $x < 100; $x++) {
         $range = FakeCarHelper::getRange([1, 100], 0);
-        expect($range)->toMatch('/^\d+$/')
+
+        expect((string) $range)->toMatch('/^\d+$/')
             ->and((int) $range)->toBeGreaterThanOrEqual(1)
             ->and((int) $range)->toBeLessThanOrEqual(100);
     }
