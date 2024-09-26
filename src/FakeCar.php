@@ -171,6 +171,7 @@ class FakeCar extends \Faker\Provider\Base
     {
         //TODO: Remove check and add to data provider interface in next major version
         $this->isSupported(__FUNCTION__);
+
         /** @phpstan-ignore method.notFound */
         return $this->dataProvider->getVehicleEngineTorque();
     }
@@ -184,6 +185,7 @@ class FakeCar extends \Faker\Provider\Base
     {
         //TODO: Remove check and add to data provider interface in next major version
         $this->isSupported(__FUNCTION__);
+
         /** @phpstan-ignore method.notFound */
         return $this->dataProvider->getVehicleEngineTorqueValue();
     }
@@ -197,6 +199,7 @@ class FakeCar extends \Faker\Provider\Base
     {
         //TODO: Remove check and add to data provider interface in next major version
         $this->isSupported(__FUNCTION__);
+
         /** @phpstan-ignore method.notFound */
         return $this->dataProvider->getVehicleEnginePower();
     }
@@ -210,6 +213,7 @@ class FakeCar extends \Faker\Provider\Base
     {
         //TODO: Remove check and add to data provider interface in next major version
         $this->isSupported(__FUNCTION__);
+
         /** @phpstan-ignore method.notFound */
         return $this->dataProvider->getVehicleEnginePowerValue();
     }

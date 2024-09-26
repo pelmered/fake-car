@@ -48,8 +48,9 @@ class FakeCarDataProvider implements FakeCarDataProviderInterface
     }
 
     /**
-     * @throws Exception
      * @return string|array<string>)
+     *
+     * @throws Exception
      */
     public function getVehicleFuelType(int $count = 1): string|array
     {
