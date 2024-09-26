@@ -9,9 +9,11 @@ use Random\RandomException;
 class FakeCarHelper
 {
     /**
+     * @param  array<int|string, int|string>  $arrayData
+     *
      * @throws Exception
      */
-    public static function getArrayData(array $arrayData, int $count = 1)
+    public static function getArrayData(array $arrayData, int $count = 1): mixed
     {
         $data = static::isWeighted($arrayData)
             ? static::getWeighted($arrayData, $count)
@@ -26,8 +28,9 @@ class FakeCarHelper
 
     /**
      * Determines if an array is weighted(associative).
-     *
      * An array is "associative" if it doesn't have sequential numerical keys beginning with zero.
+     *
+     * @param  array<int|string, int|string>  $array
      */
     public static function isWeighted(array $array): bool
     {
@@ -39,11 +42,11 @@ class FakeCarHelper
     /**
      * Returns a random element from a passed array
      *
-     * @param  array  $values
+     * @param  array<int|string, int|string>  $values
      *
-     * @throws Exception
+     * @throws InvalidArgumentException|RandomException
      */
-    public static function getRandomElementFromArray($values)
+    public static function getRandomElementFromArray(array $values): int|string
     {
         $elements = static::getRandomElementsFromArray($values, 1);
 
@@ -53,16 +56,15 @@ class FakeCarHelper
     /**
      * Get random elements from input array
      *
-     * @param  array  $values  The input array
-     * @param  int  $count  The number of random elements you want to get in your response.
-     *                      Leave out or set to 0 for random.
-     * @return mixed
+     * @param  array<int|string, int|string>  $values  The input array
+     * @param  int|null  $count  The number of random elements you want to get in your response.
+     *                           Leave out or set to 0 for random.
+     * @return array<int|string, int|string>
      *
-     * @throws InvalidArgumentException|Exception
+     * @throws RandomException
      */
     public static function getRandomElementsFromArray(array $values, ?int $count = 1): array
     {
-        //dd('getRandomElementsFromArray', $values,$count);
         $valuesLength = count($values);
 
         if ($count > $valuesLength) {
@@ -74,7 +76,7 @@ class FakeCarHelper
         }
 
         if (! $count) {
-            $count = random_int(1, $valuesLength);
+            $count = $valuesLength === 1 ? 1 : random_int(1, $valuesLength);
         }
 
         return array_intersect_key(
@@ -89,11 +91,11 @@ class FakeCarHelper
      * Get one element out of an input array with specified weights to get the distribution
      * of the generated elements as you want them.
      *
-     * @param  array  $values  Input array with values as key and weight as value. ['value 1' => 30, 'value 7' => 70]
+     * @param  array<int|string, int>  $values  Input array with values as key and weight as value. ['value 1' => 30, 'value 7' => 70]
      *
      * @throws Exception
      */
-    public static function getWeighted(array $values, int $count = 1): string
+    public static function getWeighted(array $values, int $count = 1): string|int
     {
         $currentTotal = 0;
         $firstRand    = random_int(1, 100);
@@ -118,7 +120,7 @@ class FakeCarHelper
      *
      * @throws RandomException
      */
-    public static function getRange(array $range, int $decimals = 0): string
+    public static function getRange(array $range, int $decimals = 0): int|string
     {
         if (count($range) !== 2) {
             throw new RandomException('Invalid range');

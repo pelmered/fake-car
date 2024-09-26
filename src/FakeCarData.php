@@ -4,7 +4,10 @@ namespace Faker\Provider;
 
 class FakeCarData
 {
-    public static $brandsWithModels = [
+    /**
+     * @var array <string, array<string>>
+     */
+    public static array $brandsWithModels = [
         'Abarth' => [
             'Fiat 595',
         ],
@@ -783,72 +786,106 @@ class FakeCarData
         ],
     ];
 
-    public static $vehicleTypes = [
+    /**
+     * @var string[]
+     */
+    public static array $vehicleTypes = [
         'hatchback', 'sedan', 'small', 'convertible', 'SUV', 'MPV', 'coupe', 'station wagon',
     ];
 
-    // Based on 2021 EU sales data
-    // https://www.acea.auto/fuel-pc/fuel-types-of-new-cars-battery-electric-9-1-hybrid-19-6-and-petrol-40-0-market-share-full-year-2021/
-    public static $vehicleFuelTypes = [
+    /**
+     * Based on 2021 EU sales data
+     * https://www.acea.auto/fuel-pc/fuel-types-of-new-cars-battery-electric-9-1-hybrid-19-6-and-petrol-40-0-market-share-full-year-2021/
+     *
+     * @var array<string, int>
+     */
+    public static array $vehicleFuelTypes = [
         'gasoline'      => 40,
         'electric'      => 10,
         'diesel'        => 20,
-        'hybrid'        => 19.5,
+        'hybrid'        => 20,
         'plugin-hybrid' => 10,
-        'natural-gas'   => 0.5,
+        'natural-gas'   => 1,
     ];
 
-    public static $vehicleDoorCount = [
-        '4' => 75,
-        '2' => 15,
-        '6' => 10,
+    /**
+     * @var array<int, int>
+     */
+    public static array $vehicleDoorCount = [
+        2 => 15,
+        4 => 75,
+        6 => 10,
     ];
 
-    public static $vehicleSeatCount = [
-        '5' => 75,
-        '2' => 15,
-        '8' => 5,
-        '4' => 10,
+    /**
+     * @var array<int, int>
+     */
+    public static array $vehicleSeatCount = [
+        2 => 15,
+        4 => 10,
+        5 => 75,
+        8 => 5,
     ];
 
-    public static $vehicleProperties = [
+    /**
+     * @var string[]
+     */
+    public static array $vehicleProperties = [
         'Towbar', 'Air condition', 'GPS', 'Leather seats', 'Roof Rack',
     ];
 
-    public static $vehicleGearBoxType = [
+    /**
+     * @var array<string, int>
+     */
+    public static array $vehicleGearBoxType = [
         'manual'    => 70,
         'automatic' => 30,
     ];
 
-    public static $vehicleEnginePower = [
+    /**
+     * @var array<string, string|int|int[]>
+     */
+    public static array $vehicleEnginePower = [
         'range'    => [100, 1500],
         'unit'     => 'hp',
         'rounding' => 0,
     ];
 
-    public static $vehicleEngineTorque = [
+    /**
+     * @var array<string, string|int|int[]>
+     */
+    public static array $vehicleEngineTorque = [
         'range'    => [100, 700],
         'unit'     => 'nm',
         'decimals' => 0,
     ];
 
-    public static $vehicleEngineDisplacement = [
+    /**
+     * @var array<string, string|int|int[]>
+     */
+    public static array $vehicleEngineDisplacement = [
         'range'    => [500, 8000],
         'unit'     => 'cc',
         'decimals' => 1,
     ];
 
-    public static $vehicleEngineCylinders = [
-        '3'  => 5,
-        '4'  => 60,
-        '5'  => 5,
-        '6'  => 5,
-        '8'  => 15,
-        '10' => 5,
-        '12' => 5,
+    /**
+     * @var array<int, int>
+     */
+    public static array $vehicleEngineCylinders = [
+        3  => 5,
+        4  => 60,
+        5  => 5,
+        6  => 5,
+        8  => 15,
+        10 => 5,
+        12 => 5,
     ];
 
-    public static $vehicleEngineFuelConsumption = [
+    /**
+     * @var array<string, string|int|int[]>
+     */
+    public static array $vehicleEngineFuelConsumption = [
         'range'    => [4, 30],
         'unit'     => 'l/100km',
         'decimals' => 1,
