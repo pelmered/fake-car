@@ -15,9 +15,12 @@ class FakeCarHelper
      */
     public static function getArrayData(array $arrayData, int $count = 1): mixed
     {
-        $data = static::isWeighted($arrayData)
-            ? static::getWeighted($arrayData, $count)
-            : static::getRandomElementsFromArray($arrayData, $count);
+        if (static::isWeighted($arrayData)) {
+            /** @var array<int|string, int> $arrayData */
+            $data = static::getWeighted($arrayData, $count);
+        } else {
+            $data = static::getRandomElementsFromArray($arrayData, $count);
+        }
 
         if (is_array($data) && $count === 1) {
             return array_values($data)[0];

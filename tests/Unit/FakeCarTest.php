@@ -15,9 +15,6 @@ beforeEach(function () {
     $this->faker = $faker;
 });
 
-
-
-
 test('vehicle', function () {
     $this->faker->seed(random_int(1, 9999));
 
@@ -111,17 +108,17 @@ test('vehicle properties', function () {
     expect($properties)->toBeArray();
 
     $properties = $this->faker->vehicleProperties(2);
-    expect($properties)->toBeArray();
-    expect($properties)->toHaveCount(2);
+    expect($properties)->toBeArray()
+        ->and($properties)->toHaveCount(2);
 
     $properties = $this->faker->vehicleProperties(5);
-    expect($properties)->toBeArray();
-    expect($properties)->toHaveCount(5);
+    expect($properties)->toBeArray()
+        ->and($properties)->toHaveCount(5);
 
-    //If we pass 0 we should get a random
+    // If we pass 0, we should get a random property
     $properties = $this->faker->vehicleProperties(0);
-    expect($properties)->toBeArray();
-    expect(count($properties))->toBeGreaterThanOrEqual(0);
+    expect($properties)->toBeArray()
+        ->and(count($properties))->toBeGreaterThanOrEqual(0);
 });
 
 test('vehicle gear box', function () {
@@ -187,45 +184,36 @@ test('get weighted', function () {
     expect(FakeCarHelper::getWeighted([]))->toEqual('');
 });
 
-test('valid vin', function () {
-    //Too short
-    expect($this->faker->validateVin('z2j9hhgr8Ahl1e3g'))->toBeFalse()
-        //Too long
-        ->and($this->faker->validateVin('az2j9hhgr8Ahl1e3gs'))->toBeFalse()
-        //Invalid check digit
-        ->and($this->faker->validateVin('z2j9hhgr2Ahl1e3gs'))->toBeFalse()
-        //Invalid
-        ->and($this->faker->validateVin('z2j9hhgr8Ahl1e3gd'))->toBeFalse()
-        // Valid VINs
-        ->and($this->faker->validateVin('z2j9hhgr8Ahl1e3gs'))->toBeTrue()
-        ->and($this->faker->validateVin('n7u30vns7Ajsrb1nc'))->toBeTrue()
-        ->and($this->faker->validateVin('3julknxb0A06hj41x'))->toBeTrue()
-        ->and($this->faker->validateVin('yj12c8z40Aca2x6p3'))->toBeTrue()
-        ->and($this->faker->validateVin('y95wf7gm1A9g7pz5z'))->toBeTrue()
-        ->and($this->faker->validateVin('355430557Azf4u0vr'))->toBeTrue();
-});
+test('valid vin', function ($vin, $valid) {
+    expect($this->faker->validateVin($vin))->toBe($valid);
+})->with([
+    ['z2j9hhgr8Ahl1e3g', false], // Too short
+    ['az2j9hhgr8Ahl1e3gs', false], // Too long
+    ['z2j9hhgr2Ahl1e3gs', false], // Invalid check digit
+    ['z2j9hhgr8Ahl1e3gd', false], // Invalid
+    ['z2j9hhgr8Ahl1e3gs', true], // Valid VINs
+    ['n7u30vns7Ajsrb1nc', true],
+    ['3julknxb0A06hj41x', true],
+    ['yj12c8z40Aca2x6p3', true],
+    ['y95wf7gm1A9g7pz5z', true],
+    ['355430557Azf4u0vr', true],
+]);
 
 test('vin returns valid vin', function () {
     $vin = $this->faker->vin();
     expect($this->faker->validateVin($vin))->toBeTrue();
 });
-test('model year', function () {
-
+test('model year', function ($year, $expected) {
     $object = new FakeCar($this->faker);
 
-    expect($this->callProtectedMethod([1980], 'encodeModelYear', $object))->toEqual('A');
-
-    //expect($this->callProtectedMethod([1980], 'encodeModelYear', new FakeCar($this->faker)))->toEqual('A');
-
-
-    /*
-    expect($this->faker->modelYear(1980))->toEqual('A')
-        ->and($this->faker->modelYear(2000))->toEqual('Y')
-        ->and($this->faker->modelYear(2017))->toEqual('H')
-        ->and($this->faker->modelYear(2018))->toEqual('J')
-        ->and($this->faker->modelYear(2019))->toEqual('K');
-    */
-});
+    expect($this->callProtectedMethod([$year], 'encodeModelYear', $object))->toEqual($expected);
+})->with([
+    [1980, 'A'],
+    [2000, 'Y'],
+    [2017, 'H'],
+    [2018, 'J'],
+    [2019, 'K'],
+]);
 test('transliterate', function () {
     expect($this->callProtectedMethod(['O'], 'transliterate', new FakeCar($this->faker)))->toEqual(0)
         ->and($this->callProtectedMethod(['A'], 'transliterate', new FakeCar($this->faker)))->toEqual(1)

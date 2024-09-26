@@ -9,9 +9,6 @@ use ReflectionException;
 
 abstract class TestCase extends BaseTestCase
 {
-    /**
-     * @throws Exception
-     */
     public function callProtectedMethod($args, $method, $object = null)
     {
         if (is_null($object)) {
@@ -36,8 +33,12 @@ abstract class TestCase extends BaseTestCase
             $object = new FakeCarDataProvider;
         }
 
-        $reflection = new \ReflectionClass($object);
+        try {
+            $reflection = new \ReflectionClass($object);
 
-        return $reflection->getProperty($property)->getValue($object, $property);
+            return $reflection->getProperty($property)->getValue($object, $property);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 }
