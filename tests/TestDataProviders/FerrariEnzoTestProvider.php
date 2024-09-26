@@ -12,7 +12,7 @@ class FerrariEnzoTestProvider implements FakeCarDataProviderInterface
         return 'Ferrari';
     }
 
-    public function getVehicleModel(): string
+    public function getVehicleModel(?string $brand = null): string
     {
         return 'Enzo';
     }
@@ -30,7 +30,7 @@ class FerrariEnzoTestProvider implements FakeCarDataProviderInterface
         return 'coupe';
     }
 
-    public function getVehicleFuelType(): string|array
+    public function getVehicleFuelType(int $count = 1): string|array
     {
         return 'gasoline';
     }
