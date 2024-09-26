@@ -26,10 +26,11 @@ Remove the `--dev` flag if you need it in production.
 1. Now requires PHP 8.1+ (previously 7.3+)
 2. The provider name has changed from `Fakecar` to `FakeCar`. This will cause problems if you are on a case-sensitive filesystem, but it is strongly recommended to change this even if you are not.
 3. The methods `transliterate` and `checkDigit` on the `FakeCar` provider class are now no longer publicly available (Visibility changed to private).
-4. The public methods `getRandomElementsFromArray` and `getWeighted` on the `FakeCar` provider class has been moved to a helper class. Access them like this: `\Faker\Provider\FakeCarHelper::getWeighted`
+4. The public methods `getRandomElementsFromArray` and `getWeighted` on the `FakeCar` provider class has been moved to a helper class. Access them like this: `\Faker\Provider\FakeCarHelper::getWeighted()`
 5. The constants `EBCDIC` and `MODELYEAR` are no longer public.
 
-3, 4 and 5 are changes to limited to undocumented features of the public API and should therefore not impact the typical use cases of this package.
+3, 4 and 5 are changes limited to undocumented features of the public API, 
+and should therefore not impact the typical use cases of this package.
 
 ## Basic Usage
 
@@ -38,71 +39,72 @@ $faker = (new \Faker\Factory())::create();
 $faker->addProvider(new \Faker\Provider\FakeCar($faker));
 
 
-// generate matching automobile brand and model of car as a string
-echo $faker->vehicle; // Volvo 740
+// generate matching automobile brand and model of a car as a string
+echo $faker->vehicle(); // 'Volvo 740'
 
-// generate matching automobile brand and model of car as an array
-echo $faker->vehicleArray; // [ 'brand' => 'Hummer', 'model' => 'H1' ]
+// generate matching automobile brand and model of a car as an array
+echo $faker->vehicleArray(); // [ 'brand' => 'Hummer', 'model' => 'H1' ]
 
 // generate only automobile brand
-echo $faker->vehicleBrand; // Ford
+echo $faker->vehicleBrand(); // 'Ford'
 
 // generate automobile manufacturer and model of car
-echo $faker->vehicleModel; // 488 Spider
+echo $faker->vehicleModel(); // '488 Spider'
 
 // generate Vehicle Identification Number(VIN) - https://en.wikipedia.org/wiki/Vehicle_identification_number
-echo $faker->vin; // d0vcddxpXAcz1utgz
+echo $faker->vin(); // 'd0vcddxpXAcz1utgz'
 
 // generate automobile registration number
-echo $faker->vehicleRegistration; // ABC-123
+echo $faker->vehicleRegistration(); // 'ABC-123'
 
 // generate automobile registration number with custom format
 echo $faker->vehicleRegistration('[A-Z]{2}-[0-9]{5}'); // AB-12345
 
 // generate automobile model type
-echo $faker->vehicleType; // hatchback
+echo $faker->vehicleType(); // 'hatchback'
 
 // generate automobile fuel type
-echo $faker->vehicleFuelType; // diesel
+echo $faker->vehicleFuelType(); // 'diesel'
+echo $faker->vehicleFuelType(2); // ['diesel', 'gasoline']
 
 // generate automobile door count
-echo $faker->vehicleDoorCount; // 4
+echo $faker->vehicleDoorCount(); // 4
 
 // generate automobile seat count
-echo $faker->vehicleSeatCount; // 5
+echo $faker->vehicleSeatCount(); // 5
 
 // generate automobile properties
-echo $faker->vehicleProperties; // ['Towbar','Aircondition','GPS', 'Leather seats']
+echo $faker->vehicleProperties(); // ['Towbar','Aircondition','GPS', 'Leather seats']
 
 // generate automobile gear type (manual or automatic)
-echo $faker->vehicleGearBoxType; // manual
+echo $faker->vehicleGearBoxType(); // manual
 
 // generate automobile engine power
-echo $faker->vehicleEnginePower; // 250 hp
+echo $faker->vehicleEnginePower(); // '250 hp'
 
-// generate automobile engine power without unit
-echo $faker->vehicleEnginePowerValue; // 175
+// generate automobile engine power without a unit
+echo $faker->vehicleEnginePowerValue(); // 175
 
 // generate automobile engine torque
-echo $faker->vehicleEngineTorque; // 300 nm
+echo $faker->vehicleEngineTorque(); // '300 nm'
 
-// generate automobile engine power without unit
-echo $faker->vehicleEngineTorqueValue; // 450
+// generate automobile engine power without a unit
+echo $faker->vehicleEngineTorqueValue(); // 450
 
 // generate automobile engine displacement
-echo $faker->vehicleEngineDisplacement; // 2.0 l
+echo $faker->vehicleEngineDisplacement(); // '2.0 l'
 
 // generate automobile engine displacement without unit
-echo $faker->vehicleEngineDisplacementValue; // 2.0
+echo $faker->vehicleEngineDisplacementValue(); // 2.0
 
 // generate automobile engine fuel consumption
-echo $faker->vehicleFuelConsumption; // 5.0 l/100km
+echo $faker->vehicleFuelConsumption(); // '5.0 l/100km'
 
 // generate automobile engine fuel consumption without unit
-echo $faker->vehicleFuelConsumptionValue; // 5.0
+echo $faker->vehicleFuelConsumptionValue(); // 5.0
 
 // generate automobile engine fuel consumption without unit
-echo $faker->vehicleEngineCylinders; // 4
+echo $faker->vehicleEngineCylinders(); // 4
 ```
 
 ### Laravel factory example
