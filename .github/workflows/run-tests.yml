@@ -45,6 +45,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -59,7 +61,12 @@ jobs:
       - name: Execute type coverage tests
         run: vendor/bin/pest --type-coverage --type-coverage-json=build/logs/pest-coverage.json
 
-      - name: Upload coverage results
-        run: |
-          bash <(curl -s https://raw.githubusercontent.com/getOtterWise/bash-uploader/main/uploader.sh) --repo-token ${{ secrets.OTTERWISE_TOKEN }}
-          bash <(curl -s https://raw.githubusercontent.com/getOtterWise/bash-uploader/main/uploader.sh) --type-coverage-file build/logs/pest-coverage.json
+      - name: Upload Test Coverage
+        env:
+          OTTERWISE_TOKEN: ${{ secrets.OTTERWISE_TOKEN }}
+        run: bash <(curl -s https://raw.githubusercontent.com/getOtterWise/bash-uploader/main/uploader.sh)
+
+      - name: Upload Types Coverage
+        env:
+          OTTERWISE_TOKEN: ${{ secrets.OTTERWISE_TOKEN }}
+        run: bash <(curl -s https://raw.githubusercontent.com/getOtterWise/bash-uploader/main/uploader.sh) --type-coverage-file build/logs/pest-coverage.json
