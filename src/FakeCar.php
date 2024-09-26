@@ -248,7 +248,7 @@ class FakeCar extends \Faker\Provider\Base
         $weights = '8765432X098765432';
         $sum     = 0;
         for ($i = 0; $i < 17; $i++) {
-            $sum += self::transliterate($vin[$i])
+            $sum += self::transliterate($vin[$i] ?? '')
                     * stripos($map, $weights[$i]);
         }
 
