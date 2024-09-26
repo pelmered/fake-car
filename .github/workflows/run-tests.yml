@@ -38,3 +38,28 @@ jobs:
       - name: Upload coverage results
         run: bash <(curl -s https://raw.githubusercontent.com/getOtterWise/bash-uploader/main/uploader.sh) --repo-token ${{ secrets.OTTERWISE_TOKEN }}
             bash <(curl -s https://raw.githubusercontent.com/getOtterWise/bash-uploader/main/uploader.sh) --type-coverage-file pest-coverage.json
+
+  report-metrics:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: pcov
+      - name: Install dependencies
+        run: composer update --prefer-stable --prefer-dist --no-interaction
+      - name: Execute tests
+        run: vendor/bin/pest --coverage-clover=coverage.xml
+      - name: Execute type coverage tests
+        run: vendor/bin/pest --type-coverage --type-coverage-json=pest-coverage.json
+
+      - name: Upload coverage results
+        run: |
+          bash <(curl -s https://raw.githubusercontent.com/getOtterWise/bash-uploader/main/uploader.sh) --repo-token ${{ secrets.OTTERWISE_TOKEN }}
+          bash <(curl -s https://raw.githubusercontent.com/getOtterWise/bash-uploader/main/uploader.sh) --type-coverage-file pest-coverage.json
