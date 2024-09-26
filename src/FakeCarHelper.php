@@ -78,7 +78,7 @@ class FakeCarHelper
             return [];
         }
 
-        if (! $count) {
+        if ($count === null) {
             $count = $valuesLength === 1 ? 1 : random_int(1, $valuesLength);
         }
 
@@ -100,6 +100,7 @@ class FakeCarHelper
      */
     public static function getWeighted(array $values, int $count = 1): string|int
     {
+        // TODO: Implement support for $count > 1
         $currentTotal = 0;
         $firstRand    = random_int(1, 100);
 
