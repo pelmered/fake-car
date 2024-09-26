@@ -55,11 +55,11 @@ jobs:
       - name: Install dependencies
         run: composer update --prefer-stable --prefer-dist --no-interaction
       - name: Execute tests
-        run: vendor/bin/pest --coverage-clover=coverage.xml
+        run: vendor/bin/pest --coverage-clover=build/logs/clover.xml
       - name: Execute type coverage tests
-        run: vendor/bin/pest --type-coverage --type-coverage-json=pest-coverage.json
+        run: vendor/bin/pest --type-coverage --type-coverage-json=build/logs/pest-coverage.json
 
       - name: Upload coverage results
         run: |
           bash <(curl -s https://raw.githubusercontent.com/getOtterWise/bash-uploader/main/uploader.sh) --repo-token ${{ secrets.OTTERWISE_TOKEN }}
-          bash <(curl -s https://raw.githubusercontent.com/getOtterWise/bash-uploader/main/uploader.sh) --type-coverage-file pest-coverage.json
+          bash <(curl -s https://raw.githubusercontent.com/getOtterWise/bash-uploader/main/uploader.sh) --type-coverage-file build/logs/pest-coverage.json
