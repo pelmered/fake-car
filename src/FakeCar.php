@@ -220,6 +220,8 @@ class FakeCar extends \Faker\Provider\Base
 
     public function isSupported(string $method): bool
     {
+        $method = 'get'.ucfirst($method);
+
         if (method_exists($this->dataProvider, $method)) {
             return true;
         }
