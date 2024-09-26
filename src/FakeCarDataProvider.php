@@ -6,9 +6,9 @@ use Exception;
 
 class FakeCarDataProvider implements FakeCarDataProviderInterface
 {
-    protected $vehicleData;
+    protected mixed $vehicleData;
 
-    public function __construct($vehicleData = null)
+    public function __construct(mixed $vehicleData = null)
     {
         $this->vehicleData = $vehicleData ?: FakeCarData::class;
     }
@@ -31,6 +31,9 @@ class FakeCarDataProvider implements FakeCarDataProviderInterface
         return (string) FakeCarHelper::getRandomElementFromArray($brandsWithModels[$brand ?: $this->getVehicleBrand()]);
     }
 
+    /**
+     * @return array<string, array<string>>
+     */
     public function getBrandsWithModels(): array
     {
         return $this->vehicleData::$brandsWithModels;
@@ -46,6 +49,7 @@ class FakeCarDataProvider implements FakeCarDataProviderInterface
 
     /**
      * @throws Exception
+     * @return string|array<string>)
      */
     public function getVehicleFuelType(int $count = 1): string|array
     {
@@ -69,9 +73,11 @@ class FakeCarDataProvider implements FakeCarDataProviderInterface
     }
 
     /**
+     * @return array<string>
+     *
      * @throws Exception
      */
-    public function getVehicleProperties(int $count = 0): array
+    public function getVehicleProperties(int $count = 1): array
     {
         return FakeCarHelper::getArrayData($this->vehicleData::$vehicleProperties, $count);
     }
@@ -97,7 +103,7 @@ class FakeCarDataProvider implements FakeCarDataProviderInterface
     /**
      * @throws Exception
      */
-    public function getVehicleEnginePowerValue(): string
+    public function getVehicleEnginePowerValue(): int|string
     {
         ['range' => $range] = $this->vehicleData::$vehicleEnginePower;
 
@@ -117,7 +123,7 @@ class FakeCarDataProvider implements FakeCarDataProviderInterface
     /**
      * @throws Exception
      */
-    public function getVehicleEngineTorqueValue(): string
+    public function getVehicleEngineTorqueValue(): int|string
     {
         ['range' => $range] = $this->vehicleData::$vehicleEngineTorque;
 

@@ -36,6 +36,8 @@ class FakeCar extends \Faker\Provider\Base
 
     /**
      * Get vehicle with brand and model as an array
+     *
+     * @return array{brand: string, model: string}
      */
     public function vehicleArray(): array
     {
@@ -58,24 +60,21 @@ class FakeCar extends \Faker\Provider\Base
     /**
      * Get random vehicle model
      *
-     * @param  string  $brand  Get random model from specific brand (optional)
-     * @return mixed
+     * @param  ?string  $brand  Get a random model from specific brand (optional)
      */
     public function vehicleModel(?string $brand = null): string
     {
-        return (string) $this->dataProvider->getVehicleModel($brand);
+        return $this->dataProvider->getVehicleModel($brand);
     }
 
     /**
      * Generate VIN
      *
      * @link https://en.wikipedia.org/wiki/Vehicle_identification_number
-     *
-     * @return mixed
      */
     public function vin(int $year = 1980): string
     {
-        $modelYear = static::modelYear($year);
+        $modelYear = self::encodeModelYear($year);
         $regex     = "([a-hj-npr-z0-9]{8})_{$modelYear}([a-hj-npr-z0-9]{7})";
         $vin       = static::regexify($regex);
 
@@ -92,7 +91,7 @@ class FakeCar extends \Faker\Provider\Base
     }
 
     /**
-     * Get vehicle type
+     * Get a vehicle type
      *
      * @throws Exception
      */
@@ -102,11 +101,13 @@ class FakeCar extends \Faker\Provider\Base
     }
 
     /**
-     * Get vehicle fuel type
+     * Get vehicle fuel type(s)
+     *
+     * @return string|array<string>
      */
-    public function vehicleFuelType(int $count = 1): string
+    public function vehicleFuelType(int $count = 1): string|array
     {
-        return (string) $this->dataProvider->getVehicleFuelType($count);
+        return $this->dataProvider->getVehicleFuelType($count);
     }
 
     /**
@@ -116,7 +117,7 @@ class FakeCar extends \Faker\Provider\Base
      */
     public function vehicleDoorCount(): int
     {
-        return (int) $this->dataProvider->getVehicleDoorCount();
+        return $this->dataProvider->getVehicleDoorCount();
     }
 
     /**
@@ -126,12 +127,13 @@ class FakeCar extends \Faker\Provider\Base
      */
     public function vehicleSeatCount(): int
     {
-        return (int) $this->dataProvider->getVehicleSeatCount();
+        return $this->dataProvider->getVehicleSeatCount();
     }
 
     /**
      * Get an array of random vehicle properties
      *
+     * @return array<string>
      *
      * @throws Exception
      */
@@ -143,8 +145,6 @@ class FakeCar extends \Faker\Provider\Base
     /**
      * Get random vehicle gearbox type
      *
-     * @return mixed
-     *
      * @throws Exception
      */
     public function vehicleGearBoxType(): string
@@ -153,9 +153,7 @@ class FakeCar extends \Faker\Provider\Base
     }
 
     /**
-     * Get random vehicle gearbox type without unit
-     *
-     * @return mixed
+     * Get a random vehicle gearbox type without a unit
      *
      * @throws Exception
      */
@@ -167,54 +165,56 @@ class FakeCar extends \Faker\Provider\Base
     /**
      * Get engine torque
      *
-     * @return mixed
-     *
      * @throws Exception
      */
     public function vehicleEngineTorque(): string
     {
+        //TODO: Remove check and add to data provider interface in next major version
+        $this->isSupported(__FUNCTION__);
+        /** @phpstan-ignore method.notFound */
         return $this->dataProvider->getVehicleEngineTorque();
     }
 
     /**
-     * Get engine torque without unit
-     *
-     * @return mixed
+     * Get engine torque without a unit
      *
      * @throws Exception
      */
     public function vehicleEngineTorqueValue(): string
     {
-        return $this->dataProvider->getVehicleEngineTorque();
+        //TODO: Remove check and add to data provider interface in next major version
+        $this->isSupported(__FUNCTION__);
+        /** @phpstan-ignore method.notFound */
+        return $this->dataProvider->getVehicleEngineTorqueValue();
     }
 
     /**
      * Get engine power (horsepower or kilowatts)
      *
-     * @return mixed
-     *
      * @throws Exception
      */
     public function vehicleEnginePower(): string
     {
+        //TODO: Remove check and add to data provider interface in next major version
+        $this->isSupported(__FUNCTION__);
+        /** @phpstan-ignore method.notFound */
         return $this->dataProvider->getVehicleEnginePower();
     }
 
     /**
-     * Get engine power without unit
-     *
-     * @return mixed
+     * Get engine power without a unit
      *
      * @throws Exception
      */
     public function vehicleEnginePowerValue(): string
     {
+        //TODO: Remove check and add to data provider interface in next major version
         $this->isSupported(__FUNCTION__);
-
+        /** @phpstan-ignore method.notFound */
         return $this->dataProvider->getVehicleEnginePowerValue();
     }
 
-    public function isSupported($method): bool
+    public function isSupported(string $method): bool
     {
         if (method_exists($this->dataProvider, $method)) {
             return true;
@@ -223,20 +223,18 @@ class FakeCar extends \Faker\Provider\Base
         throw new \RuntimeException('Method not supported be data provider. Please implement '.$method.'() in your data provider.');
     }
 
-    public static function modelYear(int $year = 1980): string
+    /**
+     * Model year encoding for VIN generation.
+     *
+     * @link: https://en.wikipedia.org/wiki/Vehicle_identification_number#Model_year_encoding
+     */
+    private static function encodeModelYear(int $modelYear = 1980): string
     {
-        return substr(self::MODEL_YEAR, ($year - 1980) % 30, 1);
-    }
-
-    private static function transliterate(string $character): string
-    {
-        return stripos(self::EBCDIC, $character) % 10;
+        return substr(self::MODEL_YEAR, ($modelYear - 1980) % 30, 1);
     }
 
     /**php
-     * @param string $vin
-     *
-     * @return mixed
+     * @link: https://en.wikipedia.org/wiki/Vehicle_identification_number#Check-digit_calculation
      */
     private static function checkDigit(string $vin): string
     {
@@ -244,11 +242,16 @@ class FakeCar extends \Faker\Provider\Base
         $weights = '8765432X098765432';
         $sum     = 0;
         for ($i = 0; $i < 17; $i++) {
-            $sum += self::transliterate(substr($vin, $i, 1))
+            $sum += self::transliterate($vin[$i])
                     * stripos($map, $weights[$i]);
         }
 
         return $map[$sum % 11];
+    }
+
+    private static function transliterate(string $character): int
+    {
+        return stripos(self::EBCDIC, $character) % 10;
     }
 
     public static function validateVin(string $vin): bool
@@ -257,6 +260,6 @@ class FakeCar extends \Faker\Provider\Base
             return false;
         }
 
-        return self::checkDigit($vin) == $vin[8];
+        return self::checkDigit($vin) === $vin[8];
     }
 }

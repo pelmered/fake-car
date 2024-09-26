@@ -4,7 +4,7 @@ namespace FakeCar\Tests\TestProviders;
 
 class BMWFakeCarData extends \Faker\Provider\FakeCarData
 {
-    public static $brandsWithModels = [
+    public static array $brandsWithModels = [
         'BMW' => [
             '8 Series', 'M1', 'X5', 'Z1', 'Z3', 'Z4', 'Z8', 'Alpina', 'E', 'X3', 'M', 'X6', '1 Series', '5 Series',
             'X5 M', 'M5', '750', '6 Series', '3 Series', 'M3', 'X6 M', 'M6', 'X1', '7 Series', '325', '324', '316',
@@ -17,22 +17,22 @@ class BMWFakeCarData extends \Faker\Provider\FakeCarData
         ],
     ];
 
-    public static $vehicleTypes = [
+    public static array $vehicleTypes = [
         'hatchback', 'sedan', 'convertible', 'SUV', 'coupe',
     ];
 
-    public static $vehicleFuelTypes = [
+    public static array $vehicleFuelTypes = [
         'gasoline' => 40,
         'electric' => 10,
         'diesel'   => 20,
     ];
 
-    public static $vehicleEnginePower = [
+    public static array $vehicleEnginePower = [
         'range' => [150, 1200],
         'unit'  => 'hp',
     ];
 
-    public static $vehicleEngineTorque = [
+    public static array $vehicleEngineTorque = [
         'range' => [300, 700],
         'unit'  => 'nm',
     ];
