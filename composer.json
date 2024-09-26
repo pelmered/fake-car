@@ -50,20 +50,6 @@
         "test-coverage": [
             "./vendor/bin/pest --coverage-text"
         ],
-        "phpmd": [
-            "php ./vendor/bin/phpmd src ansi ./phpmd-ruleset.xml --ignore-violations-on-exit"
-        ],
-        "phpmd-html": [
-            "php ./vendor/bin/phpmd src html ./phpmd-ruleset.xml --ignore-violations-on-exit > reports/phpmd.html",
-            "open ./reports/phpmd.html"
-        ],
-        "codemetrics": [
-            "php ./vendor/bin/phpmetrics src"
-        ],
-        "codemetrics-html": [
-            "php ./vendor/bin/phpmetrics --report-html=reports/codemetrics src",
-            "open ./reports/codemetrics/index.html"
-        ],
         "all": [
             "composer run test && composer run test-coverage && composer run phpmd && composer run codemetrics"
         ]
