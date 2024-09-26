@@ -25,7 +25,8 @@
         "pestphp/pest": "^3.0",
         "pestphp/pest-plugin-drift": "3.x-dev",
         "phpstan/phpstan": "^1.12",
-        "laravel/pint": "^1.18"
+        "laravel/pint": "^1.18",
+        "pestphp/pest-plugin-type-coverage": "^3.0"
     },
     "autoload": {
         "psr-4": {
@@ -49,6 +50,9 @@
         ],
         "test-coverage": [
             "./vendor/bin/pest --coverage-text"
+        ],
+        "types": [
+            "./vendor/bin/pest --type-coverage"
         ],
         "all": [
             "composer run test && composer run test-coverage && composer run phpmd && composer run codemetrics"
