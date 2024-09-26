@@ -2,13 +2,16 @@
 
 use FakeCar\Tests\TestDataProviders\BMWFakeCarData;
 use FakeCar\Tests\TestDataProviders\FerrariEnzoTestProvider;
+use Faker\Factory;
+use Faker\Provider\FakeCar;
+use Faker\Provider\FakeCarDataProvider;
 
 test('custom provider data source', function () {
     $BMWCarData          = new BMWFakeCarData;
-    $fakeCarDataProvider = new \Faker\Provider\FakeCarDataProvider($BMWCarData);
+    $fakeCarDataProvider = new FakeCarDataProvider($BMWCarData);
 
-    $faker   = (new \Faker\Factory)::create();
-    $fakeCar = new \Faker\Provider\FakeCar($faker);
+    $faker   = (new Factory)::create();
+    $fakeCar = new FakeCar($faker);
     $fakeCar->setDataProvider($fakeCarDataProvider);
     $faker->addProvider($fakeCar);
 
@@ -37,8 +40,8 @@ test('custom provider data source', function () {
 test('custom provider class', function () {
     $fakeCarDataProvider = new FerrariEnzoTestProvider;
 
-    $faker   = (new \Faker\Factory)::create();
-    $fakeCar = new \Faker\Provider\FakeCar($faker);
+    $faker   = (new Factory)::create();
+    $fakeCar = new FakeCar($faker);
     $fakeCar->setDataProvider($fakeCarDataProvider);
     $faker->addProvider($fakeCar);
 

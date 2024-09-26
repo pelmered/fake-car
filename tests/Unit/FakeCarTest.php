@@ -75,14 +75,6 @@ test('vehicle door count', function () {
         expect($this->faker->vehicleSeatCount())->toBeGreaterThanOrEqual(1)
             ->and($this->faker->vehicleSeatCount())->toBeLessThanOrEqual(9)
             ->and($this->faker->vehicleSeatCount())->toBeInt();
-
-        /*
-        expect($this->logicalAnd(
-            $this->isType('int'),
-            $this->greaterThanOrEqual(2),
-            $this->lessThanOrEqual(6)
-        ))->toMatchConstraint($this->faker->vehicleDoorCount);
-        */
     }
 });
 
@@ -92,14 +84,6 @@ test('vehicle seat count', function () {
         expect($this->faker->vehicleSeatCount())->toBeGreaterThanOrEqual(1)
             ->and($this->faker->vehicleSeatCount())->toBeLessThanOrEqual(9)
             ->and($this->faker->vehicleSeatCount())->toBeInt();
-
-        /*
-        expect($this->logicalAnd(
-            $this->isType('int'),
-            $this->greaterThanOrEqual(1),
-            $this->lessThanOrEqual(9)
-        ))->toBe($this->faker->vehicleSeatCount);
-        */
     }
 });
 
