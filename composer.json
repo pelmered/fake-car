@@ -49,13 +49,13 @@
             "./vendor/bin/pest"
         ],
         "test-coverage": [
-            "./vendor/bin/pest --coverage-text"
+            "./vendor/bin/pest --coverage"
         ],
         "types": [
             "./vendor/bin/pest --type-coverage"
         ],
         "all": [
-            "composer run test && composer run test-coverage && composer run phpmd && composer run codemetrics"
+            "composer run test-coverage && composer run types && composer run lint"
         ]
     },
     "config": {

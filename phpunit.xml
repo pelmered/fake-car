@@ -20,10 +20,12 @@
   </source>
   <coverage includeUncoveredFiles="true" pathCoverage="false" ignoreDeprecatedCodeUnits="true" disableCodeCoverageIgnore="true">
     <report>
-      <clover outputFile="coverage/clover.xml"/>
-      <html outputDirectory="coverage/html" lowUpperBound="50" highLowerBound="90"/>
-      <text outputFile="coverage/coverage.txt" showUncoveredFiles="false"/>
-      <xml outputDirectory="coverage/xml"/>
+      <html outputDirectory="build/coverage"/>
+      <text outputFile="build/coverage.txt"/>
+      <clover outputFile="build/logs/clover.xml"/>
     </report>
   </coverage>
+  <logging>
+    <junit outputFile="build/report.junit.xml"/>
+  </logging>
 </phpunit>
