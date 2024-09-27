@@ -4,6 +4,7 @@ namespace Faker\Provider;
 
 use Exception;
 use Faker\Generator;
+use InvalidArgumentException;
 
 class FakeCar extends \Faker\Provider\Base
 {
@@ -226,7 +227,7 @@ class FakeCar extends \Faker\Provider\Base
             return true;
         }
 
-        throw new \RuntimeException('Method not supported be data provider. Please implement '.$method.'() in your data provider.');
+        throw new InvalidArgumentException('Method not supported be data provider. Please implement '.$method.'() in your data provider.');
     }
 
     /**

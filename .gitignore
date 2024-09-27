@@ -7,10 +7,11 @@ composer.lock
 
 # Temp files
 coverage.clover
+pest-coverage.json
 .phpunit.result.cache
 .php-cs-fixer.cache
 ocular.phar
 reports
 outdated.txt
 .phpunit.cache/
-coverage/
+/build

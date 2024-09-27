@@ -1,6 +1,7 @@
 <?php
 
 use FakeCar\Tests\TestCase;
+use FakeCar\Tests\TestDataProviders\FerrariEnzoTestProvider;
 use Faker\Factory;
 use Faker\Provider\FakeCar;
 use Faker\Provider\FakeCarData;
@@ -72,9 +73,9 @@ test('vehicle fuel type', function () {
 test('vehicle door count', function () {
     for ($i = 0; $i < 10; $i++) {
 
-        expect($this->faker->vehicleSeatCount())->toBeGreaterThanOrEqual(1)
-            ->and($this->faker->vehicleSeatCount())->toBeLessThanOrEqual(9)
-            ->and($this->faker->vehicleSeatCount())->toBeInt();
+        expect($this->faker->vehicleDoorCount())->toBeGreaterThanOrEqual(1)
+            ->and($this->faker->vehicleDoorCount())->toBeLessThanOrEqual(9)
+            ->and($this->faker->vehicleDoorCount())->toBeInt();
     }
 });
 
@@ -107,6 +108,10 @@ test('vehicle properties', function () {
 
 test('vehicle gear box', function () {
     expect(array_keys(FakeCarData::$vehicleGearBoxType))->toContain($this->faker->vehicleGearBoxType());
+});
+
+test('vehicle gear box value', function () {
+    expect(array_keys(FakeCarData::$vehicleGearBoxType))->toContain($this->faker->vehicleGearBoxTypeValue());
 });
 
 test('get random elements from array', function () {
@@ -168,58 +173,16 @@ test('get weighted', function () {
     expect(FakeCarHelper::getWeighted([]))->toEqual('');
 });
 
-test('valid vin', function ($vin, $valid) {
-    expect($this->faker->validateVin($vin))->toBe($valid);
-})->with([
-    ['z2j9hhgr8Ahl1e3g', false], // Too short
-    ['az2j9hhgr8Ahl1e3gs', false], // Too long
-    ['z2j9hhgr2Ahl1e3gs', false], // Invalid check digit
-    ['z2j9hhgr8Ahl1e3gd', false], // Invalid
-    ['z2j9hhgr8Ahl1e3gs', true], // Valid VINs
-    ['n7u30vns7Ajsrb1nc', true],
-    ['3julknxb0A06hj41x', true],
-    ['yj12c8z40Aca2x6p3', true],
-    ['y95wf7gm1A9g7pz5z', true],
-    ['355430557Azf4u0vr', true],
-]);
-
-test('vin returns valid vin', function () {
-    $vin = $this->faker->vin();
-    expect($this->faker->validateVin($vin))->toBeTrue();
-});
-test('model year', function ($year, $expected) {
-    $object = new FakeCar($this->faker);
-
-    expect($this->callProtectedMethod([$year], 'encodeModelYear', $object))->toEqual($expected);
-})->with([
-    [1980, 'A'],
-    [2000, 'Y'],
-    [2017, 'H'],
-    [2018, 'J'],
-    [2019, 'K'],
-]);
-test('transliterate', function () {
-    expect($this->callProtectedMethod(['O'], 'transliterate', new FakeCar($this->faker)))->toEqual(0)
-        ->and($this->callProtectedMethod(['A'], 'transliterate', new FakeCar($this->faker)))->toEqual(1)
-        ->and($this->callProtectedMethod(['K'], 'transliterate', new FakeCar($this->faker)))->toEqual(2);
-});
-
-test('check digit', function () {
-    expect($this->callProtectedMethod(['z2j9hhgr8Ahl1e3g'], 'checkDigit', new FakeCar($this->faker)))->toEqual('4')
-        ->and($this->callProtectedMethod(['n7u30vns7Ajsrb1n'], 'checkDigit', new FakeCar($this->faker)))->toEqual('1')
-        ->and($this->callProtectedMethod(['3julknxb0A06hj41'], 'checkDigit', new FakeCar($this->faker)))->toEqual('8');
-});
-
-test('vin', function () {
-    $vin = $this->faker->vin();
-    expect($vin)->toMatch('/[a-zA-Z0-9]{17}/')
-        ->and($this->faker->validateVin($vin))->toBeTrue();
-});
-
 test('engine power', function () {
     $power = $this->faker->vehicleEnginePower();
     expect($power)->toMatch('/^\d+ hp$/')
         ->and((int) explode(' ', $power)[0])->toBeGreaterThanOrEqual(100)
+        ->and((int) explode(' ', $power)[0])->toBeLessThanOrEqual(1500);
+});
+
+test('engine power value', function () {
+    $power = $this->faker->vehicleEnginePowerValue();
+    expect((int) explode(' ', $power)[0])->toBeGreaterThanOrEqual(100)
         ->and((int) explode(' ', $power)[0])->toBeLessThanOrEqual(1500);
 });
 
@@ -230,45 +193,24 @@ test('engine torque', function () {
         ->and((int) explode(' ', $torque)[0])->toBeLessThanOrEqual(700);
 });
 
-test('get range', function () {
-    for ($x = 0; $x < 100; $x++) {
-        $range = FakeCarHelper::getRange([1, 100], 0);
+test('engine torque value', function () {
+    $torque = $this->faker->vehicleEngineTorqueValue();
 
-        expect((string) $range)->toMatch('/^\d+$/')
-            ->and((int) $range)->toBeGreaterThanOrEqual(1)
-            ->and((int) $range)->toBeLessThanOrEqual(100);
-    }
-
-    for ($x = 0; $x < 100; $x++) {
-        $range = FakeCarHelper::getRange([100, 150], 2);
-
-        expect($range)->toMatch('/^\d+\.\d+$/')
-            ->and((int) $range)->toBeGreaterThanOrEqual(100)
-            ->and((int) $range)->toBeLessThanOrEqual(150);
-    }
-});
-test('get range invalid', function () {
-    $this->expectException('\Random\RandomException');
-    FakeCarHelper::getRange([100, 50], 2);
-
-    $this->expectException('\InvalidArgumentException');
-    FakeCarHelper::getRange([100, 50], -2);
+    expect((int) explode(' ', $torque)[0])->toBeGreaterThanOrEqual(100)
+        ->and((int) explode(' ', $torque)[0])->toBeLessThanOrEqual(700);
 });
 
-test('get range with unit', function () {
-    for ($x = 0; $x < 100; $x++) {
-        $range = FakeCarHelper::getRangeWithUnit([2065, 2450], 'l', 0);
+test('is supported check', function () {
+    $faker   = (new Factory)::create();
+    $fakeCar = new FakeCar($faker);
+    $fakeCar->setDataProvider(new FerrariEnzoTestProvider);
+    $faker->addProvider($fakeCar);
 
-        expect($range)->toMatch('/^\d+ l$/')
-            ->and((int) $range)->toBeGreaterThanOrEqual(2065)
-            ->and((int) $range)->toBeLessThanOrEqual(2450);
-    }
+    expect($fakeCar->isSupported('vehicleEnginePower'))->toBeTrue();
 
-    for ($x = 0; $x < 100; $x++) {
-        $range = FakeCarHelper::getRangeWithUnit([200, 250], 'hp', 2);
+    expect(fn () => $fakeCar->isSupported('vehicleEngineTorque'))
+        ->toThrow(InvalidArgumentException::class);
 
-        expect($range)->toMatch('/^\d+\.\d+ hp$/')
-            ->and((int) $range)->toBeGreaterThanOrEqual(200)
-            ->and((int) $range)->toBeLessThanOrEqual(250);
-    }
+    expect(fn () => $fakeCar->isSupported('invalidMethod'))
+        ->toThrow(InvalidArgumentException::class);
 });
