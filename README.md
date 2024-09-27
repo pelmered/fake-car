@@ -2,13 +2,13 @@
 Faker provider for fake car data
 
 [![Latest Stable Version](https://poser.pugx.org/pelmered/fake-car/v/stable)](https://packagist.org/packages/pelmered/fake-car)
-[![Total Downloads](https://poser.pugx.org/pelmered/fake-car/d/total)](//packagist.org/packages/pelmered/fake-car)
-[![Monthly Downloads](https://poser.pugx.org/pelmered/fake-car/d/monthly)](//packagist.org/packages/pelmered/fake-car)
+[![Total Downloads](https://poser.pugx.org/pelmered/fake-car/d/total)](//packagist.org/packages/pelmered/fake-car/stats)
+[![Monthly Downloads](https://poser.pugx.org/pelmered/fake-car/d/monthly)](//packagist.org/packages/pelmered/fake-car/stats)
 [![License](https://poser.pugx.org/pelmered/fake-car/license)](https://packagist.org/packages/pelmered/fake-car)
 
 [![Build Status](https://scrutinizer-ci.com/g/pelmered/fake-car/badges/build.png?b=main)](https://scrutinizer-ci.com/g/pelmered/fake-car/build-status/main)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pelmered/fake-car/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/pelmered/fake-car/?branch=master)
-[![OtterWise Coverage](https://img.shields.io/endpoint?url=https://otterwise.app/badge/github/pelmered/fake-car/7e74d17a-eacc-4082-a465-5c5ac9583255)](https://otterwise.app/github/pelmered/fake-car)
+[![OtterWise Coverage](https://img.shields.io/endpoint?url=https://otterwise.app/badge/github/pelmered/fake-car)](https://otterwise.app/github/pelmered/fake-car)
 
 
 ## Installation
