@@ -9,7 +9,7 @@ Faker provider for fake car data
 [![Build Status](https://scrutinizer-ci.com/g/pelmered/fake-car/badges/build.png?b=main)](https://scrutinizer-ci.com/g/pelmered/fake-car/build-status/main)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pelmered/fake-car/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/pelmered/fake-car/?branch=master)
 [![OtterWise Coverage](https://img.shields.io/endpoint?url=https://otterwise.app/badge/github/pelmered/fake-car)](https://otterwise.app/github/pelmered/fake-car)
-
+[![OtterWise Coverage](https://img.shields.io/endpoint?url=https://otterwise.app/badge/github/pelmered/fake-car/type)](https://otterwise.app/github/pelmered/fake-car)
 
 ## Installation
 
