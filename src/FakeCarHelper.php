@@ -137,7 +137,6 @@ class FakeCarHelper
         if ($decimals < 0) {
             throw new InvalidArgumentException('Invalid decimals');
         }
-
         if ($decimals > 0) {
             $factor = 10 ** $decimals;
 
