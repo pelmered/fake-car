@@ -261,8 +261,13 @@ class FakeCar extends \Faker\Provider\Base
         return stripos(self::EBCDIC, $character) % 10;
     }
 
-    public static function validateVin(string $vin): bool
+    public static function validateVin(string $vin, bool $strict = true): bool
     {
+        if (! $strict) {
+            /** @var string $vin */
+            $vin = preg_replace('/[^A-Za-z0-9]/', '', $vin);
+        }
+
         if (strlen($vin) !== 17) {
             return false;
         }

@@ -28,6 +28,14 @@ test('valid vin', function ($vin, $valid) {
     ['355430557Azf4u0vr', true],
 ]);
 
+test('valid vin non strict', function ($vin, $valid) {
+    expect($this->faker->validateVin($vin, strict: false))->toBe($valid);
+})->with([
+    ['z2j9hhgr-8Ahl1e3gs', true],
+    ['z2j_9hhgr-8Ahl1/e3gs', true],
+    ['z2j9hhgr9Ahl1e3gs', false], // Invalid check digit
+]);
+
 test('vin returns valid vin', function () {
     $vin = $this->faker->vin();
     expect($this->faker->validateVin($vin))->toBeTrue();
