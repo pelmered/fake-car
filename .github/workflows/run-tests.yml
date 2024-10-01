@@ -52,12 +52,7 @@ jobs:
       - name: Execute type coverage tests
         run: vendor/bin/pest --type-coverage --type-coverage-json=build/logs/pest-coverage.json
 
-      - name: Upload Test Coverage
-        env:
-          OTTERWISE_TOKEN: ${{ secrets.OTTERWISE_TOKEN }}
-        run: bash <(curl -s https://raw.githubusercontent.com/getOtterWise/bash-uploader/main/uploader.sh)
-
-      - name: Upload Types Coverage
+      - name: Upload Coverage
         env:
           OTTERWISE_TOKEN: ${{ secrets.OTTERWISE_TOKEN }}
         run: bash <(curl -s https://raw.githubusercontent.com/getOtterWise/bash-uploader/main/uploader.sh) --type-coverage-file build/logs/pest-coverage.json
